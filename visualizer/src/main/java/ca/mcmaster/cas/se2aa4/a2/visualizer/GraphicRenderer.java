@@ -28,15 +28,15 @@ public class GraphicRenderer {
             canvas.fill(point);
             canvas.setColor(old);
         }
-        // for (Segment e: aMesh.getSegmentsList()) {
-        //     double centre_x = e.getV1Idx() - (THICKNESS/2.0d);
-        //     double centre_y = e.getV1Idx() - (THICKNESS/2.0d);
-        //     Color old = canvas.getColor();
-        //     canvas.setColor(extractColor(e.getPropertiesList()));
-        //     Ellipse2D point = new Ellipse2D.Double(centre_x+10, centre_y+10, THICKNESS, THICKNESS);
-        //     canvas.fill(point);
-        //     canvas.setColor(old);
-        // }
+
+        for(Segment e: aMesh.getSegmentsList()){
+            int v1Index = e.getV1Idx();
+            int v2Index = e.getV2Idx();
+            Vertex v1 = aMesh.getVertices(v1Index);
+            Vertex v2 = aMesh.getVertices(v2Index);
+            canvas.drawLine((int)v1.getX(), (int)v1.getY(), (int)v2.getX(), (int)v2.getY());
+        }
+        
     }
 
     private Color extractColor(List<Property> properties) {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Random;
+import java.util.Iterator;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
@@ -43,17 +44,12 @@ public class DotGen {
         }
 
         // Create all the edges
-        /*
+        
         Set<Segment> edges = new HashSet<>();
-        for(int x = 0; x < width; x += square_size) {
-            for(int y = 0; y < height; y += square_size) {
-                edges.add(Segment.newBuilder().setV1Idx(x).setV2Idx(y).build());
-                edges.add(Segment.newBuilder().setV1Idx(x+square_size).setV2Idx(y).build());
-                edges.add(Segment.newBuilder().setV1Idx(x).setV2Idx(y + square_size).build());
-                edges.add(Segment.newBuilder().setV1Idx(x +square_size).setV2Idx(y+square_size).build());
-                
-            }
+        for(int i =0; i<vertices.size()-1; i++){
+            edges.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i+1).build());
         }
+
         Set<Segment> edgesWithColors = new HashSet<>();
         for(Segment e: edges){
             int red = bag.nextInt(255);
@@ -64,11 +60,11 @@ public class DotGen {
             Segment colored = Segment.newBuilder(e).addProperties(color).build();
             edgesWithColors.add(colored);
         }
-         */
+        
         
         
 
-        return Mesh.newBuilder().addAllVertices(verticesWithColors).build();
+        return Mesh.newBuilder().addAllVertices(verticesWithColors).addAllSegments(edgesWithColors).build();
     }
 
 }
