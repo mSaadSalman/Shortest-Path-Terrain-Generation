@@ -19,7 +19,7 @@ public class DotGen {
     private final int square_size = 20;
 
     public Mesh generate() {
-        Set<Vertex> vertices = new HashSet<>();
+        ArrayList<Vertex> vertices = new ArrayList<>();
         // Create all the vertices
         for (int x = 0; x < width; x += square_size) {
             for (int y = 0; y < height; y += square_size) {
@@ -31,7 +31,7 @@ public class DotGen {
             }
         }
         // Distribute colors randomly. Vertices are immutable, need to enrich them
-        Set<Vertex> verticesWithColors = new HashSet<>();
+        ArrayList<Vertex> verticesWithColors = new ArrayList<>();
         Random bag = new Random();
         for (Vertex v : vertices) {
             int red = bag.nextInt(255);
@@ -44,13 +44,13 @@ public class DotGen {
         }
 
         // Create all the edges
-        Set<Segment> edges = new HashSet<>();
+        ArrayList<Segment> edges = new ArrayList<>();
         for (int i = 0; i < vertices.size() - 1; i++) {
             edges.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i + 1).build());
         }
 
         // Distribute the average of each color randomly
-        Set<Segment> edgesWithColors = new HashSet<>();
+        ArrayList<Segment> edgesWithColors = new ArrayList<>();
         for (Segment e : edges) {
             int red = bag.nextInt(255);
             int green = bag.nextInt(255);
