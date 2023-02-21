@@ -65,6 +65,7 @@ When you develop features and enrich the product, remember that you have first t
 
 | Id | Feature title | Who? | Start | End | Status |
 |:--:|---------------|------|-------|-----|--------|
-|    |               |      |       |     |        |
-
-
+|    |Creating a mesh ADT  |      |  7/02/23     |     |    P    |
+|    |Producing full meshes  |      |  11/02/23     |     |    P    |
+|    |Playing with rendering |      |  11/02/23     |     |    P    |
+|    |Visualization mode |      |  15/02/23     |     |    P    |
