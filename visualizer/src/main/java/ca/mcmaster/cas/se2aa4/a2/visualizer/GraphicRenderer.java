@@ -10,7 +10,6 @@ import java.awt.Stroke;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
 import java.util.List;
 
 public class GraphicRenderer {
@@ -37,10 +36,14 @@ public class GraphicRenderer {
             int v2Index = e.getV2Idx();
             Vertex v1 = aMesh.getVertices(v1Index);
             Vertex v2 = aMesh.getVertices(v2Index);
+
             Color old = canvas.getColor();
             canvas.setColor(extractColor(e.getPropertiesList()));
-            canvas.drawLine((int) v1.getX(), (int) v1.getY(), (int) v2.getX(), (int) v2.getY());
+            if(v1.getX() == v2.getX() || v1.getY() == v2.getY()){
+                canvas.drawLine((int)v1.getX(), (int)v1.getY(), (int)v2.getX(), (int)v2.getY());
+            }
             canvas.setColor(old);
+            canvas.setStroke(stroke);
         }
 
     }
