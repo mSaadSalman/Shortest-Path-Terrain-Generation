@@ -36,16 +36,22 @@ public class DotGen {
             }
         }
         // Distribute colors randomly. Vertices are immutable, need to enrich them
-        ArrayList<Vertex> verticesWithColors = new ArrayList<>();
+        ArrayList<Vertex> verticesWithProps = new ArrayList<>();
         Random bag = new Random();
         for (Vertex v : mesh.getVertexs()) {
             int red = bag.nextInt(255);
             int green = bag.nextInt(255);
             int blue = bag.nextInt(255);
+
             String colorCode = red + "," + green + "," + blue;
             Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
-            Vertex colored = Vertex.newBuilder(v).addProperties(color).build();
-            verticesWithColors.add(colored);
+ 
+            String verticesThicknessVal = String.valueOf(bag.nextInt(6)+1);
+            Property verticesThickness = Property.newBuilder().setKey("thickness").setValue(verticesThicknessVal).build();
+
+            Vertex verticesProps = Vertex.newBuilder(v).addProperties(color).addProperties(verticesThickness).build();
+            
+            verticesWithProps.add(verticesProps);
         }
 
         // Create all the edges
