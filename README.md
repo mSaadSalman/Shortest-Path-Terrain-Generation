@@ -60,13 +60,13 @@ When you develop features and enrich the product, remember that you have first t
 
 ### Definition of Done
 
--- Insert here your definition of done for your features --
+-- The criteria that will decide that a feauture is done is if it functions according to the instructions and works smoothly with all the other features --
 
 ### Product Backlog
 
-| Id  | Feature title               | Who?  | Start    | End      | Status |
-| :-: | --------------------------- | ----- | -------- | -------- | ------ |
-| F01 | Creating a minimal mesh ADT | Mahad | 7/02/23  | 20/02/23 | D      |
-| F02 | Producing full meshes       |       | 11/02/23 |          | P      |
-| F03 | Playing with rendering      |       | 11/02/23 |          | P      |
-| F04 | Visualization mode          |       | 15/02/23 |          | P      |
+| Id  | Feature title               | Who?                             | Start    | End      | Status |
+| :-: | --------------------------- | -------------------------------- | -------- | -------- | ------ |
+| F01 | Creating a minimal mesh ADT | Mahad                            | 7/02/23  | 20/02/23 | D      |
+| F02 | Producing full meshes       |                                  | 11/02/23 |          | P      |
+| F03 | Playing with rendering      | Ali (Setting colors/thicknesses) | 11/02/23 | 21/02/23 | D      |
+| F04 | Visualization mode          |                                  | 15/02/23 |          | P      |

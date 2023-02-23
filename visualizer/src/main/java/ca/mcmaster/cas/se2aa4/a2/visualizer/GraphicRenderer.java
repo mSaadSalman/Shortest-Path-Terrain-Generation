@@ -14,18 +14,17 @@ import java.util.List;
 
 public class GraphicRenderer {
 
-    private static final int THICKNESS = 3;
-
     public void render(Mesh aMesh, Graphics2D canvas) {
         canvas.setColor(Color.BLACK);
         Stroke stroke = new BasicStroke(0.5f);
         canvas.setStroke(stroke);
+
         for (Vertex v : aMesh.getVerticesList()) {
+            int THICKNESS = extractThickness(v.getPropertiesList());
             double centre_x = v.getX() - (THICKNESS / 2.0d);
             double centre_y = v.getY() - (THICKNESS / 2.0d);
             Color old = canvas.getColor();
             canvas.setColor(extractColor(v.getPropertiesList()));
-
             Ellipse2D point = new Ellipse2D.Double(centre_x, centre_y, THICKNESS, THICKNESS);
             canvas.fill(point);
             canvas.setColor(old);
@@ -39,9 +38,12 @@ public class GraphicRenderer {
 
             Color old = canvas.getColor();
             canvas.setColor(extractColor(e.getPropertiesList()));
-           
-            if(v1.getX() == v2.getX() || v1.getY() == v2.getY()){
-                canvas.drawLine((int)v1.getX(), (int)v1.getY(), (int)v2.getX(), (int)v2.getY());
+
+            Stroke newStroke = new BasicStroke(extractThickness(e.getPropertiesList()));
+            canvas.setStroke(newStroke);
+
+            if (v1.getX() == v2.getX() || v1.getY() == v2.getY()) {
+                canvas.drawLine((int) v1.getX(), (int) v1.getY(), (int) v2.getX(), (int) v2.getY());
             }
             canvas.setColor(old);
             canvas.setStroke(stroke);
@@ -64,6 +66,20 @@ public class GraphicRenderer {
         int green = Integer.parseInt(raw[1]);
         int blue = Integer.parseInt(raw[2]);
         return new Color(red, green, blue);
+    }
+
+    private int extractThickness(List<Property> properties) {
+        String val = null;
+        for (Property p : properties) {
+            if (p.getKey().equals("thickness")) {
+                System.out.println(p.getValue());
+                val = p.getValue();
+            }
+        }
+        if (val == null)
+            return 3;
+        int thickness = Integer.parseInt(val);
+        return thickness;
     }
 
 }
