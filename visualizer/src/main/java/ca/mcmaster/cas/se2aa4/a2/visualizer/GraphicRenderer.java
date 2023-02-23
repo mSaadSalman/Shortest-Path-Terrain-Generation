@@ -39,6 +39,7 @@ public class GraphicRenderer {
 
             Color old = canvas.getColor();
             canvas.setColor(extractColor(e.getPropertiesList()));
+           
             if(v1.getX() == v2.getX() || v1.getY() == v2.getY()){
                 canvas.drawLine((int)v1.getX(), (int)v1.getY(), (int)v2.getX(), (int)v2.getY());
             }

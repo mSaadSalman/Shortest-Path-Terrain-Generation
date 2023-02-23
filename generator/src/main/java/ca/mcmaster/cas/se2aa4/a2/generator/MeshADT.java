@@ -25,9 +25,27 @@ public class MeshADT {
     }
 
     public void addVertex(double x, double y){
-        vertices.add(Vertex.newBuilder().setX(round((double) x)).setY(round((double) y)).build());
+        Vertex v = Vertex.newBuilder().setX(round((double) x)).setY(round((double) y)).build();
+        if(!vertices.contains(v)){
+            vertices.add(v);
+        }
     }
 
-    
+    public ArrayList<Vertex> getVertexs(){
+        return vertices;
+    }
+
+    public void addSegment(int v1idx, int v2idx){
+        Segment e = Segment.newBuilder().setV1Idx(v1idx).setV2Idx(v2idx).build();
+        if(!segments.contains(e)){
+            segments.add(e);
+        }
+    } 
+
+    public ArrayList<Segment> getSegments(){
+        return segments;
+    }
+
+
 
 }
