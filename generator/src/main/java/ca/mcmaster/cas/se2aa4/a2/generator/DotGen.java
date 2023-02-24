@@ -136,7 +136,11 @@ public class DotGen {
             edgesWithProps.add(segmentProps);
         }
 
+<<<<<<< Updated upstream
         return Mesh.newBuilder().addAllVertices(verticesWithProps).addAllSegments(edgesWithProps).build();
+=======
+        return Mesh.newBuilder().addAllVertices(verticesWithProps).addAllSegments(edgesWithColors).build();
+>>>>>>> Stashed changes
     }
 
 }
