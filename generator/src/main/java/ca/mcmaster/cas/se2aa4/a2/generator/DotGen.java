@@ -21,7 +21,6 @@ public class DotGen {
     MeshADT mesh = new MeshADT(precision);
 
     public Mesh generate() {
-        // ArrayList<Vertex> vertices = new ArrayList<>();
         // Create all the vertices
         for (int x = 0; x < width; x += square_size) {
             for (int y = 0; y < height; y += square_size) {
@@ -113,6 +112,7 @@ public class DotGen {
             mesh.addPolygon(i, i + 1, i + 2, i + 3);
         }
 
+        // creating all the centroids
         ArrayList<Vertex> centroids = new ArrayList<>();
         for (int i = 0; i < width; i += square_size) {
             for (int j = 0; j < height; j += square_size) {
@@ -120,7 +120,6 @@ public class DotGen {
                 double y = j + (square_size / 2);
 
                 centroids.add(Vertex.newBuilder().setX(x).setY(y).build());
-                // Polygon.newBuilder().setCentroidIdx(centroids.size());
             }
         }
 
