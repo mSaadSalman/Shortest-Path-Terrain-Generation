@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import ca.mcmaster.cas.se2aa4.a2.generator.MeshADT;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
@@ -133,11 +132,12 @@ public class DotGen {
             edgesWithProps.add(segmentProps);
         }
 
-<<<<<<< Updated upstream
+        //create polygons
+        for(int i = 0; i < mesh.getSegments().size()-1; i += 4){
+            mesh.addPolygon(i, i+1, i+2, i+3);
+        }
+
         return Mesh.newBuilder().addAllVertices(verticesWithProps).addAllSegments(edgesWithProps).build();
-=======
-        return Mesh.newBuilder().addAllVertices(verticesWithProps).addAllSegments(edgesWithColors).build();
->>>>>>> Stashed changes
     }
 
 }
