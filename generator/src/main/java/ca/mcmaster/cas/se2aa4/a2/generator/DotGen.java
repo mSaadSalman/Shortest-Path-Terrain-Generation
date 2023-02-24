@@ -9,6 +9,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 
 public class DotGen {
 
@@ -22,21 +23,12 @@ public class DotGen {
     public Mesh generate() {
         // ArrayList<Vertex> vertices = new ArrayList<>();
         // Create all the vertices
-        for (int x = 0; x < width; x += square_size ) {
+        for (int x = 0; x < width; x += square_size) {
             for (int y = 0; y < height; y += square_size) {
                 mesh.addVertex(x, y);
                 mesh.addVertex(x + square_size, y);
                 mesh.addVertex(x, y + square_size);
                 mesh.addVertex(x + square_size, y + square_size);
-
-                // vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y).build());
-                // vertices.add(Vertex.newBuilder().setX((double) x + square_size).setY((double)
-                // y).build());
-                // vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y +
-                // square_size).build());
-                // vertices.add(Vertex.newBuilder().setX((double) x + square_size).setY((double)
-                // y + square_size).build());
-
             }
         }
         // Distribute colors randomly. Vertices are immutable, need to enrich them
@@ -46,12 +38,6 @@ public class DotGen {
             int red = bag.nextInt(255);
             int green = bag.nextInt(255);
             int blue = bag.nextInt(255);
-
-            // if (mode == "debug") {
-            // red = 0;
-            // green = 0;
-            // blue = 0;
-            // }
 
             String colorCode = red + "," + green + "," + blue;
             Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
@@ -64,14 +50,9 @@ public class DotGen {
         // Create all the edges
         for (int i = 0; i < mesh.getVertexs().size() - 2; i += 4) {
             mesh.addSegment(i, i + 1);
-            mesh.addSegment(i, i + 2);
             mesh.addSegment(i + 1, i + 3);
-            mesh.addSegment(i + 2, i + 3);
-            
-            // edges.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i + 1).build());
-            // edges.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i + 2).build());
-            // edges.add(Segment.newBuilder().setV1Idx(i + 1).setV2Idx(i + 3).build());
-            // edges.add(Segment.newBuilder().setV1Idx(i + 2).setV2Idx(i + 3).build());
+            mesh.addSegment(i + 3, i + 2);
+            mesh.addSegment(i + 2, i);
         }
 
         // Distribute the average of each color randomly and also give the segments
@@ -81,12 +62,6 @@ public class DotGen {
             int avgRed;
             int avgGreen;
             int avgBlue;
-
-            // if (mode == "debug") {
-            // avgRed = 0;
-            // avgGreen = 0;
-            // avgBlue = 0;
-            // }
 
             Vertex v1 = verticesWithProps.get(e.getV1Idx());
             Vertex v2 = verticesWithProps.get(e.getV2Idx());
@@ -133,25 +108,32 @@ public class DotGen {
             edgesWithProps.add(segmentProps);
         }
 
-        //create polygons
-        for(int i = 0; i < mesh.getSegments().size()-1; i += 4){
-            mesh.addPolygon(i, i+1, i+2, i+3);
+        // create polygons
+        for (int i = 0; i < mesh.getSegments().size() - 1; i += 4) {
+            mesh.addPolygon(i, i + 1, i + 2, i + 3);
         }
 
-        //create centroids mesh.getVertexs().size()
-        //ArrayList<Vertex> new_vertex = new ArrayList<>();
-        for (int i = 0; i < width; i+= square_size) {
-            for (int j = 0; j < height; j+= square_size) {
-                double x=i+(square_size/2);
-                double y=j+(square_size/2);
-                verticesWithProps.add(Vertex.newBuilder().setX(x).setY(y).build());
-                Structs.Polygon.newBuilder().setCentroidIdx(verticesWithProps.size());
+        ArrayList<Vertex> centroids = new ArrayList<>();
+        for (int i = 0; i < width; i += square_size) {
+            for (int j = 0; j < height; j += square_size) {
+                double x = i + (square_size / 2);
+                double y = j + (square_size / 2);
+
+                centroids.add(Vertex.newBuilder().setX(x).setY(y).build());
+                // Polygon.newBuilder().setCentroidIdx(centroids.size());
             }
         }
 
+        ArrayList<Vertex> centroidsWithProps = new ArrayList<>();
+        for (Vertex c : centroids) {
+            String colorCode = 255 + "," + 0 + "," + 0;
+            Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
+            Vertex centroidProps = Vertex.newBuilder(c).addProperties(color).build();
+            verticesWithProps.add(centroidProps);
+        }
 
-
-        return Mesh.newBuilder().addAllVertices(verticesWithProps).addAllSegments(edgesWithProps).build();
+        return Mesh.newBuilder().addAllVertices(verticesWithProps).addAllSegments(edgesWithProps)
+                .addAllVertices(centroidsWithProps).addAllPolygons(mesh.getPolygons()).build();
     }
 
 }

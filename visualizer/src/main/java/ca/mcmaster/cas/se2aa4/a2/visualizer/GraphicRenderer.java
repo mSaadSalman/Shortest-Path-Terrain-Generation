@@ -11,14 +11,26 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.geom.Ellipse2D;
 import java.util.List;
+import java.util.Objects;
+import java.util.Properties;
 
 public class GraphicRenderer {
 
+    private boolean debugMode = false;
+
+    public GraphicRenderer(String flag) {
+        if (Objects.equals(flag, "-X")) {
+            this.debugMode = true;
+        }
+    }
+
     public void render(Mesh aMesh, Graphics2D canvas) {
+
         canvas.setColor(Color.BLACK);
         Stroke stroke = new BasicStroke(0.5f);
         canvas.setStroke(stroke);
 
+        // Create vertices
         for (Vertex v : aMesh.getVerticesList()) {
             int THICKNESS = extractThickness(v.getPropertiesList());
             double centre_x = v.getX() - (THICKNESS / 2.0d);
@@ -30,6 +42,20 @@ public class GraphicRenderer {
             canvas.setColor(old);
         }
 
+        // Create centorids
+        for (Vertex c : aMesh.getVerticesList()) {
+            int THICKNESS = 3;
+            double centre_x = c.getX() - (THICKNESS / 2.0d);
+            double centre_y = c.getY() - (THICKNESS / 2.0d);
+
+            Color old = canvas.getColor();
+            canvas.setColor(Color.RED);
+            Ellipse2D point = new Ellipse2D.Double(centre_x, centre_y, THICKNESS, THICKNESS);
+            canvas.fill(point);
+            canvas.setColor(old);
+        }
+
+        // Create edges
         for (Segment e : aMesh.getSegmentsList()) {
             int v1Index = e.getV1Idx();
             int v2Index = e.getV2Idx();
@@ -53,12 +79,15 @@ public class GraphicRenderer {
 
     private Color extractColor(List<Property> properties) {
         String val = null;
-        for (Property p : properties) {
-            if (p.getKey().equals("rgb_color")) {
-                System.out.println(p.getValue());
-                val = p.getValue();
+        if (!debugMode) {
+            for (Property p : properties) {
+                if (p.getKey().equals("rgb_color")) {
+                    System.out.println(p.getValue());
+                    val = p.getValue();
+                }
             }
         }
+
         if (val == null)
             return Color.BLACK;
         String[] raw = val.split(",");
@@ -70,10 +99,12 @@ public class GraphicRenderer {
 
     private int extractThickness(List<Property> properties) {
         String val = null;
-        for (Property p : properties) {
-            if (p.getKey().equals("thickness")) {
-                System.out.println(p.getValue());
-                val = p.getValue();
+        if (!debugMode) {
+            for (Property p : properties) {
+                if (p.getKey().equals("thickness")) {
+                    System.out.println(p.getValue());
+                    val = p.getValue();
+                }
             }
         }
         if (val == null)
