@@ -22,8 +22,8 @@ public class DotGen {
     public Mesh generate() {
         // ArrayList<Vertex> vertices = new ArrayList<>();
         // Create all the vertices
-        for (int x = 0; x < width; x += square_size * 2) {
-            for (int y = 0; y < height; y += square_size * 2) {
+        for (int x = 0; x < width; x += square_size ) {
+            for (int y = 0; y < height; y += square_size) {
                 mesh.addVertex(x, y);
                 mesh.addVertex(x + square_size, y);
                 mesh.addVertex(x, y + square_size);
@@ -62,15 +62,12 @@ public class DotGen {
         }
 
         // Create all the edges
-        for (int i = 0; i < mesh.getVertexs().size() - 2; i += 2) {
+        for (int i = 0; i < mesh.getVertexs().size() - 2; i += 4) {
             mesh.addSegment(i, i + 1);
             mesh.addSegment(i, i + 2);
             mesh.addSegment(i + 1, i + 3);
             mesh.addSegment(i + 2, i + 3);
-            if (mesh.getVertexs().size() - (((width / square_size) * 2) + 2) > i) { // hard coded .. find the pattern
-                mesh.addSegment(i + 1, i + ((width / square_size) * 2) + 2);
-                mesh.addSegment(i + 3, i + ((width / square_size) * 2) + 2);
-            }
+            
             // edges.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i + 1).build());
             // edges.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i + 2).build());
             // edges.add(Segment.newBuilder().setV1Idx(i + 1).setV2Idx(i + 3).build());
