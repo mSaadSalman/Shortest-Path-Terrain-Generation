@@ -11,7 +11,7 @@ public class MeshADT {
     private final int precision;
     private final ArrayList<Vertex> vertices;
     private final ArrayList<Segment> segments;
-    private final ArrayList<Polygon> polygons;
+    final ArrayList<Polygon> polygons;
 
     public MeshADT(int precision){
         this.precision = precision;
