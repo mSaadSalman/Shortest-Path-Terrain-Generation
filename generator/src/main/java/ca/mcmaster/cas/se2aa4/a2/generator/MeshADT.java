@@ -25,7 +25,10 @@ public class MeshADT {
     }
 
     public void addVertex(double x, double y) {
-        Vertex v = Vertex.newBuilder().setX(round((double) x)).setY(round((double) y)).build();
+        Vertex v = Vertex.newBuilder()
+                        .setX(round((double) x))
+                        .setY(round((double) y))
+                        .build();
         vertices.add(v);
     }
 
@@ -34,7 +37,10 @@ public class MeshADT {
     }
 
     public void addSegment(int v1idx, int v2idx) {
-        Segment e = Segment.newBuilder().setV1Idx(v1idx).setV2Idx(v2idx).build();
+        Segment e = Segment.newBuilder()
+                        .setV1Idx(v1idx)
+                        .setV2Idx(v2idx)
+                        .build();
         segments.add(e);
     }
 
@@ -42,9 +48,14 @@ public class MeshADT {
         return segments;
     }
 
-    public void addPolygon(int s1idx, int s2idx, int s3idx, int s4idx) {
-        Polygon poly = Polygon.newBuilder().addSegmentIdxs(s1idx).addSegmentIdxs(s2idx).addSegmentIdxs(s3idx)
-                .addSegmentIdxs(s4idx).build();
+    public void addPolygon(int s1idx, int s2idx, int s3idx, int s4idx, int centroididx) {
+        Polygon poly = Polygon.newBuilder()
+                            .addSegmentIdxs(s1idx)
+                            .addSegmentIdxs(s2idx)
+                            .addSegmentIdxs(s3idx)
+                            .addSegmentIdxs(s4idx)
+                            .setCentroidIdx(centroididx)
+                            .build();
         polygons.add(poly);
     }
 

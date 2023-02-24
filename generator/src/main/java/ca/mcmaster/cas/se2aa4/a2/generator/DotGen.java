@@ -107,10 +107,7 @@ public class DotGen {
             edgesWithProps.add(segmentProps);
         }
 
-        // create polygons
-        for (int i = 0; i < mesh.getSegments().size() - 1; i += 4) {
-            mesh.addPolygon(i, i + 1, i + 2, i + 3);
-        }
+        
 
         // creating all the centroids
         ArrayList<Vertex> centroids = new ArrayList<>();
@@ -118,7 +115,6 @@ public class DotGen {
             for (int j = 0; j < height; j += square_size) {
                 double x = i + (square_size / 2);
                 double y = j + (square_size / 2);
-
                 centroids.add(Vertex.newBuilder().setX(x).setY(y).build());
             }
         }
@@ -131,8 +127,17 @@ public class DotGen {
             verticesWithProps.add(centroidProps);
         }
 
-        return Mesh.newBuilder().addAllVertices(verticesWithProps).addAllSegments(edgesWithProps)
-                .addAllVertices(centroidsWithProps).addAllPolygons(mesh.getPolygons()).build();
+        // create polygons
+        for (int i=0, j=0; i < mesh.getSegments().size() - 1; i+=4, j++) {
+            mesh.addPolygon(i, i + 1, i + 2, i + 3, j);
+        }
+
+        return Mesh.newBuilder()
+                .addAllVertices(verticesWithProps)
+                .addAllSegments(edgesWithProps)
+                .addAllVertices(centroidsWithProps)
+                .addAllPolygons(mesh.getPolygons())
+                .build();
     }
 
 }
