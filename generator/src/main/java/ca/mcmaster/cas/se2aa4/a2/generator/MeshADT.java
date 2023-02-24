@@ -46,7 +46,7 @@ public class MeshADT {
         return segments;
     }
 
-    public void addSegment(int s1idx, int s2idx, int s3idx, int s4idx){
+    public void addPolygon(int s1idx, int s2idx, int s3idx, int s4idx){
         Polygon poly = Polygon.newBuilder().addSegmentIdxs(s1idx).addSegmentIdxs(s2idx).addSegmentIdxs(s3idx).addSegmentIdxs(s4idx).build();
         polygons.add(poly);
     }   
