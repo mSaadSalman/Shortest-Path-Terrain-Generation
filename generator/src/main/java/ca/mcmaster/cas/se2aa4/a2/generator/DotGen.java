@@ -25,9 +25,6 @@ public class DotGen {
         for (int x = 0; x < width; x += square_size) {
             for (int y = 0; y < height; y += square_size) {
                 mesh.addVertex(x, y);
-                mesh.addVertex(x + square_size, y);
-                mesh.addVertex(x, y + square_size);
-                mesh.addVertex(x + square_size, y + square_size);
             }
         }
         // Distribute colors randomly. Vertices are immutable, need to enrich them
@@ -47,12 +44,11 @@ public class DotGen {
         }
 
         // Create all the edges
-        for (int i = 0; i < mesh.getVertexs().size() - 2; i += 4) {
-            mesh.addSegment(i, i + 1);
-            mesh.addSegment(i + 1, i + 3);
-            mesh.addSegment(i + 3, i + 2);
-            mesh.addSegment(i + 2, i);
+        for (int i = 0; i < mesh.getVertexs().size()-25; i += width/square_size) {
+            for(int j=i; j<height/square_size + i; j+=1 ) mesh.addSegment(j, j + 1);
+            for(int k=i; k<height/square_size + i; k+=1) mesh.addSegment(k, k+(height/square_size));
         }
+        for(int j=mesh.getVertexs().size()-25; j<mesh.getVertexs().size()-1; j+=1 ) mesh.addSegment(j, j + 1);
 
         // Distribute the average of each color randomly and also give the segments
         // thickness values
@@ -128,9 +124,12 @@ public class DotGen {
         }
 
         // create polygons
-        for (int i=0, j=0; i < mesh.getSegments().size() - 1; i+=4, j++) {
-            mesh.addPolygon(i, i + 1, i + 2, i + 3, j);
+        for (int i=0, j=0; i < mesh.getSegments().size()-25; i+=width/square_size, j++) {
+            for(int k=i; k<height/square_size + i; k+=1) 
+            mesh.addPolygon(k, k+(width/square_size)-1, k+(2*(width/square_size))-1, k+(width/square_size), j);;
         }
+
+        //find neighboring polygons
 
         return Mesh.newBuilder()
                 .addAllVertices(verticesWithProps)

@@ -29,7 +29,8 @@ public class MeshADT {
                         .setX(round((double) x))
                         .setY(round((double) y))
                         .build();
-        vertices.add(v);
+
+        if(!vertices.contains(v)) vertices.add(v);
     }
 
     public ArrayList<Vertex> getVertexs() {
@@ -37,11 +38,14 @@ public class MeshADT {
     }
 
     public void addSegment(int v1idx, int v2idx) {
-        Segment e = Segment.newBuilder()
-                        .setV1Idx(v1idx)
-                        .setV2Idx(v2idx)
-                        .build();
-        segments.add(e);
+        if(vertices.get(v1idx).getX() == vertices.get(v2idx).getX() 
+        || vertices.get(v1idx).getY() == vertices.get(v2idx).getY()){
+            Segment e = Segment.newBuilder()
+                            .setV1Idx(v1idx)
+                            .setV2Idx(v2idx)
+                            .build();
+            if(!segments.contains(e)) segments.add(e);
+        }
     }
 
     public ArrayList<Segment> getSegments() {
@@ -49,6 +53,7 @@ public class MeshADT {
     }
 
     public void addPolygon(int s1idx, int s2idx, int s3idx, int s4idx, int centroididx) {
+
         Polygon poly = Polygon.newBuilder()
                             .addSegmentIdxs(s1idx)
                             .addSegmentIdxs(s2idx)
@@ -58,6 +63,7 @@ public class MeshADT {
                             .build();
         polygons.add(poly);
     }
+
 
     public ArrayList<Polygon> getPolygons() {
         return polygons;
