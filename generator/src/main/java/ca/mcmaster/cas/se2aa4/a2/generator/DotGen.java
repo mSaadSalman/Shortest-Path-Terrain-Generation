@@ -126,10 +126,10 @@ public class DotGen {
         // create polygons
         for (int i=0, j=0; i < mesh.getSegments().size()-25; i+=width/square_size, j++) {
             for(int k=i; k<height/square_size + i; k+=1) 
-            mesh.addPolygon(k, k+(width/square_size)-1, k+(2*(width/square_size))-1, k+(width/square_size), j);;
+            mesh.addPolygon(k, k+(width/square_size)-1, k+(2*(width/square_size))-1, k+(width/square_size), j);
         }
 
-        //find neighboring polygons
+        
 
         return Mesh.newBuilder()
                 .addAllVertices(verticesWithProps)
