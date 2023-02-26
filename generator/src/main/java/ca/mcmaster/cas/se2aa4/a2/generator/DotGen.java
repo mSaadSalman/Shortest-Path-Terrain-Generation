@@ -22,14 +22,28 @@ public class DotGen {
 
     public Mesh generate() {
         // Create all the vertices
+
+        Random bag = new Random();
+
+        // int tempx = 0;
+        // int tempy = 0;
+        // for (int x = 0; x < width; x += square_size) {
+        //     for (int y = 0; y < height; y += square_size) {
+        //         tempx += bag.nextInt(20)+10;
+        //         tempy += bag.nextInt(20)+10;
+        //         mesh.addVertex(tempx, tempy);
+        //     }
+        // }
+
         for (int x = 0; x < width; x += square_size) {
             for (int y = 0; y < height; y += square_size) {
                 mesh.addVertex(x, y);
             }
         }
+
         // Distribute colors randomly. Vertices are immutable, need to enrich them
         ArrayList<Vertex> verticesWithProps = new ArrayList<>();
-        Random bag = new Random();
+        // Random bag = new Random();
         for (Vertex v : mesh.getVertexs()) {
             int red = bag.nextInt(255);
             int green = bag.nextInt(255);
@@ -44,11 +58,14 @@ public class DotGen {
         }
 
         // Create all the edges
-        for (int i = 0; i < mesh.getVertexs().size()-25; i += width/square_size) {
-            for(int j=i; j<height/square_size + i; j+=1 ) mesh.addSegment(j, j + 1);
-            for(int k=i; k<height/square_size + i; k+=1) mesh.addSegment(k, k+(height/square_size));
+        for (int i = 0; i < mesh.getVertexs().size() - 25; i += width / square_size) {
+            for (int j = i; j < height / square_size + i; j += 1)
+                mesh.addSegment(j, j + 1);
+            for (int k = i; k < height / square_size + i; k += 1)
+                mesh.addSegment(k, k + (height / square_size));
         }
-        for(int j=mesh.getVertexs().size()-25; j<mesh.getVertexs().size()-1; j+=1 ) mesh.addSegment(j, j + 1);
+        for (int j = mesh.getVertexs().size() - 25; j < mesh.getVertexs().size() - 1; j += 1)
+            mesh.addSegment(j, j + 1);
 
         // Distribute the average of each color randomly and also give the segments
         // thickness values
@@ -103,8 +120,6 @@ public class DotGen {
             edgesWithProps.add(segmentProps);
         }
 
-        
-
         // creating all the centroids
         ArrayList<Vertex> centroids = new ArrayList<>();
         for (int i = 0; i < width; i += square_size) {
@@ -124,12 +139,11 @@ public class DotGen {
         }
 
         // create polygons
-        for (int i=0, j=0; i < mesh.getSegments().size()-25; i+=width/square_size, j++) {
-            for(int k=i; k<height/square_size + i; k+=1) 
-            mesh.addPolygon(k, k+(width/square_size)-1, k+(2*(width/square_size))-1, k+(width/square_size), j);
+        for (int i = 0, j = 0; i < mesh.getSegments().size() - 25; i += width / square_size, j++) {
+            for (int k = i; k < height / square_size + i; k += 1)
+                mesh.addPolygon(k, k + (width / square_size) - 1, k + (2 * (width / square_size)) - 1,
+                        k + (width / square_size), j);
         }
-
-        
 
         return Mesh.newBuilder()
                 .addAllVertices(verticesWithProps)
