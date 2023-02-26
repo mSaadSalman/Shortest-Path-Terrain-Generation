@@ -70,3 +70,9 @@ When you develop features and enrich the product, remember that you have first t
 | F02 | Producing full meshes                               | Saad & Mahad | 11/02/23 | 22/02/23 | D      |
 | F03 | Playing with rendering (Setting colors/thicknesses) | Ali          | 11/02/23 | 21/02/23 | D      |
 | F04 | Visualization mode                                  | Ali          | 15/02/23 | 23/02/23 | D      |
+| F05 | Generate Random Points                              | Saad         | 15/02/23 | 24/02/23 | D      |
+| F06 | Compute the Voronoi Diagram                         |              |          |          | P      |
+| F07 | Apply Lloyd relaxation                              |              |          |          | P      |
+| F08 | Crop the mesh to the expected size                  |              |          |          | P      |
+| F09 | Compute neiborhood relationships using Delaunay’s triangulation                  |              |          |          | P      |
+| F10 | For each irregular polygon, reorder its segments                   |              |          |          | P      |

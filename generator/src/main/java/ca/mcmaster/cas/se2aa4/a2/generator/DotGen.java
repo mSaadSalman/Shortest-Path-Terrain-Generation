@@ -26,7 +26,20 @@ public class DotGen {
 
     public Mesh generateGridMesh() {
 
+<<<<<<< Updated upstream
         // Random bag = new Random();
+=======
+
+        ArrayList<Vertex> Points= new ArrayList<>();
+
+        int pointCount=576;
+        for(int i = 1; i <= pointCount; i++) {
+            int xRandomlySelected = bag.nextInt(width) ;
+            int yRandomlySelected = bag.nextInt(height);
+            Points.add(Vertex.newBuilder().setX(xRandomlySelected).setY(yRandomlySelected).build());
+        }
+
+>>>>>>> Stashed changes
         // int tempx = 0;
         // int tempy = 0;
         // for (int x = 0; x < width; x += square_size) {
@@ -202,10 +215,11 @@ public class DotGen {
         }
 
         return Mesh.newBuilder()
-                .addAllVertices(verticesWithProps)
-                .addAllSegments(edgesWithProps)
+                //.addAllVertices(verticesWithProps)
+                .addAllVertices(Points)
+                /*.addAllSegments(edgesWithProps)
                 .addAllVertices(centroidsWithProps)
-                .addAllPolygons(mesh.getPolygons())
+                .addAllPolygons(mesh.getPolygons())*/
                 .build();
     }
 
