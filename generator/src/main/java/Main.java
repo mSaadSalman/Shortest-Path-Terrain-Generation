@@ -20,9 +20,6 @@ public class Main {
             MeshFactory factory = new MeshFactory();
             factory.write(myMesh, args[0]);
         }
-        // Mesh myMesh = generator.generateIrregularMesh();
-        // MeshFactory factory = new MeshFactory();
-        // factory.write(myMesh, args[0]);
     }
 
 }

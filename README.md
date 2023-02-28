@@ -26,7 +26,8 @@ To run the generator, go to the `generator` directory, and use `java -jar` to ru
 
 ```
 mosser@azrael A2 % cd generator
-mosser@azrael generator % java -jar generator.jar sample.mesh
+mosser@azrael generator % java -jar generator.jar sample.mesh grid (provides grid mesh)
+mosser@azrael generator % java -jar generator.jar sample.mesh irregular (provides irregular mesh)
 mosser@azrael generator % ls -lh sample.mesh
 -rw-r--r--  1 mosser  staff    29K 29 Jan 10:52 sample.mesh
 mosser@azrael generator %
@@ -38,7 +39,8 @@ To visualize an existing mesh, go the the `visualizer` directory, and use `java 
 
 ```
 mosser@azrael A2 % cd visualizer
-mosser@azrael visualizer % java -jar visualizer.jar ../generator/sample.mesh sample.svg
+mosser@azrael visualizer % java -jar visualizer.jar ../generator/sample.mesh sample.svg (in normal mode)
+mosser@azrael visualizer % java -jar visualizer.jar ../generator/sample.mesh sample.svg -X (in debug mode)
 
 ... (lots of debug information printed to stdout) ...
 
@@ -72,7 +74,7 @@ When you develop features and enrich the product, remember that you have first t
 | F04 | Visualization mode                                              | Ali          | 15/02/23 | 23/02/23 | D      |
 | F05 | Generate Random Points                                          | Saad         | 15/02/23 | 24/02/23 | D      |
 | F06 | Compute the Voronoi Diagram                                     | Ali          | 18/02/23 | 27/02/23 | D      |
-| F07 | Apply Lloyd relaxation                                          |              |          |          | P      |
-| F08 | Crop the mesh to the expected size                              |              |          |          | P      |
+| F07 | Crop the mesh to the expected size                              | Mahad        | 20/02/23 | 27/02/23 | D      |
+| F08 | Apply Lloyd relaxation                                          |              |          |          | P      |
 | F09 | Compute neiborhood relationships using Delaunay’s triangulation |              |          |          | P      |
 | F10 | For each irregular polygon, reorder its segments                |              |          |          | P      |
