@@ -9,16 +9,17 @@ public class Main {
     public static void main(String[] args) throws IOException {
         DotGen generator = new DotGen();
 
-        if (args[1].equals("grid")) {
-            Mesh myMesh = generator.generateGridMesh();
-            MeshFactory factory = new MeshFactory();
-            factory.write(myMesh, args[0]);
-        }
-        else if (args[1].equals("irregular")) {
+
+        // if (args[1].equals("grid")) {
+        //     Mesh myMesh = generator.generateGridMesh();
+        //     MeshFactory factory = new MeshFactory();
+        //     factory.write(myMesh, args[0]);
+        // }
+        // else if ()) {
             Mesh myMesh = generator.generateIrregularMesh();
             MeshFactory factory = new MeshFactory();
             factory.write(myMesh, args[0]);
-        }
+        // }
     }
 
 }

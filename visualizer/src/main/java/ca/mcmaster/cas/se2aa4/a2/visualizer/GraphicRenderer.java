@@ -12,7 +12,6 @@ import java.awt.Color;
 import java.awt.geom.Ellipse2D;
 import java.util.List;
 import java.util.Objects;
-import java.util.Properties;
 
 public class GraphicRenderer {
 
