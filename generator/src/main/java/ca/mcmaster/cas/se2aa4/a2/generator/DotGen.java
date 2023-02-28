@@ -148,13 +148,19 @@ public class DotGen {
         ArrayList<Polygon> poly = new ArrayList<>();
 
         // Create random points
-        int numVertices = 100;
+        int numVertices = 200;
         for (int i = 0; i < numVertices; i++) {
             irregularMesh.addRandPts(bag.nextInt(width), bag.nextInt(height));
         }
 
         // Creates the voronoi diagram
         irregularMesh.voronoiDiagram(width, height);
+        irregularMesh.resetCentroids();
+        for(int i=0; i<10; i++){
+            irregularMesh.voronoiDiagram(width, height);
+            irregularMesh.resetCentroids();
+        }
+
         ArrayList<org.locationtech.jts.geom.Polygon> polygons = irregularMesh.getPolygons();
 
         // Adding the vertices of the polygons to the Vertices struct
