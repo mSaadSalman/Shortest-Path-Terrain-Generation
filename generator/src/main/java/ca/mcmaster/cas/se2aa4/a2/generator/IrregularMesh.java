@@ -19,7 +19,7 @@ public class IrregularMesh {
     }
 
     public void addRandPts(int x,int y){
-        randPts.add(new Coordinate(x, y));
+        if(x < 500 && y < 500) randPts.add(new Coordinate(x, y));
     }
 
     public ArrayList<Coordinate> returnRandPts(){

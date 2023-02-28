@@ -15,6 +15,7 @@ import java.util.Objects;
 
 public class GraphicRenderer {
 
+    
     private boolean debugMode = false;
 
     public GraphicRenderer(String flag) {
@@ -24,6 +25,8 @@ public class GraphicRenderer {
     }
 
     public void render(Mesh aMesh, Graphics2D canvas) {
+        int height = 500;
+        int witdh = 500;
 
         canvas.setColor(Color.BLACK);
         Stroke stroke = new BasicStroke(0.5f);
@@ -34,11 +37,14 @@ public class GraphicRenderer {
             int THICKNESS = extractThickness(v.getPropertiesList());
             double centre_x = v.getX() - (THICKNESS / 2.0d);
             double centre_y = v.getY() - (THICKNESS / 2.0d);
+
+            if(centre_x < witdh && centre_y < height){
             Color old = canvas.getColor();
             canvas.setColor(extractColor(v.getPropertiesList()));
             Ellipse2D point = new Ellipse2D.Double(centre_x, centre_y, THICKNESS, THICKNESS);
             canvas.fill(point);
             canvas.setColor(old);
+            }
         }
 
         // Create centorids
@@ -47,11 +53,13 @@ public class GraphicRenderer {
             double centre_x = c.getX() - (THICKNESS / 2.0d);
             double centre_y = c.getY() - (THICKNESS / 2.0d);
 
+            if(centre_x < witdh && centre_y < height){
             Color old = canvas.getColor();
             canvas.setColor(Color.RED);
             Ellipse2D point = new Ellipse2D.Double(centre_x, centre_y, THICKNESS, THICKNESS);
             canvas.fill(point);
             canvas.setColor(old);
+            }
         }
 
         // Create edges
@@ -60,6 +68,8 @@ public class GraphicRenderer {
             int v2Index = e.getV2Idx();
             Vertex v1 = aMesh.getVertices(v1Index);
             Vertex v2 = aMesh.getVertices(v2Index);
+
+            if(v1.getX() < witdh && v1.getY()<height && v2.getX() < witdh && v2.getY() < height){
 
             Color old = canvas.getColor();
             canvas.setColor(extractColor(e.getPropertiesList()));
@@ -71,6 +81,7 @@ public class GraphicRenderer {
 
             canvas.setColor(old);
             canvas.setStroke(stroke);
+            }
         }
 
     }
