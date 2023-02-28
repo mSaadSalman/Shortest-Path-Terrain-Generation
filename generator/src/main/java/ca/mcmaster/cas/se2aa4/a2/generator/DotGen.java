@@ -140,7 +140,7 @@ public class DotGen {
                 .build();
     }
 
-    public Mesh generateIrregularMesh() {
+    public Mesh generateIrregularMesh(String numVerticesInput, String relaxValInput) {
         Random bag = new Random();
         IrregularMesh irregularMesh = new IrregularMesh();
         ArrayList<Vertex> vertices = new ArrayList<>();
@@ -148,7 +148,7 @@ public class DotGen {
         ArrayList<Polygon> poly = new ArrayList<>();
 
         // Create random points
-        int numVertices = 200;
+        int numVertices = Integer.parseInt(numVerticesInput);
         for (int i = 0; i < numVertices; i++) {
             irregularMesh.addRandPts(bag.nextInt(width), bag.nextInt(height));
         }
@@ -156,7 +156,7 @@ public class DotGen {
         // Creates the voronoi diagram
         irregularMesh.voronoiDiagram(width, height);
         irregularMesh.resetCentroids();
-        for(int i=0; i<10; i++){
+        for (int i = 0; i < Integer.parseInt(relaxValInput); i++) {
             irregularMesh.voronoiDiagram(width, height);
             irregularMesh.resetCentroids();
         }

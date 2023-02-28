@@ -6,7 +6,11 @@
 
 ## How to run the product
 
-_This section needs to be edited to reflect how the user can interact with thefeature released in your project_
+To Get Grid Mesh: In Generator --> java -jar generator.jar sample.mesh grid
+To Get Irregular Mesh: In Generator --> java -jar generator.jar sample.mesh irregular [number vertices] [relax value number]
+
+To run without debug mode: In Visualizer --> java -jar visualizer.jar ../generator/sample.mesh sample.svg 
+To run with debug mode: In Visualizer --> java -jar visualizer.jar ../generator/sample.mesh sample.svg -X 
 
 ### Installation instructions
 
@@ -27,7 +31,7 @@ To run the generator, go to the `generator` directory, and use `java -jar` to ru
 ```
 mosser@azrael A2 % cd generator
 mosser@azrael generator % java -jar generator.jar sample.mesh grid (provides grid mesh)
-mosser@azrael generator % java -jar generator.jar sample.mesh irregular (provides irregular mesh)
+mosser@azrael generator % java -jar generator.jar sample.mesh irregular [number vertices] [relax value number] (provides irregular mesh)
 mosser@azrael generator % ls -lh sample.mesh
 -rw-r--r--  1 mosser  staff    29K 29 Jan 10:52 sample.mesh
 mosser@azrael generator %
@@ -68,13 +72,13 @@ When you develop features and enrich the product, remember that you have first t
 
 | Id  | Feature title                                                   | Who?         | Start    | End      | Status |
 | :-: | --------------------------------------------------------------- | ------------ | -------- | -------- | ------ |
-| F01 | Creating a minimal mesh ADT                                     | Mahad        | 7/02/23  | 20/02/23 | D      |
+| F01 | Creating a minimal mesh ADT                                     | Mahad & Saad | 7/02/23  | 20/02/23 | D      |
 | F02 | Producing full meshes                                           | Saad & Mahad | 11/02/23 | 22/02/23 | D      |
 | F03 | Playing with rendering (Setting colors/thicknesses)             | Ali          | 11/02/23 | 21/02/23 | D      |
 | F04 | Visualization mode                                              | Ali          | 15/02/23 | 23/02/23 | D      |
-| F05 | Generate Random Points                                          | Saad         | 15/02/23 | 24/02/23 | D      |
+| F05 | Generate Random Points                                          | Saad & Ali   | 15/02/23 | 24/02/23 | D      |
 | F06 | Compute the Voronoi Diagram                                     | Ali          | 18/02/23 | 27/02/23 | D      |
 | F07 | Crop the mesh to the expected size                              | Mahad        | 20/02/23 | 27/02/23 | D      |
-| F08 | Apply Lloyd relaxation                                          |              |          |          | P      |
+| F08 | Apply Lloyd relaxation                                          | Mahad        | 22/02/23 | 27/02/23 | D      |
 | F09 | Compute neiborhood relationships using Delaunay’s triangulation |              |          |          | P      |
 | F10 | For each irregular polygon, reorder its segments                |              |          |          | P      |
