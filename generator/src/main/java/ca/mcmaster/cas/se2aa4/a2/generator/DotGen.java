@@ -26,26 +26,6 @@ public class DotGen {
 
     public Mesh generateGridMesh() {
 
-
-        ArrayList<Vertex> Points = new ArrayList<>();
-
-//        int pointCount=576;
-//        for(int i = 1; i <= pointCount; i++) {
-//            int xRandomlySelected = bag.nextInt(width) ;
-//            int yRandomlySelected = bag.nextInt(height);
-//            Points.add(Vertex.newBuilder().setX(xRandomlySelected).setY(yRandomlySelected).build());
-//        }
-
-        // int tempx = 0;
-        // int tempy = 0;
-        // for (int x = 0; x < width; x += square_size) {
-        // for (int y = 0; y < height; y += square_size) {
-        // tempx += bag.nextInt(20)+10;
-        // tempy += bag.nextInt(20)+10;
-        // mesh.addVertex(tempx, tempy);
-        // }
-        // }
-
         // Create all the vertices
         for (int x = 0; x < width; x += square_size) {
             for (int y = 0; y < height; y += square_size) {
@@ -79,7 +59,8 @@ public class DotGen {
         for (int j = mesh.getVertexs().size() - 25; j < mesh.getVertexs().size() - 1; j += 1)
             mesh.addSegment(j, j + 1);
 
-        // Distribute the average of each color randomly and also give the segments thickness values
+        // Distribute the average of each color randomly and also give the segments
+        // thickness values
         ArrayList<Segment> edgesWithProps = new ArrayList<>();
         for (Segment e : mesh.getSegments()) {
             // Get the vertices and their properties
@@ -129,61 +110,6 @@ public class DotGen {
             edgesWithProps.add(segmentProps);
         }
 
-
-        //=======================================================================================================================
-        // Distribute the average of each color randomly and also give the segments thickness values
-        // ArrayList<Segment> edgesWithProps = new ArrayList<>();
-        // for (Segment e : mesh.getSegments()) {
-        //     int avgRed;
-        //     int avgGreen;
-        //     int avgBlue;
-
-        //     Vertex v1 = verticesWithProps.get(e.getV1Idx());
-        //     Vertex v2 = verticesWithProps.get(e.getV2Idx());
-        //     String v1_colorCode = "";
-        //     String v2_colorCode = "";
-
-        //     // List stores the properties of the vertices
-        //     List<Property> v1_PropsList = v1.getPropertiesList();
-        //     List<Property> v2_PropsList = v2.getPropertiesList();
-
-        //     // Extracts the color props
-        //     for (int i = 0; i < v1_PropsList.size(); i++) {
-        //         if (v1_PropsList.get(i).getKey().equals("rgb_color")) {
-        //             v1_colorCode = v1_PropsList.get(i).getValue();
-        //         }
-        //     }
-        //     for (int i = 0; i < v2_PropsList.size(); i++) {
-        //         if (v2_PropsList.get(i).getKey().equals("rgb_color")) {
-        //             v2_colorCode = v2_PropsList.get(i).getValue();
-        //         }
-        //     }
-
-        //     // Extracting the colors
-        //     String[] v1_colors = v1_colorCode.split(",");
-        //     String[] v2_colors = v2_colorCode.split(",");
-
-        //     int v1_red = Integer.parseInt(v1_colors[0]);
-        //     int v1_green = Integer.parseInt(v1_colors[1]);
-        //     int v1_blue = Integer.parseInt(v1_colors[2]);
-        //     int v2_red = Integer.parseInt(v2_colors[0]);
-        //     int v2_green = Integer.parseInt(v2_colors[1]);
-        //     int v2_blue = Integer.parseInt(v2_colors[2]);
-
-        //     avgRed = (v1_red + v2_red) / 2;
-        //     avgGreen = (v1_green + v2_green) / 2;
-        //     avgBlue = (v1_blue + v2_blue) / 2;
-
-        //     String colorCode = avgRed + "," + avgGreen + "," + avgBlue;
-        //     Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
-        //     String thicknessVal = String.valueOf(bag.nextInt(5) + 1);
-        //     Property thickness = Property.newBuilder().setKey("thickness").setValue(thicknessVal).build();
-        //     Segment segmentProps = Segment.newBuilder(e).addProperties(color).addProperties(thickness).build();
-
-        //     edgesWithProps.add(segmentProps);
-        // }
-
-
         // creating all the centroids
         ArrayList<Vertex> centroids = new ArrayList<>();
         for (int i = 0; i < width; i += square_size) {
@@ -210,11 +136,10 @@ public class DotGen {
         }
 
         return Mesh.newBuilder()
-                //.addAllVertices(verticesWithProps)
-                .addAllVertices(Points)
-                /*.addAllSegments(edgesWithProps)
+                .addAllVertices(verticesWithProps)
+                .addAllSegments(edgesWithProps)
                 .addAllVertices(centroidsWithProps)
-                .addAllPolygons(mesh.getPolygons())*/
+                .addAllPolygons(mesh.getPolygons())
                 .build();
     }
 
@@ -226,10 +151,10 @@ public class DotGen {
         ArrayList<Polygon> polygons = new ArrayList<>();
 
         // Vertices
-        for (ArrayList<ArrayList<Double>> voronoiPolygonCoord : voronoiPolygonCoords) {
-            for (int j = 0; j < voronoiPolygonCoord.size(); j++) {
-                Double x = voronoiPolygonCoord.get(j).get(0);
-                Double y = voronoiPolygonCoord.get(j).get(1);
+        for (int i = 0; i < voronoiPolygonCoords.size(); i++) {
+            for (int j = 0; j < voronoiPolygonCoords.get(i).size(); j++) {
+                Double x = voronoiPolygonCoords.get(i).get(j).get(0);
+                Double y = voronoiPolygonCoords.get(i).get(j).get(1);
                 vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y).build());
             }
         }
@@ -290,5 +215,4 @@ public class DotGen {
 
         return Mesh.newBuilder().addAllVertices(verticesWithProps).addAllSegments(edgesWithProps).build();
     }
-
 }
