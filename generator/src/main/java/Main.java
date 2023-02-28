@@ -10,16 +10,19 @@ public class Main {
         DotGen generator = new DotGen();
 
 
-        // if (args[1].equals("grid")) {
-        //     Mesh myMesh = generator.generateGridMesh();
-        //     MeshFactory factory = new MeshFactory();
-        //     factory.write(myMesh, args[0]);
-        // }
-        // else if ()) {
+        if (args[1].equals("grid")) {
+            Mesh myMesh = generator.generateGridMesh();
+            MeshFactory factory = new MeshFactory();
+            factory.write(myMesh, args[0]);
+        }
+        else if (args[1].equals("irregular")) {
             Mesh myMesh = generator.generateIrregularMesh();
             MeshFactory factory = new MeshFactory();
             factory.write(myMesh, args[0]);
-        // }
+        }
+        // Mesh myMesh = generator.generateIrregularMesh();
+        // MeshFactory factory = new MeshFactory();
+        // factory.write(myMesh, args[0]);
     }
 
 }

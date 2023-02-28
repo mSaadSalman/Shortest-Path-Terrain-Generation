@@ -67,9 +67,8 @@ public class GraphicRenderer {
             Stroke newStroke = new BasicStroke(extractThickness(e.getPropertiesList()));
             canvas.setStroke(newStroke);
 
-            
             canvas.drawLine((int) v1.getX(), (int) v1.getY(), (int) v2.getX(), (int) v2.getY());
-            
+
             canvas.setColor(old);
             canvas.setStroke(stroke);
         }

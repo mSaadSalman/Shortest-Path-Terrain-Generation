@@ -58,7 +58,8 @@ public class DotGen {
         for (int j = mesh.getVertexs().size() - 25; j < mesh.getVertexs().size() - 1; j += 1)
             mesh.addSegment(j, j + 1);
 
-        // Distribute the average of each color randomly and also give the segments thickness values
+        // Distribute the average of each color randomly and also give the segments
+        // thickness values
         ArrayList<Segment> edgesWithProps = new ArrayList<>();
         for (Segment e : mesh.getSegments()) {
             // Get the vertices and their properties
@@ -108,8 +109,6 @@ public class DotGen {
             edgesWithProps.add(segmentProps);
         }
 
-
-
         // creating all the centroids
         ArrayList<Vertex> centroids = new ArrayList<>();
         for (int i = 0; i < width; i += square_size) {
@@ -122,10 +121,8 @@ public class DotGen {
 
         ArrayList<Vertex> centroidsWithProps = new ArrayList<>();
         for (Vertex c : centroids) {
-            String colorCode = 255 + "," + 0 + "," + 0;
-            Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
-            Vertex centroidProps = Vertex.newBuilder(c).addProperties(color).build();
-            verticesWithProps.add(centroidProps);
+            Vertex centroidProps = Vertex.newBuilder(c).build();
+            centroidsWithProps.add(centroidProps);
         }
 
         // create polygons
@@ -143,42 +140,33 @@ public class DotGen {
                 .build();
     }
 
-
-
-
-
     public Mesh generateIrregularMesh() {
         Random bag = new Random();
         IrregularMesh irregularMesh = new IrregularMesh();
         ArrayList<Vertex> vertices = new ArrayList<>();
         ArrayList<Segment> segments = new ArrayList<>();
         ArrayList<Polygon> poly = new ArrayList<>();
-        
 
-        //Create random points
+        // Create random points
         int numVertices = 100;
         for (int i = 0; i < numVertices; i++) {
             irregularMesh.addRandPts(bag.nextInt(width), bag.nextInt(height));
         }
 
-        //Creates the voronoi diagram
+        // Creates the voronoi diagram
         irregularMesh.voronoiDiagram(width, height);
         ArrayList<org.locationtech.jts.geom.Polygon> polygons = irregularMesh.getPolygons();
 
-        //Adding the vertices of the polygons to the Vertices struct
-        for(int i=0; i<polygons.size(); i++){
-            for(int j=0; j<polygons.get(i).getNumPoints(); j++){
+        // Adding the vertices of the polygons to the Vertices struct
+        for (int i = 0; i < polygons.size(); i++) {
+            for (int j = 0; j < polygons.get(i).getNumPoints(); j++) {
                 Coordinate[] coords = (polygons.get(i).getCoordinates());
                 vertices.add(Vertex.newBuilder().setX(coords[0].x).setY(coords[0].y).build());
             }
-             
+
         }
 
-        System.out.println(polygons.get(0));
-        System.out.println(polygons.get(0).getCentroid());
-
-
-        //Create Segments
+        // Create Segments
         for (int i = 0; i < polygons.size(); i++) {
             // Store info on indcies of segments that form polygon
             ArrayList<Integer> segIdxs = new ArrayList<>();
@@ -187,8 +175,8 @@ public class DotGen {
             for (int j = 0; j < (polygons.get(i).getNumPoints() - 1); j++) {
                 double x1 = polygons.get(i).getCoordinates()[j].x;
                 double y1 = polygons.get(i).getCoordinates()[j].y;
-                double x2 = polygons.get(i).getCoordinates()[j+1].x;
-                double y2 = polygons.get(i).getCoordinates()[j+1].y;
+                double x2 = polygons.get(i).getCoordinates()[j + 1].x;
+                double y2 = polygons.get(i).getCoordinates()[j + 1].y;
 
                 // if vertex not found, new vertex object created
                 int v1Idx = vertices.indexOf(Vertex.newBuilder().setX((double) x1).setY((double) y1).build());
@@ -229,7 +217,22 @@ public class DotGen {
             Segment segmentProps = Segment.newBuilder(s).addProperties(color).build();
             edgesWithProps.add(segmentProps);
         }
-        
-        return Mesh.newBuilder().addAllVertices(vertices).addAllSegments(edgesWithProps).build();
+
+        ArrayList<Vertex> centroids = new ArrayList<>();
+        for (int i = 0; i < polygons.size(); i++) {
+            polygons.get(i).getCentroid().getX();
+            double xCoords = polygons.get(i).getCentroid().getX();
+            double yCoords = polygons.get(i).getCentroid().getY();
+            centroids.add(Vertex.newBuilder().setX(xCoords).setY(yCoords).build());
+        }
+
+        ArrayList<Vertex> centroidsWithProps = new ArrayList<>();
+        for (Vertex c : centroids) {
+            Vertex centroidProps = Vertex.newBuilder(c).build();
+            centroidsWithProps.add(centroidProps);
+        }
+
+        return Mesh.newBuilder().addAllVertices(verticesWithProps).addAllSegments(edgesWithProps)
+                .addAllVertices(centroidsWithProps).build();
     }
 }
