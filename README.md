@@ -12,7 +12,7 @@ mosser@azrael A2 % mvn install
 ```
 It creates two jars:
 
-`generator/generator.jar` to generate meshes
+`generator/generator.jar` to generate meshes  
 `visualizer/visualizer.jar` to visualize such meshes as SVG files
 
 ## Examples of Execution
