@@ -41,6 +41,11 @@ Run island generator using a mesh named `irregular.mesh` as input and producing 
 java -jar island/island.jar -i img/irregular.mesh -o img/lagoon.mesh --mode lagoon
 ```
 
+## Visualizing the Island
+```
+java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/lagoon.svg
+```
+
 ## Backlog
 
 ### Product Backlog

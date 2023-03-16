@@ -25,7 +25,6 @@ public class islandGenerator {
         iMesh.addAllVertices(aMesh.getVerticesList());
         iMesh.addAllSegments(aMesh.getSegmentsList());
         CenterMesh dim = new CenterMesh(aMesh);
-        dim.centeredMeshDimensions();
         
 
         Structs.Property land = Structs.Property.newBuilder()

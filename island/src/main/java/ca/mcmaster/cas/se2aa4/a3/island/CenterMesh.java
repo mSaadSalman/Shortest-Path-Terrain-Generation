@@ -1,9 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
 
-import java.io.IOException;
 
-import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 
 public class CenterMesh {
@@ -13,13 +11,9 @@ public class CenterMesh {
     public double minY;
     public double maxY;
 
-    public CenterMesh(Structs.Mesh mesh) throws IOException {
-        // aMesh = new MeshFactory().read("img/irregular.mesh");
+    public CenterMesh(Structs.Mesh mesh) {
         this.aMesh = mesh;
-        this.minX = 0;
-        this.maxX = 0;
-        this.minY = 0;
-        this.maxY = 0;
+        centeredMeshDimensions();
     }
 
     public void centeredMeshDimensions() {
