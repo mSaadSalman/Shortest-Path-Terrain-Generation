@@ -14,12 +14,16 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 
 public class islandGenerator {
     private Structs.Mesh aMesh;
+    private CenterMesh centerMesh;
 
     public islandGenerator() throws IOException {
         aMesh = new MeshFactory().read("img/irregular.mesh");
+        centerMesh = new CenterMesh();
     }
 
-    public Structs.Mesh LandPoly(double width, double height) {
+    public Structs.Mesh LandPoly() {
+        double width = centerMesh.meshDimensions()[0];
+        double height = centerMesh.meshDimensions()[1];
 
         Structs.Mesh.Builder iMesh = Structs.Mesh.newBuilder();
         iMesh.addAllVertices(aMesh.getVerticesList());

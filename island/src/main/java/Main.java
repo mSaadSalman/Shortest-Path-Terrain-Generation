@@ -15,11 +15,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.configuration.Configuration;
 public class Main {
     public static void main(String[] args) throws IOException {
         Configuration config = new Configuration(args);
-        CenterMesh centerMesh = new CenterMesh();
-        System.out.println(centerMesh.meshDimensions()[0]);
-        System.out.println(centerMesh.meshDimensions()[1]);
-
-        Structs.Mesh iMesh = new islandGenerator().LandPoly(centerMesh.meshDimensions()[0], centerMesh.meshDimensions()[1]);
+        Structs.Mesh iMesh = new islandGenerator().LandPoly();
         new MeshFactory().write(iMesh, config.output());
         
     }
