@@ -13,9 +13,10 @@ import ca.mcmaster.cas.se2aa4.a3.island.configuration.Configuration;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        // Configuration config = new Configuration(args);
+        Configuration config = new Configuration(args);
+        Structs.Mesh iMesh = new islandGenerator().LandPoly();
+        new MeshFactory().write(iMesh, config.output());
 
-        islandGenerator generator = new islandGenerator();
-        System.out.println(generator.LandPoly());
+        
     }
 }

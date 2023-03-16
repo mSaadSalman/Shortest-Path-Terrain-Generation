@@ -1,7 +1,10 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter.Green;
 
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
@@ -18,30 +21,35 @@ public class islandGenerator {
 
     public islandGenerator() throws IOException {
         aMesh = new MeshFactory().read("img/irregular.mesh");
-        this.landPoly = new ArrayList<>();
-        this.oceanPoly = new ArrayList<>();
-        this.polyList = new ArrayList<>();
+        
     }
 
-    public ArrayList<ArrayList<Polygon>> LandPoly() {
+    public Structs.Mesh LandPoly() {
 
-        for (Structs.Polygon p : aMesh.getPolygonsList()) {
-            Structs.Vertex centroid = aMesh.getVertices(p.getCentroidIdx());
-            // System.out.println(centroid.getX());
-            // System.out.println(centroid.getY());
+        Structs.Mesh.Builder iMesh = Structs.Mesh.newBuilder();
+        iMesh.addAllVertices(aMesh.getVerticesList());
+        iMesh.addAllSegments(aMesh.getSegmentsList());
 
-            if (centroid.getX() > 500 || centroid.getY() > 500) {
-                oceanPoly.add(p);
-            } else {
-                landPoly.add(p);
-            }
-        }
-        polyList.add(landPoly);
-        polyList.add(oceanPoly);
+        Structs.Property land = Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue("124,252,0")
+                .build();
 
+        Structs.Property ocean = Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue("0,0,55")
+                .build();
+
+
+        for (Structs.Polygon poly : aMesh.getPolygonsList()) {
+            Structs.Vertex centroid = aMesh.getVertices(poly.getCentroidIdx());
+            Structs.Polygon.Builder p = Structs.Polygon.newBuilder(poly);
+            if((centroid.getX()<750 && centroid.getX()>250) && (centroid.getY()>250 && centroid.getY()<750) ) p.addProperties(land);
+            else p.addProperties(ocean);
+            iMesh.addPolygons(p);
+         }
         
-
-        return polyList;
+        return iMesh.build();
     }
 
 }
