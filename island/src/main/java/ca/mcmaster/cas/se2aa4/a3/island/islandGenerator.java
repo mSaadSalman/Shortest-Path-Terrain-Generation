@@ -13,18 +13,13 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 
 public class islandGenerator {
-
-    private ArrayList<Polygon> landPoly;
-    private ArrayList<Polygon> oceanPoly;
-    private ArrayList<ArrayList<Polygon>> polyList;
     private Structs.Mesh aMesh;
 
     public islandGenerator() throws IOException {
         aMesh = new MeshFactory().read("img/irregular.mesh");
-        
     }
 
-    public Structs.Mesh LandPoly() {
+    public Structs.Mesh LandPoly(double width, double height) {
 
         Structs.Mesh.Builder iMesh = Structs.Mesh.newBuilder();
         iMesh.addAllVertices(aMesh.getVerticesList());
@@ -40,11 +35,12 @@ public class islandGenerator {
                 .setValue("0,0,55")
                 .build();
 
-
         for (Structs.Polygon poly : aMesh.getPolygonsList()) {
             Structs.Vertex centroid = aMesh.getVertices(poly.getCentroidIdx());
             Structs.Polygon.Builder p = Structs.Polygon.newBuilder(poly);
-            if((centroid.getX()<750 && centroid.getX()>250) && (centroid.getY()>250 && centroid.getY()<750) ) p.addProperties(land);
+            if((centroid.getX()<(width *0.75) && centroid.getX()>(width*0.25)) && (centroid.getY()<(height*0.75) && centroid.getY()>(height*0.25))){
+                p.addProperties(land);
+            } 
             else p.addProperties(ocean);
             iMesh.addPolygons(p);
          }
