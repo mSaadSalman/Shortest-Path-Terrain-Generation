@@ -22,8 +22,10 @@ public class islandGenerator {
     }
 
     public Structs.Mesh LandPoly() {
-        double width = centerMesh.meshDimensions()[0];
-        double height = centerMesh.meshDimensions()[1];
+        double minX = centerMesh.centeredMeshDimensions()[0];
+        double maxX = centerMesh.centeredMeshDimensions()[1];
+        double minY = centerMesh.centeredMeshDimensions()[2];
+        double maxY = centerMesh.centeredMeshDimensions()[3];
 
         Structs.Mesh.Builder iMesh = Structs.Mesh.newBuilder();
         iMesh.addAllVertices(aMesh.getVerticesList());
@@ -42,7 +44,7 @@ public class islandGenerator {
         for (Structs.Polygon poly : aMesh.getPolygonsList()) {
             Structs.Vertex centroid = aMesh.getVertices(poly.getCentroidIdx());
             Structs.Polygon.Builder p = Structs.Polygon.newBuilder(poly);
-            if((centroid.getX()<(width *0.75) && centroid.getX()>(width*0.25)) && (centroid.getY()<(height*0.75) && centroid.getY()>(height*0.25))){
+            if((centroid.getX()<maxX && centroid.getX()>minX) && (centroid.getY()<maxY && centroid.getY()>minY)){
                 p.addProperties(land);
             } 
             else p.addProperties(ocean);
