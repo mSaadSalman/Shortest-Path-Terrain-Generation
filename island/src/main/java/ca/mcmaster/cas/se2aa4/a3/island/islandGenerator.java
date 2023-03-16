@@ -14,22 +14,19 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 
 public class islandGenerator {
     private Structs.Mesh aMesh;
-    private CenterMesh centerMesh;
 
     public islandGenerator() throws IOException {
         aMesh = new MeshFactory().read("img/irregular.mesh");
-        centerMesh = new CenterMesh();
     }
 
-    public Structs.Mesh LandPoly() {
-        double minX = centerMesh.centeredMeshDimensions()[0];
-        double maxX = centerMesh.centeredMeshDimensions()[1];
-        double minY = centerMesh.centeredMeshDimensions()[2];
-        double maxY = centerMesh.centeredMeshDimensions()[3];
+    public Structs.Mesh LandPoly() throws IOException {
 
         Structs.Mesh.Builder iMesh = Structs.Mesh.newBuilder();
         iMesh.addAllVertices(aMesh.getVerticesList());
         iMesh.addAllSegments(aMesh.getSegmentsList());
+        CenterMesh dim = new CenterMesh(aMesh);
+        dim.centeredMeshDimensions();
+        
 
         Structs.Property land = Structs.Property.newBuilder()
                 .setKey("rgb_color")
@@ -44,13 +41,13 @@ public class islandGenerator {
         for (Structs.Polygon poly : aMesh.getPolygonsList()) {
             Structs.Vertex centroid = aMesh.getVertices(poly.getCentroidIdx());
             Structs.Polygon.Builder p = Structs.Polygon.newBuilder(poly);
-            if((centroid.getX()<maxX && centroid.getX()>minX) && (centroid.getY()<maxY && centroid.getY()>minY)){
+            if((centroid.getX()<dim.maxX && centroid.getX()>dim.minX) && (centroid.getY()<dim.maxY && centroid.getY()>dim.minY)){
                 p.addProperties(land);
             } 
             else p.addProperties(ocean);
             iMesh.addPolygons(p);
-         }
-        
+        }
+
         return iMesh.build();
     }
 
