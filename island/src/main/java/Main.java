@@ -17,6 +17,7 @@ public class Main {
         Configuration config = new Configuration(args);
         Structs.Mesh iMesh = new islandGenerator().generate();
         new MeshFactory().write(iMesh, config.output());
+    
         
     }
 }
