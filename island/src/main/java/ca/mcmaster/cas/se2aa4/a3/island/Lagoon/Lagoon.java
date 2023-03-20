@@ -16,7 +16,7 @@ public class Lagoon{
         CenterMesh dim = new CenterMesh(iMesh);
         this.centerX = dim.maxX/2;
         this.centerY = dim.maxY/2;
-        this.radius = dim.maxX*0.25;
+        this.radius = dim.maxX*0.2;
     }
 
     public Structs.Mesh build(){
