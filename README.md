@@ -52,13 +52,9 @@ java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/lagoon.svg
 
 | Id  | Feature title                                                   | Who?         | Start    | End      | Status |
 | :-: | --------------------------------------------------------------- | ------------ | -------- | -------- | ------ |
-| F01 | Creating a minimal mesh ADT                                     | Mahad & Saad | 7/02/23  | 20/02/23 | D      |
-| F02 | Producing full meshes                                           | Saad & Mahad | 11/02/23 | 22/02/23 | D      |
-| F03 | Playing with rendering (Setting colors/thicknesses)             | Ali          | 11/02/23 | 21/02/23 | D      |
-| F04 | Visualization mode                                              | Ali          | 15/02/23 | 23/02/23 | D      |
-| F05 | Generate Random Points                                          | Saad & Ali   | 15/02/23 | 24/02/23 | D      |
-| F06 | Compute the Voronoi Diagram                                     | Ali          | 18/02/23 | 27/02/23 | D      |
-| F07 | Crop the mesh to the expected size                              | Mahad        | 20/02/23 | 27/02/23 | D      |
-| F08 | Apply Lloyd relaxation                                          | Mahad        | 22/02/23 | 27/02/23 | D      |
-| F09 | Compute neiborhood relationships using Delaunay’s triangulation |              |          |          | P      |
-| F10 | For each irregular polygon, reorder its segments                |              |          |          | P      |
+| F01 | Tile Creation Water and Land (Differentiation)                   | Mahad         | 1/03/23  | 7/3/23 | D      |
+| F02 | Centering Function (Creating Shapes figure)                     | Ali            | 7/03/23 | 14/03/23 | D      |
+| F03 | Adding Lagoons                                                  | Saad         | 15/02/23 | 19/03/23 | D      |
+| F04 |                                                                 |           |  | |       |
+| F05 |                                                                 |           |  |  |      |
+| F06 |                                                                 |           |  |  |       |
