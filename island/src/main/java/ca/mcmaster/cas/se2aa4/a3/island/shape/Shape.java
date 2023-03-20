@@ -1,9 +1,9 @@
 package ca.mcmaster.cas.se2aa4.a3.island.shape;
 
-import com.google.protobuf.Struct;
+
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import ca.mcmaster.cas.se2aa4.a3.island.CenterMesh;
+
 
 public abstract class Shape {
 

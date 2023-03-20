@@ -15,17 +15,13 @@ public class Circle extends Shape {
         this.radius = maxX*0.375;
         land = Structs.Property.newBuilder()
                 .setKey("rgb_color")
-                .setValue("124,252,0")
+                .setValue("122,171,135")
                 .build();
         ocean = Structs.Property.newBuilder()
                 .setKey("rgb_color")
                 .setValue("0,0,55")
                 .build();
     }
-
-    
-
-
 
     public boolean contains(Structs.Vertex v) {
 

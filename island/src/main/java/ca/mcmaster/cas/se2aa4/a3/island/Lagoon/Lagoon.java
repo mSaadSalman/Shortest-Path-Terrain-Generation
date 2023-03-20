@@ -1,39 +1,44 @@
-package ca.mcmaster.cas.se2aa4.a3.island.Lagoon;
+package ca.mcmaster.cas.se2aa4.a3.island.lagoon;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
-import ca.mcmaster.cas.se2aa4.a3.island.shape.Circle;
-import ca.mcmaster.cas.se2aa4.a3.island.shape.Shape;
+import ca.mcmaster.cas.se2aa4.a3.island.CenterMesh;
 
-public class Lagoon extends Shape{
-    
+
+public class Lagoon{
+
+    private Structs.Mesh aMesh;
     private double centerX;
-    private double centerY; 
+    private double centerY;
     private double radius;
+    
+    public Lagoon(Structs.Mesh iMesh){
+        this.aMesh = iMesh;
+        CenterMesh dim = new CenterMesh(iMesh);
+        this.centerX = dim.maxX/2;
+        this.centerY = dim.maxY/2;
+        this.radius = dim.maxX*0.25;
+    }
 
-    public Lagoon(double maxX, double maxY){
-        
-        this.centerX = maxX/2;
-        this.centerY = maxY/2;
-        this.radius = maxX*0.375;
-        land = Structs.Property.newBuilder()
-                .setKey("rgb_color")
-                .setValue("124,252,100")
-                .build();
-        ocean = Structs.Property.newBuilder()
+    public Structs.Mesh build(){
+
+        Structs.Mesh.Builder iMesh = Structs.Mesh.newBuilder();
+        iMesh.addAllVertices(aMesh.getVerticesList());
+        iMesh.addAllSegments(aMesh.getSegmentsList());
+       
+        Structs.Property lagoon = Structs.Property.newBuilder()
                 .setKey("rgb_color")
                 .setValue("0,0,100")
                 .build();
+        
+        for (Structs.Polygon poly : aMesh.getPolygonsList()) {
+            Structs.Vertex centroid = aMesh.getVertices(poly.getCentroidIdx());
+            Structs.Polygon.Builder p = Structs.Polygon.newBuilder(poly);
+            if(Math.sqrt(Math.pow(centroid.getX() - centerX, 2) + Math.pow(centroid.getY() - centerY, 2)) <= radius ) 
+                p.setProperties(0, lagoon);
+            iMesh.addPolygons(p);
+        }
+
+        return iMesh.build(); 
+
     }
-
-    public boolean contains(Structs.Vertex v) {
-
-        return (Math.sqrt(Math.pow(v.getX() - centerX, 2) + Math.pow(v.getY() - centerY, 2))) <= radius;
-    }
-
-    public Structs.Mesh build(Structs.Mesh aMesh){
-        return super.build(aMesh);
-    }
-
-    
 }

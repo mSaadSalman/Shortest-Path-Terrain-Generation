@@ -1,8 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-import com.google.protobuf.Struct;
 
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
@@ -17,6 +17,8 @@ public class Main {
         Configuration config = new Configuration(args);
         Structs.Mesh iMesh = new islandGenerator().generate();
         new MeshFactory().write(iMesh, config.output());
+
+        
     
         
     }

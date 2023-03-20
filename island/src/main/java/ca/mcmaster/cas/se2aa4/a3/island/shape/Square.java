@@ -1,7 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a3.island.shape;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 
 public class Square extends Shape {
     private double maxX;
@@ -12,7 +11,7 @@ public class Square extends Shape {
         this.maxY = maxY;
         land = Structs.Property.newBuilder()
                 .setKey("rgb_color")
-                .setValue("124,252,0")
+                .setValue("122,171,135")
                 .build();
         ocean = Structs.Property.newBuilder()
                 .setKey("rgb_color")
