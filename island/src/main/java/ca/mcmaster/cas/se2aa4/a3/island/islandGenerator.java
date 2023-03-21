@@ -9,6 +9,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.shape.Circle;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Square;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.TiltedOval;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Shape;
+import ca.mcmaster.cas.se2aa4.a3.island.Aquifers;
 
 public class islandGenerator {
     private Structs.Mesh aMesh;
@@ -34,6 +35,7 @@ public class islandGenerator {
         Structs.Mesh mesh = iMesh.build(aMesh); // Calls build function from Shape
         mesh = new Lagoon(mesh).build(); // adds lagoon to mesh
         mesh = new Beaches(mesh).enrichBeaches(); // adds beacehs to mesh
+        mesh = new Aquifers(mesh).enrichAquifers();
         return mesh; // returns the mesh
     }
 }
