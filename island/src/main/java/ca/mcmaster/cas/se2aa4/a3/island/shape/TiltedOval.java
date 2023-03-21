@@ -2,15 +2,19 @@ package ca.mcmaster.cas.se2aa4.a3.island.shape;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 
-public class Circle extends Shape {
+public class TiltedOval extends Shape {
     private double centerX;
     private double centerY;
-    private double radius;
+    private double majorAxis;
+    private double minorAxis;
+    private double angle;
 
-    public Circle(double maxX, double maxY) {
+    public TiltedOval(double maxX, double maxY) {
         this.centerX = maxX / 2;
         this.centerY = maxY / 2;
-        this.radius = (maxX > maxY) ? maxY * 0.4 : maxX * 0.4;
+        this.majorAxis = maxX * 0.4;
+        this.minorAxis = maxY * 0.3;
+        this.angle = Math.toRadians(35);
 
         land = Structs.Property.newBuilder()
                 .setKey("rgb_color")
@@ -23,7 +27,9 @@ public class Circle extends Shape {
     }
 
     public boolean contains(Structs.Vertex v) {
-        return (Math.sqrt(Math.pow(v.getX() - centerX, 2) + Math.pow(v.getY() - centerY, 2))) <= radius;
+        double xRot = (v.getX() - centerX) * Math.cos(angle) - (v.getY() - centerY) * Math.sin(angle) + centerX;
+        double yRot = (v.getX() - centerX) * Math.sin(angle) + (v.getY() - centerY) * Math.cos(angle) + centerY;
+        return Math.pow((xRot - centerX) / majorAxis, 2) + Math.pow((yRot - centerY) / minorAxis, 2) <= 1;
     }
 
     public Structs.Mesh build(Structs.Mesh aMesh) {

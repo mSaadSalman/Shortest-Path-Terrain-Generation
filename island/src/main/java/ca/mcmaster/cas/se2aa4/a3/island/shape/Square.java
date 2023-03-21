@@ -6,9 +6,10 @@ public class Square extends Shape {
     private double maxX;
     private double maxY;
 
-    public Square(double maxX, double maxY){
+    public Square(double maxX, double maxY) {
         this.maxX = maxX;
         this.maxY = maxY;
+
         land = Structs.Property.newBuilder()
                 .setKey("rgb_color")
                 .setValue("122,171,135")
@@ -20,13 +21,11 @@ public class Square extends Shape {
     }
 
     public boolean contains(Structs.Vertex vertex) {
-        return vertex.getX() >= maxX*0.2 && vertex.getX() <= maxX*0.8 &&
-                vertex.getY() >= maxY*0.2 && vertex.getY() <= maxY*0.8;
+        return vertex.getX() >= maxX * 0.15 && vertex.getX() <= maxX * 0.85 &&
+                vertex.getY() >= maxY * 0.15 && vertex.getY() <= maxY * 0.85;
     }
 
-    public Structs.Mesh build(Structs.Mesh aMesh){
+    public Structs.Mesh build(Structs.Mesh aMesh) {
         return super.build(aMesh);
     }
-    
-    
 }

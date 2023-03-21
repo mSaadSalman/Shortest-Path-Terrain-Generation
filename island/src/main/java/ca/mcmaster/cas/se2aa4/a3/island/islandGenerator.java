@@ -1,15 +1,14 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
-
 import java.io.IOException;
-
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
-import ca.mcmaster.cas.se2aa4.a3.island.lagoon.Lagoon;
+import ca.mcmaster.cas.se2aa4.a3.island.Lagoon.Lagoon;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Circle;
+import ca.mcmaster.cas.se2aa4.a3.island.shape.Square;
+import ca.mcmaster.cas.se2aa4.a3.island.shape.TiltedOval;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Shape;
-
 
 public class islandGenerator {
     private Structs.Mesh aMesh;
@@ -18,18 +17,23 @@ public class islandGenerator {
         aMesh = new MeshFactory().read("img/irregular.mesh");
     }
 
-    public Structs.Mesh generate() throws IOException {
+    public Structs.Mesh generate(String shape) throws IOException {
+        MeshDimension dim = new MeshDimension(aMesh); // finds mesh dimensions
+        Shape iMesh = null;
 
-        CenterMesh dim = new CenterMesh(aMesh);
-        Shape iMesh = new Circle(dim.maxX, dim.maxY);
-        Structs.Mesh mesh = iMesh.build(aMesh);
-        mesh = new Lagoon(mesh).build();
-        mesh = new Beaches(mesh).enrichBeaches();
-        return mesh;
-        
+        if (shape.equals("square"))
+            iMesh = new Square(dim.maxX, dim.maxY); // Creates square island and passes mesh dimension
+        else if (shape.equals("circle"))
+            iMesh = new Circle(dim.maxX, dim.maxY);
+        else if (shape.equals("oval"))
+            iMesh = new TiltedOval(dim.maxX, dim.maxY);
 
+        if (iMesh == null)
+            throw new IllegalArgumentException("Unknown shape: " + shape);
 
+        Structs.Mesh mesh = iMesh.build(aMesh); // Calls build function from Shape
+        mesh = new Lagoon(mesh).build(); // adds lagoon to mesh
+        mesh = new Beaches(mesh).enrichBeaches(); // adds beacehs to mesh
+        return mesh; // returns the mesh
     }
-
-
 }

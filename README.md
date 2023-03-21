@@ -38,7 +38,7 @@ Note: PDF versions of the SVG files were created with `rsvg-convert`
 ## Generating the Island
 Run island generator using a mesh named `irregular.mesh` as input and producing a mesh named `lagoon.mesh` as output
 ```
-java -jar island/island.jar -i img/irregular.mesh -o img/lagoon.mesh --mode lagoon
+java -jar island/island.jar -i img/irregular.mesh -o img/lagoon.mesh --mode lagoon --shape [insert shape (circle, square, oval)]
 ```
 
 ## Visualizing the Island
