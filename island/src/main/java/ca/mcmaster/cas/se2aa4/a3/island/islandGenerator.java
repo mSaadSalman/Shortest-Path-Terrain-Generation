@@ -4,7 +4,7 @@ import java.io.IOException;
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
-import ca.mcmaster.cas.se2aa4.a3.island.Lagoon.Lagoon;
+import ca.mcmaster.cas.se2aa4.a3.island.lagoon.Lagoon;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Circle;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Square;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.TiltedOval;
