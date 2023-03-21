@@ -16,7 +16,6 @@ public class Aquifers {
         iMesh.addAllVertices(aMesh.getVerticesList());
         iMesh.addAllSegments(aMesh.getSegmentsList());
 
-
         Structs.Property aqua = Structs.Property.newBuilder()
                 .setKey("rgb_color")
                 .setValue("100,40,0")
@@ -30,7 +29,6 @@ public class Aquifers {
             x.setProperties(0, aqua);
             iMesh.addPolygons(x);
         }
-        
         return iMesh.build();
     }
 }
