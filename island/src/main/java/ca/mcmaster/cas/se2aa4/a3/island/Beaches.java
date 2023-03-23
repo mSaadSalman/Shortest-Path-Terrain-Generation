@@ -26,8 +26,9 @@ public class Beaches {
                 if (poly.getProperties(0).getValue() == "122,171,135" &&
                         (p.getProperties(0).getValue() == "0,0,100" || p.getProperties(0).getValue() == "0,0,55"))
                     x.setProperties(0, sand);
-                iMesh.addPolygons(x);
+                
             }
+            iMesh.addPolygons(x);
         }
         return iMesh.build();
     }
