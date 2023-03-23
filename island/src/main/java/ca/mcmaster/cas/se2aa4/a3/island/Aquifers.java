@@ -24,6 +24,11 @@ public class Aquifers {
                 .setValue("0,0,30")
                 .build();
 
+        Structs.Property moist = Structs.Property.newBuilder()
+                .setKey("moisture")
+                .setValue("1")
+                .build();
+
         int poly_size = aMesh.getPolygonsCount();
         Random rand= new Random();
 
@@ -40,22 +45,31 @@ public class Aquifers {
 
         
         for(Structs.Polygon poly : aMesh.getPolygonsList()){
+            for (Integer idx : poly.getNeighborIdxsList()) {
+
             if (val==0){
                 break;
             }
             int y = rand.nextInt(poly_size);
             Structs.Polygon temp= aMesh.getPolygons(y);
+            Structs.Polygon neigbor = aMesh.getPolygons(idx);
 
             if (temp.getProperties(0).getValue() == "122,171,135"||
             temp.getProperties(0).getValue() == "194,178,128"){
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(temp);
+            Structs.Polygon.Builder t = Structs.Polygon.newBuilder(neigbor);
+            
             x.setProperties(0, aqua);
             iMesh.setPolygons(y, x);
+            t.addProperties(moist);
+
+
             val--;
             }
 
             
         }
+    }
 
         
 
