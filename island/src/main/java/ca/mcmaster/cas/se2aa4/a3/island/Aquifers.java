@@ -43,13 +43,14 @@ public class Aquifers {
             if (val==0){
                 break;
             }
-            Structs.Polygon temp= aMesh.getPolygons(rand.nextInt(poly_size));
+            int y = rand.nextInt(poly_size);
+            Structs.Polygon temp= aMesh.getPolygons(y);
 
             if (temp.getProperties(0).getValue() == "0,0,100"||
             temp.getProperties(0).getValue() == "0,0,55"){
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(temp);
             x.setProperties(0, aqua);
-            iMesh.addPolygons(x);
+            iMesh.setPolygons(y, x);
             val--;
             }
 

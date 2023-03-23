@@ -9,7 +9,8 @@ import ca.mcmaster.cas.se2aa4.a3.island.shape.Square;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.TiltedOval;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Shape;
 import ca.mcmaster.cas.se2aa4.a3.island.Aquifers;
-import ca.mcmaster.cas.se2aa4.a3.island.Lagoon.Lagoon;
+import ca.mcmaster.cas.se2aa4.a3.island.elevation.Volcano;
+import ca.mcmaster.cas.se2aa4.a3.island.lagoon.Lagoon;
 
 public class islandGenerator {
     private Structs.Mesh aMesh;
@@ -32,10 +33,11 @@ public class islandGenerator {
         if (iMesh == null)
             throw new IllegalArgumentException("Unknown shape: " + shape);
 
-        Structs.Mesh mesh = iMesh.build(aMesh); // Calls build function from Shape
+        Structs.Mesh mesh = iMesh.build(aMesh); // Calls build function from Shape 
         mesh = new Lagoon(mesh).build(); // adds lagoon to mesh
         mesh = new Beaches(mesh).enrichBeaches(); // adds beacehs to mesh
         mesh = new Aquifers(mesh).enrichAquifers();
+        mesh = new Volcano().build(mesh);
         return mesh; // returns the mesh
     }
 }
