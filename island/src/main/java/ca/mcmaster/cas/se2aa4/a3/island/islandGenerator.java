@@ -10,7 +10,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.shape.TiltedOval;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Shape;
 import ca.mcmaster.cas.se2aa4.a3.island.Aquifers;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.Volcano;
-import ca.mcmaster.cas.se2aa4.a3.island.lagoon.Lagoon;
+import ca.mcmaster.cas.se2aa4.a3.island.Lagoon.Lagoon;
 
 public class islandGenerator {
     private Structs.Mesh aMesh;

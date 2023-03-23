@@ -46,8 +46,8 @@ public class Aquifers {
             int y = rand.nextInt(poly_size);
             Structs.Polygon temp= aMesh.getPolygons(y);
 
-            if (temp.getProperties(0).getValue() == "0,0,100"||
-            temp.getProperties(0).getValue() == "0,0,55"){
+            if (temp.getProperties(0).getValue() == "122,171,135"||
+            temp.getProperties(0).getValue() == "194,178,128"){
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(temp);
             x.setProperties(0, aqua);
             iMesh.setPolygons(y, x);
