@@ -75,4 +75,4 @@ java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/lagoon.svg
 | F16 | Lakes                                          | Ali   | 15/03/23 |  |       |
 | F17 | Rivers                                         |        | 15/03/23 |  |      |
 | F19 | Aquifers (Dark bodies of water)                | Saad   | 15/03/23 | 21/03/23 | D      |
-| F20 | Elevation                                      | Saad   | 15/03/23 |   |      |
+| F20 | Soil Absorbtion                                      | Saad   | 15/03/23 |   |      |
