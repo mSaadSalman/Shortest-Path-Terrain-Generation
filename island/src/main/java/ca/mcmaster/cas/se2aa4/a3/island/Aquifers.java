@@ -1,8 +1,5 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -47,8 +44,6 @@ public class Aquifers {
 
         }
 
-
-        
         for(Structs.Polygon poly : aMesh.getPolygonsList()){
             if (val==0){
                 break;

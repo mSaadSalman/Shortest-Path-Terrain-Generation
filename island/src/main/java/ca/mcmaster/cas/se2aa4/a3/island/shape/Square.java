@@ -1,6 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a3.island.shape;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.a3.island.Properties.Properties;
 
 public class Square extends Shape {
     private double maxX;
@@ -10,14 +11,8 @@ public class Square extends Shape {
         this.maxX = maxX;
         this.maxY = maxY;
 
-        land = Structs.Property.newBuilder()
-                .setKey("rgb_color")
-                .setValue("122,171,135")
-                .build();
-        ocean = Structs.Property.newBuilder()
-                .setKey("rgb_color")
-                .setValue("0,0,55")
-                .build();
+        land = Properties.getLandProps();
+        ocean = Properties.getOceanProps();
     }
 
     public boolean contains(Structs.Vertex vertex) {

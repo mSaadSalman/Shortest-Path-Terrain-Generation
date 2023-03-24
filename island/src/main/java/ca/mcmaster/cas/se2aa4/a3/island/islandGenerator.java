@@ -3,14 +3,12 @@ package ca.mcmaster.cas.se2aa4.a3.island;
 import java.io.IOException;
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Circle;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Square;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.TiltedOval;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Shape;
-import ca.mcmaster.cas.se2aa4.a3.island.Aquifers;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.Volcano;
-import ca.mcmaster.cas.se2aa4.a3.island.Lagoon.Lagoon;
+import ca.mcmaster.cas.se2aa4.a3.island.lagoon.Lagoon;
 
 public class islandGenerator {
     private Structs.Mesh aMesh;

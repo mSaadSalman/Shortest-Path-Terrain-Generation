@@ -1,6 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.a3.island.Properties.Properties;
 
 public class Beaches {
     private Structs.Mesh aMesh;
@@ -14,10 +15,7 @@ public class Beaches {
         iMesh.addAllVertices(aMesh.getVerticesList());
         iMesh.addAllSegments(aMesh.getSegmentsList());
 
-        Structs.Property sand = Structs.Property.newBuilder()
-                .setKey("rgb_color")
-                .setValue("194,178,128")
-                .build();
+        Structs.Property sand = Properties.getBeachProps();
 
         for (Structs.Polygon poly : aMesh.getPolygonsList()) {
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(poly);
@@ -26,7 +24,7 @@ public class Beaches {
                 if (poly.getProperties(0).getValue() == "122,171,135" &&
                         (p.getProperties(0).getValue() == "0,0,100" || p.getProperties(0).getValue() == "0,0,55"))
                     x.setProperties(0, sand);
-                
+
             }
             iMesh.addPolygons(x);
         }
