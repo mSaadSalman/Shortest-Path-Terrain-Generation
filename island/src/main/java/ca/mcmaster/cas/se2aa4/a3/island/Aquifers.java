@@ -29,6 +29,11 @@ public class Aquifers {
                 .setValue("1")
                 .build();
 
+        Structs.Property moist0 = Structs.Property.newBuilder()
+                .setKey("moisture")
+                .setValue("0")
+                .build();
+
         int poly_size = aMesh.getPolygonsCount();
         Random rand= new Random();
 
@@ -45,35 +50,42 @@ public class Aquifers {
 
         
         for(Structs.Polygon poly : aMesh.getPolygonsList()){
-            for (Integer idx : poly.getNeighborIdxsList()) {
-
             if (val==0){
                 break;
             }
             int y = rand.nextInt(poly_size);
             Structs.Polygon temp= aMesh.getPolygons(y);
-            Structs.Polygon neigbor = aMesh.getPolygons(idx);
 
             if (temp.getProperties(0).getValue() == "122,171,135"||
             temp.getProperties(0).getValue() == "194,178,128"){
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(temp);
-            Structs.Polygon.Builder t = Structs.Polygon.newBuilder(neigbor);
-            
             x.setProperties(0, aqua);
             iMesh.setPolygons(y, x);
-            t.addProperties(moist);
-
-
             val--;
             }
-
-            
         }
-    }
 
-        
+        for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
+            Structs.Polygon.Builder p = Structs.Polygon.newBuilder(iMesh.getPolygons(i));
 
+            for (int j = 0; j < p.getNeighborIdxsCount(); j++) {
+                int neighborIndex = p.getNeighborIdxs(j);
+                Structs.Polygon.Builder neighbor = Structs.Polygon.newBuilder(iMesh.getPolygons(neighborIndex));
+                
 
+                 if (p.getProperties(0).getValue() == "0,0,30") {
+                        neighbor.addProperties(moist);
+                        iMesh.setPolygons(neighborIndex, neighbor.build());
+                    }
+
+                 else {
+                      neighbor.addProperties(moist0);
+                     iMesh.setPolygons(neighborIndex, neighbor.build());
+
+                     }  
+            }
+
+        }        
 
         return iMesh.build();
     }

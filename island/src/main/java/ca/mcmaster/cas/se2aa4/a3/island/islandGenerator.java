@@ -36,7 +36,7 @@ public class islandGenerator {
         Structs.Mesh mesh = iMesh.build(aMesh); // Calls build function from Shape 
         mesh = new Lagoon(mesh).build(); // adds lagoon to mesh
         mesh = new Beaches(mesh).enrichBeaches(); // adds beacehs to mesh
-        mesh = new Aquifers(mesh).enrichAquifers();
+        mesh = new Aquifers(mesh).enrichAquifers(); //adds aquifer
         mesh = new Volcano().build(mesh);
         return mesh; // returns the mesh
     }
