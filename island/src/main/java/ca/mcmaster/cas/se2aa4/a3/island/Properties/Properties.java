@@ -13,6 +13,7 @@ public class Properties {
     public static String oceanColors = "0,0,55";
     public static String aquaColors = "0,0,30";
     public static String beachColors = "194,178,128";
+    public static String forestColors = "39,118,0";
     public static String testColors = "192,0,125";
 
     public static Structs.Property gettestProps() {
@@ -112,5 +113,14 @@ public class Properties {
                 .setValue(beachColors)
                 .build();
     }
+
+    public static Structs.Property getForestProps() {
+        return Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue(forestColors)
+                .build();
+    }
+
+
 
 }

@@ -29,7 +29,7 @@ public class SeedGen {
         return seed;
     }
 
-    public void storeMesh(Structs.Mesh mesh, long seed) {
+    public void storeMesh(long seed, Structs.Mesh mesh) {
         meshes = new Hashtable<>();
         meshes.put(seed, mesh);
     }

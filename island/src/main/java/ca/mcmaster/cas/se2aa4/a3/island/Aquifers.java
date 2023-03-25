@@ -62,26 +62,34 @@ public class Aquifers {
             }
         }
 
+        for (Structs.Polygon poly : aMesh.getPolygonsList()) {
+            Structs.Polygon.Builder p = Structs.Polygon.newBuilder(poly);
+            p.addProperties(moist);
+        }
+
+        
+
         for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
             Structs.Polygon.Builder p = Structs.Polygon.newBuilder(iMesh.getPolygons(i));
 
             for (int j = 0; j < p.getNeighborIdxsCount(); j++) {
                 int neighborIndex = p.getNeighborIdxs(j);
                 Structs.Polygon.Builder neighbor = Structs.Polygon.newBuilder(iMesh.getPolygons(neighborIndex));
-                
 
-                 if (p.getProperties(0).getValue() == Properties.aquaColors) {
-                        neighbor.addProperties(moist);
-                        iMesh.setPolygons(neighborIndex, neighbor.build());
+                 if (neighbor.getProperties(0).getValue() == Properties.aquaColors) {
+
+                    
+                        p.addProperties(moist);
+                        //iMesh.setPolygons(neighborIndex, neighbor.build());
+                        break;
                     }
 
-                 else {
-                      neighbor.addProperties(moist0);
-                     iMesh.setPolygons(neighborIndex, neighbor.build());
+                    else if(j==p.getNeighborIdxsCount()-1){
+                        p.addProperties(moist0);
 
-                     }  
+                    }
             }
-
+            iMesh.setPolygons(i, p);
         }        
 
         return iMesh.build();
