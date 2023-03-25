@@ -8,6 +8,7 @@ public class Configuration {
     public static final String OUTPUT = "o";
     public static final String MODE = "mode";
     public static final String SHAPE = "shape";
+    public static final String LAKES = "lakes";
 
     private CommandLine cli;
 
@@ -40,6 +41,10 @@ public class Configuration {
         return this.cli.getOptionValue(SHAPE);
     }
 
+    public String lakes() {
+        return this.cli.getOptionValue(LAKES);
+    }
+
     private Options options() {
         Options options = new Options();
         options.addOption(new Option(INPUT, true, "Input file (MESH)"));
@@ -55,6 +60,12 @@ public class Configuration {
                 .hasArg()
                 .argName("shape")
                 .desc("Island shape")
+                .build());
+        options.addOption(Option.builder()
+                .longOpt(LAKES)
+                .hasArg()
+                .argName("lakes")
+                .desc("number of lakes")
                 .build());
         return options;
     }

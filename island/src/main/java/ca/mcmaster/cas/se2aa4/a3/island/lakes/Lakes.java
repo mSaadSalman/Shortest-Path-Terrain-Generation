@@ -28,7 +28,7 @@ public class Lakes {
 
         int randomPolyIdx = random.nextInt(aMesh.getPolygonsCount());
         while (numLakes > 0) {
-            if (aMesh.getPolygons(randomPolyIdx).getProperties(0).getValue() == "122,171,135") {
+            if (aMesh.getPolygons(randomPolyIdx).getProperties(0).getValue() == Properties.landColors) {
                 Structs.Polygon randomPoly = aMesh.getPolygons(randomPolyIdx); // Get polygon at the random index
                 Structs.Polygon.Builder p = Structs.Polygon.newBuilder(randomPoly);
                 p.setProperties(0, lakes);

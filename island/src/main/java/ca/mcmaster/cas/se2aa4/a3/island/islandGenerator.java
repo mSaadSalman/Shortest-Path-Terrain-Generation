@@ -9,6 +9,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.shape.TiltedOval;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Shape;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.Volcano;
 import ca.mcmaster.cas.se2aa4.a3.island.lagoon.Lagoon;
+import ca.mcmaster.cas.se2aa4.a3.island.lakes.Lakes;
 
 public class islandGenerator {
     private Structs.Mesh aMesh;
@@ -17,7 +18,7 @@ public class islandGenerator {
         aMesh = new MeshFactory().read("img/irregular.mesh");
     }
 
-    public Structs.Mesh generate(String shape) throws IOException {
+    public Structs.Mesh generate(String shape, String numlakes) throws IOException {
         MeshDimension dim = new MeshDimension(aMesh); // finds mesh dimensions
         Shape iMesh = null;
 
@@ -35,6 +36,7 @@ public class islandGenerator {
         mesh = new Lagoon(mesh).build(); // adds lagoon to mesh
         mesh = new Beaches(mesh).enrichBeaches(); // adds beacehs to mesh
         mesh = new Aquifers(mesh).enrichAquifers(); //adds aquifer
+        mesh = new Lakes(mesh).generateLakes(Integer.parseInt(numlakes));
         mesh = new Volcano().build(mesh);
         return mesh; // returns the mesh
     }

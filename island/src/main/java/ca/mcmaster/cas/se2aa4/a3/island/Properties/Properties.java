@@ -53,8 +53,6 @@ public class Properties {
         return Structs.Property.newBuilder()
                 .setKey("rgb_color")
                 .setValue(lakeColors)
-                .setKey("humidity")
-                .setValue("1")
                 .build();
     }
 
