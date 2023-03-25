@@ -9,6 +9,7 @@ public class Configuration {
     public static final String MODE = "mode";
     public static final String SHAPE = "shape";
     public static final String LAKES = "lakes";
+    public static final String AQUIFERS = "aquifers";
     public static final String SEED = "seed";
 
     private CommandLine cli;
@@ -46,6 +47,10 @@ public class Configuration {
         return this.cli.getOptionValue(LAKES);
     }
 
+    public String aquifer() {
+        return this.cli.getOptionValue(AQUIFERS);
+    }
+
     public String seed() {
         return this.cli.getOptionValue(SEED);
     }
@@ -71,6 +76,12 @@ public class Configuration {
                 .hasArg()
                 .argName("lakes")
                 .desc("number of lakes")
+                .build());
+        options.addOption(Option.builder()
+                .longOpt(AQUIFERS)
+                .hasArg()
+                .argName("aquifers")
+                .desc("number of aquifers")
                 .build());
         options.addOption(Option.builder()
                 .longOpt(SEED)
