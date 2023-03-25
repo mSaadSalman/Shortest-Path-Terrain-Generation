@@ -18,11 +18,7 @@ public class Aquifers {
         iMesh.addAllVertices(aMesh.getVerticesList());
         iMesh.addAllSegments(aMesh.getSegmentsList());
 
-        Structs.Property aqua = Structs.Property.newBuilder()
-                .setKey("rgb_color")
-                .setValue("0,0,30")
-                .build();
-
+        
         Structs.Property moist = Structs.Property.newBuilder()
                 .setKey("moisture")
                 .setValue("1")
@@ -35,6 +31,7 @@ public class Aquifers {
 
         int poly_size = aMesh.getPolygonsCount();
         Random rand= new Random();
+        Structs.Property aqui = Properties.getAquaProps();
 
         for (Structs.Polygon poly : aMesh.getPolygonsList()) {
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(poly);
@@ -56,17 +53,11 @@ public class Aquifers {
             if (temp.getProperties(0).getValue() == Properties.landColors||
             temp.getProperties(0).getValue() == Properties.beachColors){
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(temp);
-            x.setProperties(0, aqua);
+            x.setProperties(0, aqui);
             iMesh.setPolygons(y, x);
             val--;
             }
         }
-
-        for (Structs.Polygon poly : aMesh.getPolygonsList()) {
-            Structs.Polygon.Builder p = Structs.Polygon.newBuilder(poly);
-            p.addProperties(moist);
-        }
-
         
 
         for (int i = 0; i < aMesh.getPolygonsCount(); i++) {

@@ -11,7 +11,7 @@ public class Properties {
     public static String lakeColors = "66,135,245";
     public static String landColors = "122,171,135";
     public static String oceanColors = "0,0,55";
-    public static String aquaColors = "0,0,30";
+    public static String aquaColors = "0,0,34";
     public static String beachColors = "194,178,128";
     public static String forestColors = "39,118,0";
     public static String testColors = "192,0,125";

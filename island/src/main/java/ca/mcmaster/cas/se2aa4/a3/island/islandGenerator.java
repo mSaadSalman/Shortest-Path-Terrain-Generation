@@ -35,10 +35,12 @@ public class islandGenerator {
         Structs.Mesh mesh = iMesh.build(aMesh); // Calls build function from Shape 
         if (mode.equals("lagoon"))
             mesh = new Lagoon(mesh).build(); // adds lagoon to mesh
-        mesh = new Beaches(mesh).enrichBeaches(); // adds beacehs to mesh
+        //mesh = new Beaches(mesh).enrichBeaches(); // adds beacehs to mesh
         mesh = new Aquifers(mesh).enrichAquifers(); //adds aquifer
         mesh = new Lakes(mesh).generateLakes(Integer.parseInt(numlakes));
+        mesh = new Biomes(mesh).enrichBiomes();
         mesh = new Volcano().build(mesh);
+        mesh = new Beaches(mesh).enrichBeaches();
 
         // Seed generation
         SeedGen seedGen = new SeedGen();
