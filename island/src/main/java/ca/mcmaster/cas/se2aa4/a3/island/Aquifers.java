@@ -1,5 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.a3.island.Properties.Properties;
+
 import java.util.Random;
 
 
@@ -36,9 +38,9 @@ public class Aquifers {
 
         for (Structs.Polygon poly : aMesh.getPolygonsList()) {
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(poly);
-            if (poly.getProperties(0).getValue() == "122,171,135"||
-            poly.getProperties(0).getValue() == "0,0,100"||
-            poly.getProperties(0).getValue() == "0,0,55"||poly.getProperties(0).getValue()=="194,178,128"){
+            if (poly.getProperties(0).getValue() == Properties.landColors||
+            poly.getProperties(0).getValue() == Properties.lagoonColors||
+            poly.getProperties(0).getValue() == Properties.oceanColors||poly.getProperties(0).getValue()==Properties.beachColors){
                 iMesh.addPolygons(x);
             }
 
@@ -51,8 +53,8 @@ public class Aquifers {
             int y = rand.nextInt(poly_size);
             Structs.Polygon temp= aMesh.getPolygons(y);
 
-            if (temp.getProperties(0).getValue() == "122,171,135"||
-            temp.getProperties(0).getValue() == "194,178,128"){
+            if (temp.getProperties(0).getValue() == Properties.landColors||
+            temp.getProperties(0).getValue() == Properties.beachColors){
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(temp);
             x.setProperties(0, aqua);
             iMesh.setPolygons(y, x);
@@ -68,7 +70,7 @@ public class Aquifers {
                 Structs.Polygon.Builder neighbor = Structs.Polygon.newBuilder(iMesh.getPolygons(neighborIndex));
                 
 
-                 if (p.getProperties(0).getValue() == "0,0,30") {
+                 if (p.getProperties(0).getValue() == Properties.aquaColors) {
                         neighbor.addProperties(moist);
                         iMesh.setPolygons(neighborIndex, neighbor.build());
                     }

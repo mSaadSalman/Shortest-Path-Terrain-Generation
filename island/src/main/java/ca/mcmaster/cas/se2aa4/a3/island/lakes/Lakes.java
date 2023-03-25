@@ -32,12 +32,37 @@ public class Lakes {
                 Structs.Polygon randomPoly = aMesh.getPolygons(randomPolyIdx); // Get polygon at the random index
                 Structs.Polygon.Builder p = Structs.Polygon.newBuilder(randomPoly);
                 p.setProperties(0, lakes);
-                p.addProperties(Properties.getLakeHumidityProps());
+                //p.addProperties(Properties.getLakeHumidityProps());
                 numLakes--;
                 iMesh.setPolygons(randomPolyIdx, p);
             }
             randomPolyIdx = random.nextInt(aMesh.getPolygonsCount());
         }
+
+          
+        for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
+            Structs.Polygon.Builder p = Structs.Polygon.newBuilder(iMesh.getPolygons(i));
+
+            for (int j = 0; j < p.getNeighborIdxsCount(); j++) {
+                int neighborIndex = p.getNeighborIdxs(j);
+                Structs.Polygon.Builder neighbor = Structs.Polygon.newBuilder(iMesh.getPolygons(neighborIndex));
+                
+
+                 if (p.getProperties(0).getValue() == Properties.lakeColors) {
+                        neighbor.addProperties(Properties.getLakeHumidityProps());
+                        iMesh.setPolygons(neighborIndex, neighbor.build());
+                    }
+
+                 else {
+                      neighbor.addProperties(Properties.get_normHumidityProps());
+                     iMesh.setPolygons(neighborIndex, neighbor.build());
+
+                     }
+            }
+
+        } 
+
+
 
         return iMesh.build();
     }

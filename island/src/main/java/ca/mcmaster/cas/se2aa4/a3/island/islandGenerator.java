@@ -8,7 +8,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.shape.Square;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.TiltedOval;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Shape;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.Volcano;
-import ca.mcmaster.cas.se2aa4.a3.island.lagoon.Lagoon;
+import ca.mcmaster.cas.se2aa4.a3.island.Lagoon.Lagoon;
 import ca.mcmaster.cas.se2aa4.a3.island.lakes.Lakes;
 
 public class islandGenerator {

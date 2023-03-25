@@ -13,6 +13,14 @@ public class Properties {
     public static String oceanColors = "0,0,55";
     public static String aquaColors = "0,0,30";
     public static String beachColors = "194,178,128";
+    public static String testColors = "192,0,125";
+
+    public static Structs.Property gettestProps() {
+        return Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue(testColors)
+                .build();
+    }
 
     public static Structs.Property getVolcanoTier1Props() {
         return Structs.Property.newBuilder()
@@ -59,7 +67,14 @@ public class Properties {
     public static Structs.Property getLakeHumidityProps() {
         return Structs.Property.newBuilder()
                 .setKey("humidity")
-                .setValue("1")
+                .setValue("90")
+                .build();
+    }
+
+    public static Structs.Property get_normHumidityProps() {
+        return Structs.Property.newBuilder()
+                .setKey("humidity")
+                .setValue("60")
                 .build();
     }
 
