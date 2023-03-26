@@ -47,12 +47,11 @@ public class islandGenerator {
         // Seed generation
         SeedGen seedGen = new SeedGen();
         long seed = (config.seed() == null) ? (System.currentTimeMillis()): Long.parseLong(config.seed());
-        seedGen.saveMesh(seed, mesh);
+        if(config.seed() == null)
+            seedGen.saveMesh(seed, mesh);
         mesh = seedGen.getMesh(seed);
         System.out.println("SEED: " + seed);
         
-        for(int i=0; i<5; i++)
-            mesh = new RockMountain().build(mesh);
         return mesh; // returns the mesh
     }
 }

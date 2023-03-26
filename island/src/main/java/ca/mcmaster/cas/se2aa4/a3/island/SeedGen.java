@@ -1,20 +1,11 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Random;
 
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import ca.mcmaster.cas.se2aa4.a3.island.configuration.Configuration;
+
 
 
 
@@ -34,6 +25,7 @@ public class SeedGen {
 
     public Structs.Mesh getMesh(long seed) throws IOException{
         String seedStr = "img/"+String.valueOf(seed)+".mesh";
+        System.out.println(seedStr);
         return new MeshFactory().read(seedStr);
     }
 }
