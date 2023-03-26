@@ -42,7 +42,7 @@ Note: PDF versions of the SVG files were created with `rsvg-convert`
 Run island generator using a mesh named `irregular.mesh` as input and producing a mesh named `lagoon.mesh` as output
 
 ```
-java -jar island/island.jar -i img/irregular.mesh -o img/lagoon.mesh --mode lagoon --shape circle --lakes 10
+java -jar island/island.jar -i img/irregular.mesh -o img/lagoon.mesh --mode lagoon --shape circle --lakes 10 --aquifers 20
 ```
 
 ## Visualizing the Island
@@ -65,14 +65,17 @@ java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/lagoon.svg
 | F06 | Compute the Voronoi Diagram                                     | Ali          | 18/02/23 | 27/02/23 | D      |
 | F07 | Crop the mesh to the expected size                              | Mahad        | 20/02/23 | 27/02/23 | D      |
 | F08 | Apply Lloyd relaxation                                          | Mahad        | 22/02/23 | 27/02/23 | D      |
-| F09 | Compute neiborhood relationships using Delaunay’s triangulation Mosser              |          |          |       |
+| F09 | Compute neiborhood relationships using Delaunay’s triangulation|  Mosser              |          |          |       |
 | F10 | For each irregular polygon, reorder its segments                | Mosser             |          |          |       |
+| A3 | -------------------------------------------------         | ---------| --------|------|  A3    |
 | F11 | Tile Creation Water and Land (Differentiation) | Mahad | 1/03/23  | 7/3/23   | D      |
 | F12 | Centering Function (Creating Shapes figure)    | Ali   | 7/03/23  | 14/03/23 | D      |
 | F13 | Lagoons (Finishing MVP)                        | Saad  | 15/03/23 | 19/03/23 | D      |
 | F14 | Shapes (Circle, Square, Oval)                  | Ali   | 15/03/23 | 21/03/23 | D      |
 | F15 | Elevation                                      | Mahad   | 15/03/23 |  |      |
-| F16 | Lakes                                          | Ali   | 15/03/23 |  |       |
+| F16 | Lakes                                          | Ali   | 15/03/23 | 23/03/23 |  D     |
 | F17 | Rivers                                         |        | 15/03/23 |  |      |
 | F19 | Aquifers (Dark bodies of water)                | Saad   | 15/03/23 | 21/03/23 | D      |
-| F20 | Soil Absorbtion                                      | Saad   | 15/03/23 |   |      |
+| F20 | Soil Absorbtion                                      |    | 15/03/23 |   |      |
+| F21 | Temperature                                      | Saad   | 15/03/23 |   |      |
+| F22 | Biomes                                      | Saad   | 15/03/23 |   |      |
