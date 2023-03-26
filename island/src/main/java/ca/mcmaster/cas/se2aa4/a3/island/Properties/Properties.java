@@ -23,6 +23,7 @@ public class Properties {
     public static String landMediumColors = "54,214,15";
     public static String landHighColors = "40,184,6";
     public static String testColors = "192,0,125";
+    public static String plainsColors = "210,197,6";
 
     public static Structs.Property getLandHighProps() {
         return Structs.Property.newBuilder()
@@ -213,5 +214,13 @@ public class Properties {
                 .setValue(tundraColors)
                 .build();
     }
+
+    public static Structs.Property get_PlainsProps() {
+        return Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue(plainsColors)
+                .build();
+    }
+
 
 }

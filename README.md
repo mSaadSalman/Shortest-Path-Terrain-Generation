@@ -85,5 +85,5 @@ java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/lagoon.svg
 | F19 | Aquifers (Dark bodies of water)                | Saad   | 15/03/23 | 21/03/23 | D      |
 | F20 | Soil Absorbtion                                      |    | 15/03/23 |   |      |
 | F21 | Temperature                                      | Saad   | 17/03/23 | 26/03/23  |   D   |
-| F22 | Biomes                                      | Saad   | 15/03/23 |   |      |
+| F22 | Biomes                                      | Saad   | 15/03/23 | 26/03/23  |D      |
 | F23 | Seed (Reproduction)                                   | Ali   | 15/03/23 |26/03/23   | D     |
