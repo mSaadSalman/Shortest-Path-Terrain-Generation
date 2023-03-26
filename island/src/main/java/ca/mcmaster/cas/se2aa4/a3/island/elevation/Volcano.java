@@ -5,7 +5,7 @@ import java.util.Random;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a3.island.Properties.Properties;
 
-public class Volcano extends Elevation {
+public class Volcano extends Mountain {
 
     public Volcano() {
         tier1 = Properties.getVolcanoTier1Props();

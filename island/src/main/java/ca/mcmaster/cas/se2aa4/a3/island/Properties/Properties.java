@@ -19,7 +19,31 @@ public class Properties {
     public static String rockMountTier2Colors = "111,111,111";
     public static String rockMountTier3Colors = "135,135,135";
     public static String rockMountTier4Colors = "161,161,161";
+    public static String landLowColors = "88,235,52";
+    public static String landMediumColors = "54,214,15";
+    public static String landHighColors = "40,184,6";
     public static String testColors = "192,0,125";
+
+    public static Structs.Property getLandHighProps() {
+        return Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue(landHighColors)
+                .build();
+    }
+
+    public static Structs.Property getLandMediumProps() {
+        return Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue(landMediumColors)
+                .build();
+    }
+
+    public static Structs.Property getLandLowProps() {
+        return Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue(landLowColors)
+                .build();
+    }
 
     public static Structs.Property getRockMountTier1Props() {
         return Structs.Property.newBuilder()

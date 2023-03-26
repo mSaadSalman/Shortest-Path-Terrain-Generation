@@ -43,7 +43,7 @@ public class Aquifers {
 
         }
 
-        for (Structs.Polygon poly : aMesh.getPolygonsList()) {
+        for (int i=0; i<aMesh.getPolygonsCount(); i++) {
             if (val == 0) {
                 break;
             }

@@ -8,6 +8,8 @@ import ca.mcmaster.cas.se2aa4.a3.island.shape.Square;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.TiltedOval;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Shape;
 import ca.mcmaster.cas.se2aa4.a3.island.configuration.Configuration;
+import ca.mcmaster.cas.se2aa4.a3.island.elevation.Plains;
+import ca.mcmaster.cas.se2aa4.a3.island.elevation.RockMountain;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.Volcano;
 import ca.mcmaster.cas.se2aa4.a3.island.lagoon.Lagoon;
 import ca.mcmaster.cas.se2aa4.a3.island.lakes.Lakes;
@@ -41,7 +43,9 @@ public class islandGenerator {
         mesh = new Temp(mesh).enrichTemp();
         mesh = new Biomes(mesh).enrichBiomes();
         mesh = new Volcano().build(mesh);
+        mesh = new RockMountain().build(mesh);
         mesh = new Beaches(mesh).enrichBeaches();
+        mesh = new Plains().addElevation(mesh);
 
         // Seed generation
         SeedGen seedGen = new SeedGen();
