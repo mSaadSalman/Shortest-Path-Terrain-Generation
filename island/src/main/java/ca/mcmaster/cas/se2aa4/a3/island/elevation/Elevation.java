@@ -36,6 +36,9 @@ public abstract class Elevation {
                 p.addProperties(randElevation());
                 p.setProperties(0, elevationToPropertyMap.get(randElevation().getValue()));
             }
+            else
+                p.addProperties(Structs.Property.newBuilder().setKey("elevation").setValue("NONE").build());
+                
             iMesh.addPolygons(p);
 
         }
