@@ -38,6 +38,7 @@ public class islandGenerator {
             mesh = new Lagoon(mesh).build(); // adds lagoon to mesh
         mesh = new Aquifers(mesh).enrichAquifers(config.aquifer()); // adds aquifer
         mesh = new Lakes(mesh).generateLakes(Integer.parseInt(config.lakes()));
+        mesh = new Temp(mesh).enrichTemp();
         mesh = new Biomes(mesh).enrichBiomes();
         mesh = new Volcano().build(mesh);
         mesh = new Beaches(mesh).enrichBeaches();

@@ -14,6 +14,7 @@ public class Properties {
     public static String aquaColors = "122,171,134";
     public static String beachColors = "194,178,128";
     public static String forestColors = "39,118,0";
+    public static String tundraColors = "238,169,169";
     public static String rockMountTier1Colors = "84,84,84";
     public static String rockMountTier2Colors = "111,111,111";
     public static String rockMountTier3Colors = "135,135,135";
@@ -150,6 +151,27 @@ public class Properties {
         return Structs.Property.newBuilder()
                 .setKey("rgb_color")
                 .setValue(forestColors)
+                .build();
+    }
+
+    public static Structs.Property get_temp_temperature() {
+        return Structs.Property.newBuilder()
+                .setKey("temperature")
+                .setValue("15")
+                .build();
+    }
+
+    public static Structs.Property get_hot_temperature() {
+        return Structs.Property.newBuilder()
+                .setKey("temperature")
+                .setValue("25")
+                .build();
+    }
+
+    public static Structs.Property getTundraProps() {
+        return Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue(tundraColors)
                 .build();
     }
 
