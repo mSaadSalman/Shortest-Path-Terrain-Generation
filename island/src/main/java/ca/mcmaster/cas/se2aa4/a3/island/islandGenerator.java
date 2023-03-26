@@ -8,6 +8,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.shape.Square;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.TiltedOval;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Shape;
 import ca.mcmaster.cas.se2aa4.a3.island.configuration.Configuration;
+import ca.mcmaster.cas.se2aa4.a3.island.elevation.RockMountain;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.Volcano;
 import ca.mcmaster.cas.se2aa4.a3.island.lagoon.Lagoon;
 import ca.mcmaster.cas.se2aa4.a3.island.lakes.Lakes;
@@ -50,6 +51,8 @@ public class islandGenerator {
         mesh = seedGen.getMesh(seed);
         System.out.println("SEED: " + seed);
         
+        for(int i=0; i<5; i++)
+            mesh = new RockMountain().build(mesh);
         return mesh; // returns the mesh
     }
 }

@@ -14,7 +14,39 @@ public class Properties {
     public static String aquaColors = "0,0,34";
     public static String beachColors = "194,178,128";
     public static String forestColors = "39,118,0";
+    public static String rockMountTier1Colors = "84,84,84";
+    public static String rockMountTier2Colors = "111,111,111";
+    public static String rockMountTier3Colors = "135,135,135";
+    public static String rockMountTier4Colors = "161,161,161";
     public static String testColors = "192,0,125";
+
+    public static Structs.Property getRockMountTier1Props() {
+        return Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue(rockMountTier1Colors)
+                .build();
+    }
+
+    public static Structs.Property getRockMountTier2Props() {
+        return Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue(rockMountTier2Colors)
+                .build();
+    }
+
+    public static Structs.Property getRockMountTier3Props() {
+        return Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue(rockMountTier3Colors)
+                .build();
+    }
+
+    public static Structs.Property getRockMountTier4Props() {
+        return Structs.Property.newBuilder()
+                .setKey("rgb_color")
+                .setValue(rockMountTier4Colors)
+                .build();
+    }
 
     public static Structs.Property gettestProps() {
         return Structs.Property.newBuilder()
