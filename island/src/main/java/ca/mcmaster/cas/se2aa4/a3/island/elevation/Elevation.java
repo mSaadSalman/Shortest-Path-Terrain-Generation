@@ -1,5 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a3.island.elevation;
 
+
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 
 public abstract class Elevation {
@@ -31,50 +32,35 @@ public abstract class Elevation {
     
             iMesh.addPolygons(p.build());
         }
-    
-        // Loop through all polygons in the mesh again
-        for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
-            Structs.Polygon.Builder p = Structs.Polygon.newBuilder(iMesh.getPolygons(i));
-    
-            // If the current polygon is a tier 2 polygon, loop through its neighbors
-            if (p.getProperties(0).getValue().equals(tier2.getValue())) {
-                for (int j = 0; j < p.getNeighborIdxsCount(); j++) {
-                    int neighborIndex = p.getNeighborIdxs(j);
-                    Structs.Polygon.Builder neighbor = Structs.Polygon.newBuilder(iMesh.getPolygons(neighborIndex));
-    
-                    // If the neighbor is not already a tier 2 or tier 1 polygon, set its property to tier3
-                    if (!neighbor.getProperties(0).getValue().equals(tier2.getValue()) && 
-                        !neighbor.getProperties(0).getValue().equals(tier1.getValue())) {
-                        neighbor.setProperties(0, tier3);
-                        iMesh.setPolygons(neighborIndex, neighbor.build());
-                    }
-                }
-            }
 
-        }
-
-        // Loop through all polygons in the mesh again
-        for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
-            Structs.Polygon.Builder p = Structs.Polygon.newBuilder(iMesh.getPolygons(i));
-    
-            // If the current polygon is a tier 2 polygon, loop through its neighbors
-            if (p.getProperties(0).getValue().equals(tier3.getValue())) {
-                for (int j = 0; j < p.getNeighborIdxsCount(); j++) {
-                    int neighborIndex = p.getNeighborIdxs(j);
-                    Structs.Polygon.Builder neighbor = Structs.Polygon.newBuilder(iMesh.getPolygons(neighborIndex));
-    
-                    // If the neighbor is not already a tier 2 or tier 1 polygon, set its property to tier3
-                    if (!neighbor.getProperties(0).getValue().equals(tier3.getValue()) && 
-                        !neighbor.getProperties(0).getValue().equals(tier2.getValue())) {
-                        neighbor.setProperties(0, tier4);
-                        iMesh.setPolygons(neighborIndex, neighbor.build());
-                    }
-                }
-            }
-
-        }
+        neighborRing(tier3, tier2, tier1, aMesh, iMesh);
+        neighborRing(tier4, tier3, tier2, aMesh, iMesh);
 
         System.out.println(iMesh.getPolygonsCount());
         return iMesh.build();
     }
+
+    public void neighborRing(Structs.Property tier, Structs.Property tierSub1, Structs.Property tierSub2, Structs.Mesh aMesh, Structs.Mesh.Builder iMesh ){
+        // Loop through all polygons in the mesh again
+        for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
+            Structs.Polygon.Builder p = Structs.Polygon.newBuilder(iMesh.getPolygons(i));
+    
+            // If the current polygon is a tier -1 polygon, loop through its neighbors
+            if (p.getProperties(0).getValue().equals(tierSub1.getValue())) {
+                for (int j = 0; j < p.getNeighborIdxsCount(); j++) {
+                    int neighborIndex = p.getNeighborIdxs(j);
+                    Structs.Polygon.Builder neighbor = Structs.Polygon.newBuilder(iMesh.getPolygons(neighborIndex));
+    
+                    // If the neighbor is not already a tier -2  or tier -1 polygon, set its property to tier
+                    if (!neighbor.getProperties(0).getValue().equals(tierSub1.getValue()) && 
+                        !neighbor.getProperties(0).getValue().equals(tierSub2.getValue())) {
+                        neighbor.setProperties(0, tier);
+                        iMesh.setPolygons(neighborIndex, neighbor.build());
+                    }
+                }
+            }
+
+        }
+    }
+
 }
