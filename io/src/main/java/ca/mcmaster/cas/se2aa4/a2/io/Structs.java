@@ -3902,16 +3902,16 @@ public final class Structs {
 			/**
 			 * <code>repeated .Property properties = 4;</code>
 			 */
-			public Builder addProperties(ca.mcmaster.cas.se2aa4.a2.io.Structs.Property value) {
+			public Builder addProperties(Property moist) {
 				if (propertiesBuilder_ == null) {
-					if (value == null) {
+					if (moist == null) {
 						throw new NullPointerException();
 					}
 					ensurePropertiesIsMutable();
-					properties_.add(value);
+					properties_.add(moist);
 					onChanged();
 				} else {
-					propertiesBuilder_.addMessage(value);
+					propertiesBuilder_.addMessage(moist);
 				}
 				return this;
 			}

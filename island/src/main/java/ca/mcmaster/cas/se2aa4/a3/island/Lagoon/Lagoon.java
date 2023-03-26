@@ -2,6 +2,7 @@ package ca.mcmaster.cas.se2aa4.a3.island.lagoon;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a3.island.MeshDimension;
+import ca.mcmaster.cas.se2aa4.a3.island.Properties.Properties;
 
 public class Lagoon {
     private Structs.Mesh aMesh;
@@ -22,10 +23,7 @@ public class Lagoon {
         iMesh.addAllVertices(aMesh.getVerticesList());
         iMesh.addAllSegments(aMesh.getSegmentsList());
 
-        Structs.Property lagoon = Structs.Property.newBuilder()
-                .setKey("rgb_color")
-                .setValue("0,0,100")
-                .build();
+        Structs.Property lagoon = Properties.getLagoonProps();
 
         for (Structs.Polygon poly : aMesh.getPolygonsList()) {
             Structs.Vertex centroid = aMesh.getVertices(poly.getCentroidIdx());
