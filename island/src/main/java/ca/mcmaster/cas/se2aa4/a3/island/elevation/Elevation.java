@@ -34,7 +34,7 @@ public abstract class Elevation {
             Structs.Polygon.Builder p = Structs.Polygon.newBuilder(poly);
             if(p.getProperties(0).getValue().equals(Properties.landColors)){
                 p.addProperties(randElevation());
-                p.setProperties(0, elevationToPropertyMap.get(randElevation().getValue()));
+                //p.setProperties(0, elevationToPropertyMap.get(randElevation().getValue()));
             }
             else
                 p.addProperties(Structs.Property.newBuilder().setKey("elevation").setValue("NONE").build());

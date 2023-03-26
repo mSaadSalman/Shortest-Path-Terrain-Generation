@@ -192,6 +192,21 @@ public class Properties {
                 .build();
     }
 
+    public static Structs.Property get_cold_temperature() {
+        return Structs.Property.newBuilder()
+                .setKey("temperature")
+                .setValue("5")
+                .build();
+    }
+    public static Structs.Property get_other_temperature() {
+        return Structs.Property.newBuilder()
+                .setKey("temperature")
+                .setValue("2")
+                .build();
+    }
+
+
+
     public static Structs.Property getTundraProps() {
         return Structs.Property.newBuilder()
                 .setKey("rgb_color")

@@ -39,13 +39,14 @@ public class islandGenerator {
         if (config.mode() != null && config.mode().equals("lagoon"))
             mesh = new Lagoon(mesh).build(); // adds lagoon to mesh
         mesh = new Aquifers(mesh).enrichAquifers(config.aquifer()); // adds aquifer
-        mesh = new Lakes(mesh).generateLakes(Integer.parseInt(config.lakes()));
-        mesh = new Temp(mesh).enrichTemp();
-        mesh = new Biomes(mesh).enrichBiomes();
+        mesh = new Lakes(mesh).generateLakes(Integer.parseInt(config.lakes())); //index 2
         mesh = new Volcano().build(mesh);
         mesh = new RockMountain().build(mesh);
+        mesh = new Plains().addElevation(mesh); //index 3?
+        mesh = new Temp(mesh).enrichTemp(); //index 4
+        mesh = new Biomes(mesh).enrichBiomes();
         mesh = new Beaches(mesh).enrichBeaches();
-        mesh = new Plains().addElevation(mesh);
+        
 
         // Seed generation
         SeedGen seedGen = new SeedGen();

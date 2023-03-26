@@ -22,18 +22,17 @@ public class Biomes {
         for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
             Structs.Polygon.Builder p = Structs.Polygon.newBuilder(iMesh.getPolygons(i));
 
-            if (p.getProperties(2).getValue() == "90" && p.getProperties(0).getValue() != Properties.lakeColors) {
+            if (p.getProperties(2).getValue() == "90" && p.getProperties(0).getValue() != Properties.lakeColors
+            && p.getProperties(4).getValue() == "25") {
                 p.setProperties(0, forest);
-                
             }
 
-            if (p.getProperties(2).getValue() == "60" && p.getProperties(3).getValue() == "15") {
+            else if (p.getProperties(2).getValue() == "60" && p.getProperties(0).getValue() != Properties.lakeColors
+            && p.getProperties(4).getValue() == "5") {
                 p.setProperties(0, tundra);
-                
             }
 
-            else if (p.getProperties(2).getValue() == "60"
-                    && (p.getProperties(0).getValue() == Properties.beachColors ||
+            else if ((p.getProperties(0).getValue() == Properties.beachColors ||
                             p.getProperties(0).getValue() == Properties.landColors)) {
                 p.setProperties(0, land);
             }
