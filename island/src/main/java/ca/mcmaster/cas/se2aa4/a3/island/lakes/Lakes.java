@@ -41,24 +41,23 @@ public class Lakes {
             randomPolyIdx = random.nextInt(aMesh.getPolygonsCount());
         }
 
-
         for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
             Structs.Polygon.Builder p = Structs.Polygon.newBuilder(iMesh.getPolygons(i));
             for (int j = 0; j < p.getNeighborIdxsCount(); j++) {
                 int neighborIndex = p.getNeighborIdxs(j);
                 Structs.Polygon.Builder neighbor = Structs.Polygon.newBuilder(iMesh.getPolygons(neighborIndex));
 
-                 if (neighbor.getProperties(0).getValue() == Properties.lakeColors) {                  
-                        p.addProperties(humid_lake);
-                        break;
-                    }
+                if (neighbor.getProperties(0).getValue() == Properties.lakeColors) {
+                    p.addProperties(humid_lake);
+                    break;
+                }
 
-                    else if(j==p.getNeighborIdxsCount()-1){
-                        p.addProperties(no_humid);
-                    }
+                else if (j == p.getNeighborIdxsCount() - 1) {
+                    p.addProperties(no_humid);
+                }
             }
             iMesh.setPolygons(i, p);
-        } 
+        }
         return iMesh.build();
     }
 }

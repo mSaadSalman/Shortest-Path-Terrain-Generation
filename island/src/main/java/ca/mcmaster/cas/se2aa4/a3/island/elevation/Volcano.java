@@ -29,5 +29,4 @@ public class Volcano extends Elevation {
         return super.build(mesh);
     }
 
-
 }
