@@ -21,14 +21,14 @@ import ca.mcmaster.cas.se2aa4.a3.island.lakes.Rivers;
 
 public class islandGenerator {
     private Structs.Mesh aMesh;
-    public static boolean biomeCond;
+    public static String biomeDiag;
 
     public islandGenerator() throws IOException {
         aMesh = new MeshFactory().read("img/irregular.mesh");
     }
 
     public Structs.Mesh generate(Configuration config) throws IOException {
-        biomeCond = (config.biomes() == null) ? false : true;
+        biomeDiag = config.biomes();
         MeshDimension dim = new MeshDimension(aMesh); // finds mesh dimensions
         Shape iMesh = null;
 

@@ -42,7 +42,7 @@ public class Biomes {
                 p.setProperties(0, forest);
             }
 
-            if (islandGenerator.biomeCond == true) {
+            if (islandGenerator.biomeDiag == "desert") {
                 // creates beaches biome
                 if (p.getProperties(2).getValue() == Properties.normalHumidity
                         && p.getProperties(0).getValue() != Properties.lakeColors

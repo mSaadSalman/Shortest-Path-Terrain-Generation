@@ -34,7 +34,7 @@ public abstract class Elevation {
             if (p.getProperties(0).getValue().equals(Properties.landColors)) {
                 p.addProperties(randElevation());
 
-                if (islandGenerator.biomeCond == false)
+                if (islandGenerator.biomeDiag == "grassland")
                     p.setProperties(0, elevationToPropertyMap.get(randElevation().getValue()));
             } else
                 p.addProperties(Structs.Property.newBuilder().setKey("elevation").setValue("NONE").build());

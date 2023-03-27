@@ -46,11 +46,11 @@ Inputs:
 2. --shape arguments include circle, shape, oval
 3. --lakes argument is number of lakes you want to create
 4. --aquifers argument is number of aquifers you want to create
-5.
+5. --biomes arguments include grassland and desert
 6. --seed argument can be included to generate a previous mesh
 
 ```
-java -jar island/island.jar -i img/irregular.mesh -o img/lagoon.mesh --mode lagoon --shape circle --lakes 10 --aquifers 20 --biomes biomes
+java -jar island/island.jar -i img/irregular.mesh -o img/lagoon.mesh --mode lagoon --shape circle --lakes 10 --aquifers 20 --biomes grassland
 ```
 
 ## Visualizing the Island
@@ -88,3 +88,4 @@ java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/lagoon.svg
 | F21 | Temperature                                                     | Saad         | 17/03/23 | 26/03/23 | D      |
 | F22 | Biomes                                                          | Saad         | 15/03/23 | 26/03/23 | D      |
 | F23 | Seed (Reproduction)                                             | Ali          | 15/03/23 | 26/03/23 | D      |
+| F24 | Whittaker Diagrams                                              | Saad         | 15/03/23 | 26/03/23 | D      |
