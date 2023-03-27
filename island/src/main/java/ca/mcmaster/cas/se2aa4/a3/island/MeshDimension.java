@@ -1,6 +1,9 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
+import java.util.List;
+
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 
 public class MeshDimension {
     private Structs.Mesh aMesh;
@@ -9,21 +12,29 @@ public class MeshDimension {
 
     public MeshDimension(Structs.Mesh mesh) {
         this.aMesh = mesh;
-        centeredMeshDimensions();
+        computeDimensions();
     }
 
-    public void centeredMeshDimensions() {
-        double width = aMesh.getVertices(0).getX();
-        double height = aMesh.getVertices(0).getY();
+    public void computeDimensions() {
+        List<Vertex> vertices = aMesh.getVerticesList();
+        double[] maxValues = computeMaxValues(vertices);
+        maxX = maxValues[0];
+        maxY = maxValues[1];
+    }
 
-        for (int i = 0; i < aMesh.getVerticesCount(); i++) {
-            if (aMesh.getVertices(i).getX() > width)
-                width = aMesh.getVertices(i).getX();
-            if (aMesh.getVertices(i).getY() > height)
-                height = aMesh.getVertices(i).getY();
+    public double[] computeMaxValues(List<Vertex> vertices) {
+        double maxX = vertices.get(0).getX();
+        double maxY = vertices.get(0).getY();
+
+        for (int i = 1; i < vertices.size(); i++) {
+            if (vertices.get(i).getX() > maxX) {
+                maxX = vertices.get(i).getX();
+            }
+            if (vertices.get(i).getY() > maxY) {
+                maxY = vertices.get(i).getY();
+            }
         }
 
-        maxX = width;
-        maxY = height;
+        return new double[] { maxX, maxY };
     }
 }

@@ -13,6 +13,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.elevation.RockMountain;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.Volcano;
 import ca.mcmaster.cas.se2aa4.a3.island.lagoon.Lagoon;
 import ca.mcmaster.cas.se2aa4.a3.island.lakes.Lakes;
+import ca.mcmaster.cas.se2aa4.a3.island.lakes.Rivers;
 
 public class islandGenerator {
     private Structs.Mesh aMesh;
@@ -39,7 +40,10 @@ public class islandGenerator {
         if (config.mode() != null && config.mode().equals("lagoon"))
             mesh = new Lagoon(mesh).build(); // adds lagoon to mesh
         mesh = new Aquifers(mesh).enrichAquifers(config.aquifer()); // adds aquifer
-        mesh = new Lakes(mesh).generateLakes(Integer.parseInt(config.lakes())); //index 2
+        mesh = new Lakes(mesh).generateLakes(Integer.parseInt(config.lakes()));
+        mesh = new Rivers(mesh).generateRivers(7);
+        mesh = new Temp(mesh).enrichTemp();
+        mesh = new Biomes(mesh).enrichBiomes();
         mesh = new Volcano().build(mesh);
         mesh = new RockMountain().build(mesh);
         mesh = new Plains().addElevation(mesh); //index 3?

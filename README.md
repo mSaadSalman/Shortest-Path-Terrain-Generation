@@ -81,7 +81,7 @@ java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/lagoon.svg
 | F14 | Shapes (Circle, Square, Oval)                  | Ali   | 15/03/23 | 21/03/23 | D      |
 | F15 | Elevation                                      | Mahad   | 15/03/23 | 26/03/23 |   D   |
 | F16 | Lakes                                          | Ali   | 15/03/23 | 23/03/23 |  D     |
-| F17 | Rivers                                         |        | 15/03/23 |  |      |
+| F17 | Rivers                                         |   Mahad     | 15/03/23 | 26/03/23 |  D    |
 | F19 | Aquifers (Dark bodies of water)                | Saad   | 15/03/23 | 21/03/23 | D      |
 | F20 | Soil Absorbtion                                      |    | 15/03/23 |   |      |
 | F21 | Temperature                                      | Saad   | 17/03/23 | 26/03/23  |   D   |

@@ -32,6 +32,19 @@ public class GraphicRenderer implements Renderer {
     private void drawAPolygon(Structs.Polygon p, Mesh aMesh, Graphics2D canvas) {
         Hull hull = new Hull();
         for(Integer segmentIdx: p.getSegmentIdxsList()) {
+            Structs.Segment s = aMesh.getSegments(segmentIdx);
+            Optional<Color> fill = new ColorProperty().extract(s.getPropertiesList());
+            System.out.println(fill);
+            if(fill.isPresent()){
+                canvas.setColor(fill.get());
+                Stroke stroke = new BasicStroke(10);
+                canvas.setStroke(stroke);
+                Vertex v1 = aMesh.getVertices(s.getV1Idx());
+                Vertex v2 = aMesh.getVertices(s.getV2Idx());
+                canvas.drawLine((int)v1.getX(), (int)v1.getY(),(int) v2.getX(), (int)v2.getY());
+            }
+            Stroke stroke = new BasicStroke(0.2f);
+            canvas.setStroke(stroke);
             hull.add(aMesh.getSegments(segmentIdx), aMesh);
         }
         Path2D path = new Path2D.Float();
@@ -53,8 +66,6 @@ public class GraphicRenderer implements Renderer {
         }
     }
 
-    private void colorPolygon(Structs.Polygon p, Mesh aMesh, Graphics2D canvas) {
-        
-    }
+ 
 
 }
