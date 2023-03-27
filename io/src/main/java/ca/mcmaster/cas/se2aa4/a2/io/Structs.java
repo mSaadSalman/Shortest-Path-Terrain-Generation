@@ -4087,6 +4087,10 @@ public final class Structs {
 				return super.mergeUnknownFields(unknownFields);
 			}
 
+            public Object addVertexIdxs(int i) {
+                return null;
+            }
+
 			// @@protoc_insertion_point(builder_scope:Polygon)
 		}
 

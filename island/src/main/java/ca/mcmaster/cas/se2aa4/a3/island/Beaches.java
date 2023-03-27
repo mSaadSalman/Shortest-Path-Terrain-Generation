@@ -20,14 +20,18 @@ public class Beaches {
         for (Structs.Polygon poly : aMesh.getPolygonsList()) {
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(poly);
             for (int idx : poly.getNeighborIdxsList()) {
-                Structs.Polygon p = aMesh.getPolygons(idx);
-                if (poly.getProperties(0).getValue() == "122,171,135" &&
-                        (p.getProperties(0).getValue() == "0,0,100" || p.getProperties(0).getValue() == "0,0,55"))
+                Structs.Polygon neighborPoly = aMesh.getPolygons(idx);
+                if (shouldAddBeachProperties(poly, neighborPoly)) {
                     x.setProperties(0, sand);
-
+                }
             }
             iMesh.addPolygons(x);
         }
         return iMesh.build();
+    }
+
+    private boolean shouldAddBeachProperties(Structs.Polygon poly, Structs.Polygon neighborPoly) {
+        return poly.getProperties(0).getValue().equals("122,171,135") &&
+                (neighborPoly.getProperties(0).getValue().equals("0,0,100") || neighborPoly.getProperties(0).getValue().equals("0,0,55"));
     }
 }

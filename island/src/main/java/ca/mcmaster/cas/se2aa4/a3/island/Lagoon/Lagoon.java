@@ -15,7 +15,11 @@ public class Lagoon {
         MeshDimension dim = new MeshDimension(iMesh);
         this.centerX = dim.maxX / 2;
         this.centerY = dim.maxY / 2;
-        this.radius = (dim.maxX > dim.maxY) ? dim.maxY * 0.2 : dim.maxX * 0.2;
+        this.radius = calculateRadius(dim.maxX, dim.maxY);
+    }
+
+    public double calculateRadius(double maxX, double maxY) {
+        return (maxX > maxY) ? maxY * 0.2 : maxX * 0.2;
     }
 
     public Structs.Mesh build() {
@@ -26,12 +30,21 @@ public class Lagoon {
         Structs.Property lagoon = Properties.getLagoonProps();
 
         for (Structs.Polygon poly : aMesh.getPolygonsList()) {
-            Structs.Vertex centroid = aMesh.getVertices(poly.getCentroidIdx());
-            Structs.Polygon.Builder p = Structs.Polygon.newBuilder(poly);
-            if (Math.sqrt(Math.pow(centroid.getX() - centerX, 2) + Math.pow(centroid.getY() - centerY, 2)) <= radius)
-                p.setProperties(0, lagoon);
+            Structs.Polygon.Builder p = processPolygon(poly, lagoon);
             iMesh.addPolygons(p);
         }
         return iMesh.build();
+    }
+
+    public Structs.Polygon.Builder processPolygon(Structs.Polygon poly, Structs.Property lagoon) {
+        Structs.Vertex centroid = aMesh.getVertices(poly.getCentroidIdx());
+        Structs.Polygon.Builder p = Structs.Polygon.newBuilder(poly);
+        if (isWithinLagoon(centroid.getX(), centroid.getY()))
+            p.setProperties(0, lagoon);
+        return p;
+    }
+
+    public boolean isWithinLagoon(double x, double y) {
+        return Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)) <= radius;
     }
 }
