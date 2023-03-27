@@ -43,7 +43,7 @@ public class Biomes {
             if (p.getProperties(2).getValue() == "60" && p.getProperties(0).getValue() != Properties.lakeColors
             &&  p.getProperties(4).getValue() == "25"
             && ismountain && isvolcano) {
-                p.setProperties(0, beach);
+                p.setProperties(0, Properties.getLandMediumProps());
             }
 
             //creates plains biome

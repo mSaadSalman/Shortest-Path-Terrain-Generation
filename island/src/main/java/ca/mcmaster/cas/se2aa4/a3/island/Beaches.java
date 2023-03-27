@@ -32,6 +32,6 @@ public class Beaches {
 
     private boolean shouldAddBeachProperties(Structs.Polygon poly, Structs.Polygon neighborPoly) {
         return poly.getProperties(0).getValue().equals("122,171,135") &&
-                (neighborPoly.getProperties(0).getValue().equals("0,0,100") || neighborPoly.getProperties(0).getValue().equals("0,0,55"));
+                (neighborPoly.getProperties(0).getValue().equals(Properties.lagoonColors) || neighborPoly.getProperties(0).getValue().equals(Properties.oceanColors));
     }
 }

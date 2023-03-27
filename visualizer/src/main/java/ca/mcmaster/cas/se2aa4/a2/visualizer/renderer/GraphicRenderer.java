@@ -34,7 +34,6 @@ public class GraphicRenderer implements Renderer {
         for(Integer segmentIdx: p.getSegmentIdxsList()) {
             Structs.Segment s = aMesh.getSegments(segmentIdx);
             Optional<Color> fill = new ColorProperty().extract(s.getPropertiesList());
-            System.out.println(fill);
             if(fill.isPresent()){
                 canvas.setColor(fill.get());
                 Stroke stroke = new BasicStroke(10);
