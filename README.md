@@ -20,8 +20,8 @@ It creates two jars:
 ### Generating a mesh, grid or irregular
 
 ```
-mosser@azrael A2 % java -jar generator/generator.jar -k grid -h 1080 -w 1920 -p 1000 -s 20 -o img/grid.mesh
-mosser@azrael A2 % java -jar generator/generator.jar -k irregular -h 1080 -w 1920 -p 1000 -s 20 -o img/irregular.mesh
+mosser@azrael A2 % java -jar generator/generator.jar -k grid -h 1080 -w 2000 -p 2000 -s 20 -o img/grid.mesh
+mosser@azrael A2 % java -jar generator/generator.jar -k irregular -h 2000 -w 2000 -p 1000 -s 20 -o img/irregular.mesh
 ```
 
 One can run the generator with `-help` as option to see the different command line arguments that are available
@@ -88,4 +88,4 @@ java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/lagoon.svg
 | F21 | Temperature                                                     | Saad         | 17/03/23 | 26/03/23 | D      |
 | F22 | Biomes                                                          | Saad         | 15/03/23 | 26/03/23 | D      |
 | F23 | Seed (Reproduction)                                             | Ali          | 15/03/23 | 26/03/23 | D      |
-| F24 | Whittaker Diagrams                                              | Saad         | 15/03/23 | 26/03/23 | D      |
+| F24 | Whittaker Diagrams                                              | Ali          | 15/03/23 | 26/03/23 | D      |
