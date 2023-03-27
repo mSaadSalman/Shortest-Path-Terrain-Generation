@@ -13,7 +13,7 @@ public class Biomes {
         this.aMesh = iMesh;
     }
 
-    public Structs.Mesh enrichBiomes(String biomes) {
+    public Structs.Mesh enrichBiomes() {
         Structs.Mesh.Builder iMesh = Structs.Mesh.newBuilder();
         iMesh.addAllVertices(aMesh.getVerticesList());
         iMesh.addAllSegments(aMesh.getSegmentsList());
@@ -42,7 +42,7 @@ public class Biomes {
                 p.setProperties(0, forest);
             }
 
-            if (islandGenerator.biomeDiag == "desert") {
+            if (islandGenerator.biomeCond == true) {
                 // creates beaches biome
                 if (p.getProperties(2).getValue() == Properties.normalHumidity
                         && p.getProperties(0).getValue() != Properties.lakeColors
