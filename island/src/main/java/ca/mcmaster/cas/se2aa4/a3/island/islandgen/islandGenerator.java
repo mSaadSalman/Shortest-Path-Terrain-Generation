@@ -1,4 +1,4 @@
-package ca.mcmaster.cas.se2aa4.a3.island;
+package ca.mcmaster.cas.se2aa4.a3.island.islandgen;
 
 import java.io.IOException;
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
@@ -7,9 +7,13 @@ import ca.mcmaster.cas.se2aa4.a3.island.shape.Circle;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Square;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.TiltedOval;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Shape;
+import ca.mcmaster.cas.se2aa4.a3.island.aquifers.Aquifers;
+import ca.mcmaster.cas.se2aa4.a3.island.beaches.Beaches;
+import ca.mcmaster.cas.se2aa4.a3.island.biomes.Biomes;
 import ca.mcmaster.cas.se2aa4.a3.island.configuration.Configuration;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.Plains;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.RockMountain;
+import ca.mcmaster.cas.se2aa4.a3.island.elevation.Temp;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.Volcano;
 import ca.mcmaster.cas.se2aa4.a3.island.lagoon.Lagoon;
 import ca.mcmaster.cas.se2aa4.a3.island.lakes.Lakes;
@@ -17,12 +21,14 @@ import ca.mcmaster.cas.se2aa4.a3.island.lakes.Rivers;
 
 public class islandGenerator {
     private Structs.Mesh aMesh;
+    public static boolean biomeCond;
 
     public islandGenerator() throws IOException {
         aMesh = new MeshFactory().read("img/irregular.mesh");
     }
 
     public Structs.Mesh generate(Configuration config) throws IOException {
+        biomeCond = (config.biomes() == null) ? false : true;
         MeshDimension dim = new MeshDimension(aMesh); // finds mesh dimensions
         Shape iMesh = null;
 
@@ -47,7 +53,7 @@ public class islandGenerator {
         mesh = new Beaches(mesh).enrichBeaches();
         mesh = new Plains().addElevation(mesh); //index 3?
         mesh = new Temp(mesh).enrichTemp(); //index 4
-        mesh = new Biomes(mesh).enrichBiomes();
+        mesh = new Biomes(mesh).enrichBiomes(config.biomes());
         
         
 

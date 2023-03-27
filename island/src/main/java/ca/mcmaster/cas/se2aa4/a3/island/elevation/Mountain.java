@@ -19,7 +19,6 @@ public abstract class Mountain {
         iMesh.addAllVertices(aMesh.getVerticesList());
         iMesh.addAllSegments(aMesh.getSegmentsList());
         int index = highestPeak(aMesh);
-        System.out.println(aMesh.getPolygonsCount());
 
         for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
             Structs.Polygon.Builder p = Structs.Polygon.newBuilder(aMesh.getPolygons(i));
@@ -35,8 +34,6 @@ public abstract class Mountain {
 
         neighborRing(tier3, tier2, tier1, aMesh, iMesh);
         neighborRing(tier4, tier3, tier2, aMesh, iMesh);
-
-        System.out.println(iMesh.getPolygonsCount());
         return iMesh.build();
     }
 

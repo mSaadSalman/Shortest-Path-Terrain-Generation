@@ -24,6 +24,11 @@ public class Properties {
     public static String landHighColors = "40,184,6";
     public static String testColors = "192,0,125";
     public static String plainsColors = "210,197,6";
+    public static String lakeHumidity = "90";
+    public static String normalHumidity = "60";
+    public static String hottestTemp = "25";
+    public static String normalTemp = "15";
+    public static String coldTemp = "5";
 
     public static Structs.Property getLandHighProps() {
         return Structs.Property.newBuilder()
@@ -205,8 +210,6 @@ public class Properties {
                 .setValue("2")
                 .build();
     }
-
-
 
     public static Structs.Property getTundraProps() {
         return Structs.Property.newBuilder()

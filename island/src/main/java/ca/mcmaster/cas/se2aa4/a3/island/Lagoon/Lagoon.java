@@ -1,8 +1,8 @@
 package ca.mcmaster.cas.se2aa4.a3.island.lagoon;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import ca.mcmaster.cas.se2aa4.a3.island.MeshDimension;
 import ca.mcmaster.cas.se2aa4.a3.island.Properties.Properties;
+import ca.mcmaster.cas.se2aa4.a3.island.islandgen.MeshDimension;
 
 public class Lagoon {
     private Structs.Mesh aMesh;
