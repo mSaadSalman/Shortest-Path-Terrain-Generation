@@ -46,7 +46,7 @@ Inputs:
 2. --shape arguments include circle, shape, oval
 3. --lakes argument is number of lakes you want to create
 4. --aquifers argument is number of aquifers you want to create
-5. --biomes: not including biome argument gives nornmal grassland, adding it gives desert biome
+5. --biomes: arguments include grassland and desert
 6. --seed argument can be included to generate a previous mesh
 
 ```
