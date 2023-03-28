@@ -7,6 +7,8 @@ import ca.mcmaster.cas.se2aa4.a3.island.shape.Circle;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Square;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.TiltedOval;
 import ca.mcmaster.cas.se2aa4.a3.island.shape.Shape;
+//import ca.mcmaster.cas.se2aa4.a3.island.Lagoon.Lagoon;
+import ca.mcmaster.cas.se2aa4.a3.island.Lagoon2.Lagoon2;
 import ca.mcmaster.cas.se2aa4.a3.island.aquifers.Aquifers;
 import ca.mcmaster.cas.se2aa4.a3.island.beaches.Beaches;
 import ca.mcmaster.cas.se2aa4.a3.island.biomes.Biomes;
@@ -15,7 +17,6 @@ import ca.mcmaster.cas.se2aa4.a3.island.elevation.Plains;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.RockMountain;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.Temp;
 import ca.mcmaster.cas.se2aa4.a3.island.elevation.Volcano;
-import ca.mcmaster.cas.se2aa4.a3.island.lagoon.Lagoon;
 import ca.mcmaster.cas.se2aa4.a3.island.lakes.Lakes;
 import ca.mcmaster.cas.se2aa4.a3.island.lakes.Rivers;
 
@@ -46,10 +47,10 @@ public class islandGenerator {
 
         Structs.Mesh mesh = iMesh.build(aMesh); // Calls build function from Shape
         if (config.mode() != null && config.mode().equals("lagoon"))
-            mesh = new Lagoon(mesh).build(); // adds lagoon to mesh
+            mesh = new Lagoon2(mesh).build(); // adds lagoon to mesh
         mesh = new Aquifers(mesh).enrichAquifers(config.aquifer()); // adds aquifer
         mesh = new Lakes(mesh).generateLakes(Integer.parseInt(config.lakes()));
-        mesh = new Rivers(mesh).generateRivers(7);
+        mesh = new Rivers(mesh).generateRivers(Integer.parseInt(config.rivers()));
         mesh = new Volcano().build(mesh);
         mesh = new RockMountain().build(mesh);
         mesh = new Beaches(mesh).enrichBeaches();

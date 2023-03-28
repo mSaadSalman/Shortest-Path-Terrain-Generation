@@ -1,16 +1,17 @@
-package ca.mcmaster.cas.se2aa4.a3.island.lagoon;
+
+package ca.mcmaster.cas.se2aa4.a3.island.Lagoon2;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a3.island.Properties.Properties;
 import ca.mcmaster.cas.se2aa4.a3.island.islandgen.MeshDimension;
 
-public class Lagoon {
+public class Lagoon2 {
     private Structs.Mesh aMesh;
     private double centerX;
     private double centerY;
     private double radius;
 
-    public Lagoon(Structs.Mesh iMesh) {
+    public Lagoon2(Structs.Mesh iMesh) {
         this.aMesh = iMesh;
         MeshDimension dim = new MeshDimension(iMesh);
         this.centerX = dim.maxX / 2;
@@ -47,4 +48,5 @@ public class Lagoon {
     public boolean isWithinLagoon(double x, double y) {
         return Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)) <= radius;
     }
+    
 }

@@ -12,6 +12,7 @@ public class Configuration {
     public static final String AQUIFERS = "aquifers";
     public static final String BIOMES = "biomes";
     public static final String SEED = "seed";
+    public static final String RIVERS = "rivers";
 
     private CommandLine cli;
 
@@ -60,6 +61,10 @@ public class Configuration {
         return this.cli.getOptionValue(BIOMES);
     }
 
+    public String rivers() {
+        return this.cli.getOptionValue(RIVERS);
+    }
+
     private Options options() {
         Options options = new Options();
         options.addOption(new Option(INPUT, true, "Input file (MESH)"));
@@ -82,6 +87,14 @@ public class Configuration {
                 .argName("lakes")
                 .desc("number of lakes")
                 .build());
+                
+        options.addOption(Option.builder()
+                .longOpt(RIVERS)
+                .hasArg()
+                .argName("rivers")
+                .desc("number of rivers")
+                .build());
+
         options.addOption(Option.builder()
                 .longOpt(AQUIFERS)
                 .hasArg()

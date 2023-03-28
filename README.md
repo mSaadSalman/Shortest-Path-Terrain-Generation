@@ -50,7 +50,7 @@ Inputs:
 6. --seed argument can be included to generate a previous mesh
 
 ```
-java -jar island/island.jar -i img/irregular.mesh -o img/lagoon.mesh --mode lagoon --shape circle --lakes 10 --aquifers 20 --biomes grassland
+java -jar island/island.jar -i img/irregular.mesh -o img/lagoon.mesh --mode lagoon --shape circle --lakes 10 --rivers 10 --aquifers 20 --biomes grassland 
 ```
 
 ## Visualizing the Island
