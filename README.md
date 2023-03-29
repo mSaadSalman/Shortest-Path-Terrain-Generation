@@ -39,7 +39,7 @@ Note: PDF versions of the SVG files were created with `rsvg-convert`
 
 ## Generating the Island
 
-Run island generator using a mesh named `irregular.mesh` as input and producing a mesh named `lagoon.mesh` as output
+Run island generator using a mesh named `irregular.mesh` as input and producing a mesh named `output.mesh` as output
 Inputs:
 
 1. --mode lagoon generates a lagoon, to not create a lagoon, exclude the --mode argument
@@ -48,15 +48,16 @@ Inputs:
 4. --aquifers argument is number of aquifers you want to create
 5. --biomes: arguments include grassland and desert
 6. --seed argument can be included to generate a previous mesh
+7. --elevation argument include volcano/rockymountain/both
 
 ```
-java -jar island/island.jar -i img/irregular.mesh -o img/lagoon.mesh --mode lagoon --shape circle --lakes 10 --rivers 10 --aquifers 20 --biomes grassland 
+java -jar island/island.jar -i img/irregular.mesh -o img/output.mesh --mode lagoon --shape circle --lakes 10 --rivers 10 --aquifers 20 --biomes grassland 
 ```
 
 ## Visualizing the Island
 
 ```
-java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/lagoon.svg
+java -jar visualizer/visualizer.jar -i img/output.mesh -o img/output.svg
 ```
 
 ## Backlog

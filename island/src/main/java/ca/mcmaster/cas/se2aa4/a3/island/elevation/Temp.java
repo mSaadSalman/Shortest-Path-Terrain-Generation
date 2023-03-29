@@ -21,12 +21,6 @@ public class Temp {
         Structs.Property new_cold = Properties.get_cold_temperature();
         Structs.Property other = Properties.get_other_temperature();
 
-        /*for (Structs.Polygon poly : aMesh.getPolygonsList()) {
-            
-            System.out.println(poly.getPropertiesList());
-
-        }*/
-
         for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
             Structs.Polygon.Builder p = Structs.Polygon.newBuilder(iMesh.getPolygons(i));
 
