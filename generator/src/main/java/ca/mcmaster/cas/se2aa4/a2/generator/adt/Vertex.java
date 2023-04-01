@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Vertex implements Cropable<Vertex> {
 
-    private static final int PRECISION = 2;
-    private final int x, y;
+    private static final int PRECISION = 2; //decimal prescison
+    private final int x, y; //vertex coordindates
 
     public Vertex(float x, float y) {
         this.x = convert(x);
@@ -14,7 +14,7 @@ public class Vertex implements Cropable<Vertex> {
 
     public float x() {
         return this.x / (float) Math.pow(10, PRECISION);
-    }
+    } //returns rounded value
 
     public float y() {
         return this.y / (float) Math.pow(10, PRECISION);
