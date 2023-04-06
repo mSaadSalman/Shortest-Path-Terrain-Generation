@@ -20,7 +20,9 @@ public class Graph {
 
     public void addEdge (node source, node target, int weight){
         edges new_edge = new edges(source,target,weight);
+        edges opposite_edge = new edges(target, source, weight);
         stored_edges.add(new_edge); //adds this new edge "new_edge", to the stored edges list
+        stored_edges.add(opposite_edge);
     }
 
     public ArrayList<edges> get_edges_list(){
