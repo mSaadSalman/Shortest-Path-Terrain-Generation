@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
 
-public class shortPath implements pathFinder {
+public class shortPath implements pathfinder {
     public ArrayList<edges> get_node_edge(Graph test_graph, node node_temp) {
         ArrayList<edges> source_edges = new ArrayList<>();
         for (edges curr_edge : test_graph.get_edges_list()) {
