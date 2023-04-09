@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Path2D;
 import java.util.Iterator;
 import java.util.Optional;
@@ -21,11 +22,41 @@ public class GraphicRenderer implements Renderer {
         Stroke stroke = new BasicStroke(0.2f);
         canvas.setStroke(stroke);
         drawPolygons(aMesh,canvas);
+        drawCentroids(aMesh,canvas);
     }
 
     private void drawPolygons(Mesh aMesh, Graphics2D canvas) {
         for(Structs.Polygon p: aMesh.getPolygonsList()){
             drawAPolygon(p, aMesh, canvas);
+        }
+    }
+
+    private void drawCentroids(Structs.Mesh aMesh, Graphics2D canvas) {
+        canvas.setColor(Color.RED);
+
+        for (int i = 0; i < aMesh.getVerticesCount(); i++) {
+            Structs.Vertex.Builder p = Structs.Vertex.newBuilder(aMesh.getVertices(i));
+            if(p.getProperties(0).getValue().equals("100")){
+                Ellipse2D circle = new Ellipse2D.Float((float) p.getX()-1.5f, (float) p.getY()-1.5f,
+                        7, 7);
+                canvas.fill(circle);
+            }
+            if(p.getProperties(0).getValue().equals("500")){
+                Ellipse2D circle = new Ellipse2D.Float((float) p.getX()-1.5f, (float) p.getY()-1.5f,
+                        10, 10);
+                canvas.fill(circle);
+            }
+            if(p.getProperties(0).getValue().equals("1000")){
+                Ellipse2D circle = new Ellipse2D.Float((float) p.getX()-1.5f, (float) p.getY()-1.5f,
+                        18, 18);
+                canvas.fill(circle);
+            }
+
+            if(p.getProperties(0).getValue().equals("10000")){
+                Ellipse2D circle = new Ellipse2D.Float((float) p.getX()-1.5f, (float) p.getY()-1.5f,
+                        25, 25);
+                canvas.fill(circle);
+            }
         }
     }
 

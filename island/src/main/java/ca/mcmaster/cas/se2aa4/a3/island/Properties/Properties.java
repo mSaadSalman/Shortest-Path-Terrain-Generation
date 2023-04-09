@@ -30,12 +30,55 @@ public class Properties {
     public static String normalTemp = "15";
     public static String coldTemp = "5";
 
+    public static String population = "0";
+    public static String hamlet_population="100";
+
+    public static String village_population="500";
+    public static String city_population="1000";
+    public static String capital_population ="10000";
+
+
     public static Structs.Property getLandHighProps() {
         return Structs.Property.newBuilder()
                 .setKey("rgb_color")
                 .setValue(landHighColors)
                 .build();
     }
+
+    public static Structs.Property get_no_Population() {
+        return Structs.Property.newBuilder()
+                .setKey("population")
+                .setValue(population)
+                .build();
+    }
+
+    public static Structs.Property get_hamlet_Population() {
+        return Structs.Property.newBuilder()
+                .setKey("population")
+                .setValue(hamlet_population)
+                .build();
+    }
+
+    public static Structs.Property get_village_Population() {
+        return Structs.Property.newBuilder()
+                .setKey("population")
+                .setValue(village_population)
+                .build();
+    }
+    public static Structs.Property get_city_Population() {
+        return Structs.Property.newBuilder()
+                .setKey("population")
+                .setValue(city_population)
+                .build();
+    }
+
+    public static Structs.Property get_capital_Population() {
+        return Structs.Property.newBuilder()
+                .setKey("population")
+                .setValue(capital_population)
+                .build();
+    }
+
 
     public static Structs.Property getLandMediumProps() {
         return Structs.Property.newBuilder()

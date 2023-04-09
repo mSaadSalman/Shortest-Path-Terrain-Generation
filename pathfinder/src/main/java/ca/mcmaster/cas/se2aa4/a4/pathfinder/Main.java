@@ -48,6 +48,20 @@ public class Main {
         }
 
 
+        int total = 18;
+        int num_nodes =total-1;
+        int quot = num_nodes/3;
+        int rem = num_nodes % 3;
+        int num_hamlet = quot;
+        int village = quot;
+        int city= quot + rem;
+
+        System.out.println("--------------------------------------------------------");
+        System.out.println(num_hamlet);
+        System.out.println(village);
+        System.out.println(city);
+
+
 
     }
 }
