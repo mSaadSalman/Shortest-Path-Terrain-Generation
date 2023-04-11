@@ -6,19 +6,23 @@ import ca.mcmaster.cas.se2aa4.a4.pathfinder.graphadt.Graph;
 import ca.mcmaster.cas.se2aa4.a4.pathfinder.graphadt.node;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class Cities {
 
 
     private Structs.Mesh aMesh;
+    private Graph graph;
 
-    public Cities(Structs.Mesh iMesh) {
+    public Cities(Structs.Mesh iMesh, Graph new_graph) {
         this.aMesh = iMesh;
+        this.graph =new_graph;
     }
 
 
-    public Structs.Mesh enrichNodes() {
+    public Structs.Mesh enrichNodes(Graph new_graph) {
         Structs.Mesh.Builder iMesh = Structs.Mesh.newBuilder();
         iMesh.addAllVertices(aMesh.getVerticesList());
         iMesh.addAllSegments(aMesh.getSegmentsList());
@@ -38,42 +42,42 @@ public class Cities {
             iMesh.setVertices(i, p.build());
         }
 
-        Graph new_graph = new Graph();
-        int num_totalnodes= 10;
+        int num_totalnodes= 4;
         int num_nodes = num_totalnodes-1;
         Random rand = new Random();
-
-
-
         int poly_size = aMesh.getPolygonsCount();
-
         int quot = num_nodes/3;
         int rem = num_nodes % 3;
         int num_hamlet = quot;
         int num_village = quot;
         int num_city= quot + rem;
         int capital =1;
-
         int num_hamlet_counter =0;
         int num_village_counter = 0;
         int num_city_counter =0;
         int capital_counter=0;
-
+        Set<Integer> usedIndices = new HashSet<>();
 
 
         for (int i=0; i<aMesh.getPolygonsCount(); i++) {
-            int y = rand.nextInt(poly_size);
+            int y;
+            do {
+                y = rand.nextInt(poly_size);
+            } while (usedIndices.contains(y));
+            usedIndices.add(y);
             Structs.Polygon temp = aMesh.getPolygons(y);
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(temp);
             int vert = x.getCentroidIdx();
             Structs.Vertex.Builder p = Structs.Vertex.newBuilder(iMesh.getVertices(vert));
+            boolean isValid = !(temp.getProperties(0).getValue() == Properties.oceanColors ||
+                    temp.getProperties(0).getValue() == Properties.lagoonColors ||
+                    temp.getProperties(0).getValue() == Properties.lakeColors ||
+                    temp.getProperties(0).getValue() == Properties.volcanoTier1Colors ||
+                    temp.getProperties(0).getValue() == Properties.volcanoTier2Colors);
 
-            if (num_hamlet_counter <num_hamlet &&(temp.getProperties(0).getValue() != Properties.oceanColors &&
-                    temp.getProperties(0).getValue() != Properties.lagoonColors &&
-                    temp.getProperties(0).getValue() != Properties.lakeColors&&
-                    temp.getProperties(0).getValue() != Properties.volcanoTier1Colors&&
-                    temp.getProperties(0).getValue() != Properties.volcanoTier2Colors)) {
 
+
+            if (num_hamlet_counter <num_hamlet &&(isValid)) {
                 p.setProperties(0, population_hamlet);
                 node new_node =new node("hamlet",2,vert);
                 new_graph.addNode(new_node);
@@ -81,49 +85,36 @@ public class Cities {
 
             }
 
-
-            else if (num_village_counter <num_village &&(temp.getProperties(0).getValue() != Properties.oceanColors &&
-                    temp.getProperties(0).getValue() != Properties.lagoonColors &&
-                    temp.getProperties(0).getValue() != Properties.lakeColors&&
-                    temp.getProperties(0).getValue() != Properties.volcanoTier1Colors&&
-                    temp.getProperties(0).getValue() != Properties.volcanoTier2Colors) &&
-            p.getProperties(0) !=population_hamlet) {
+            else if (num_village_counter <num_village &&(isValid)){
                 p.setProperties(0, population_village);
                 node new_node =new node("village",2,vert);
                 new_graph.addNode(new_node);
                 num_village_counter++;
             }
 
-            else if (num_city_counter <num_city &&(temp.getProperties(0).getValue() != Properties.oceanColors &&
-                    temp.getProperties(0).getValue() != Properties.lagoonColors &&
-                    temp.getProperties(0).getValue() != Properties.lakeColors&&
-                    temp.getProperties(0).getValue() != Properties.volcanoTier1Colors&&
-                    temp.getProperties(0).getValue() != Properties.volcanoTier2Colors) &&
-                    p.getProperties(0) !=population_hamlet && p.getProperties(0)!=population_village) {
+            else if (num_city_counter <num_city &&(isValid)) {
                 p.setProperties(0, population_city);
                 node new_node =new node("city",2,vert);
                 new_graph.addNode(new_node);
                 num_city_counter++;
             }
 
-            else if (capital_counter <capital &&(temp.getProperties(0).getValue() != Properties.oceanColors &&
-                    temp.getProperties(0).getValue() != Properties.lagoonColors &&
-                    temp.getProperties(0).getValue() != Properties.lakeColors&&
-                    temp.getProperties(0).getValue() != Properties.volcanoTier1Colors&&
-                    temp.getProperties(0).getValue() != Properties.volcanoTier2Colors) &&
-                    p.getProperties(0) !=population_hamlet && p.getProperties(0)!=population_village
-                    && p.getProperties(0)!=population_capital) {
+            else if (capital_counter <capital &&(isValid)) {
                 p.setProperties(0, population_capital);
                 node new_node =new node("capital",2,vert);
                 new_graph.addNode(new_node);
                 capital_counter++;
             }
+
             else{
                 p.setProperties(0, population_zero);
+                node new_node =new node("un_name",0,vert);
+                new_graph.addNode(new_node);
             }
 
             iMesh.addVertices(p);
         }
+
 
         return iMesh.build();
     }

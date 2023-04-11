@@ -1,9 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a4.pathfinder.graphadt;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.HashMap;
+import java.util.*;
 
 public class shortPath implements pathfinder {
     public ArrayList<edges> get_node_edge(Graph test_graph, node node_temp) {
@@ -19,74 +16,65 @@ public class shortPath implements pathfinder {
         return source_edges;
     }
 
+
+
     public ArrayList<node> find_shortest_path(Graph test_graph, node source_node, node dest_node) {
-        HashMap<node, Integer> dist = new HashMap<>();
-        HashMap<node, edges> previousEdges = new HashMap<>();
-        Deque<node> non_vistednodes = new ArrayDeque<>();
-        ArrayList<edges> path = new ArrayList<>();
-        ArrayList<edges> newpath = new ArrayList<>();
-        ArrayList<node> finalpath = new ArrayList<>();
+        Map<node, Integer> dist = new HashMap<>();
+        Map<node, node> previous_node = new HashMap<>();
+        PriorityQueue<node> non_vistednodes = new PriorityQueue<>(Comparator.comparingInt(dist::get));
+        ArrayList<node> nodes_vist = new ArrayList<>();
 
-        non_vistednodes.addLast(source_node);
-        dist.put(source_node, 0);
-        while (non_vistednodes.size() != 0) {
-            node new_node = non_vistednodes.removeFirst();
-            ArrayList<edges> edges_ofnode = get_node_edge(test_graph, new_node);
 
-            if (new_node.equals(dest_node)) {
-                break;
+        for(int i=0; i<test_graph.get_nodes_list().size();i++){
+            node new_node = test_graph.get_nodes_list().get(i);
+
+            if (new_node.equals(source_node)) {
+                dist.put(new_node, 0);
             }
-            //System.out.println(test.size());
+            else {dist.put(new_node, 1000000);}
 
+            non_vistednodes.add(new_node);
+        }
 
-            for (edges edge : edges_ofnode) {
-                node edge_nodes = edge.getTarget_node();
-                int new_dist;
-                if (dist.containsKey(new_node)) {
-                    new_dist = dist.get(new_node) + edge.get_weight();
+        ArrayList<node> no_path = new ArrayList<>();// returns list of zero nodes for not existing or node path-itself
+        ArrayList<node> final_path = new ArrayList<>();
+
+        while (non_vistednodes.size()!=0) {
+            node current = non_vistednodes.poll();
+
+            if (current == dest_node) {
+                node temp_node = dest_node;
+
+                while (temp_node != null) {
+                    final_path.add(0, temp_node);
+                    temp_node = previous_node.get(temp_node);
                 }
-                else {
-                    new_dist = 1000000;
+                if(final_path.size()==1){
+                    return no_path;
                 }
-                if (dist.containsKey(edge_nodes)) {
-                    int old_dist = dist.get(edge_nodes);
-                    if (new_dist < old_dist) {
-                        dist.put(edge_nodes, new_dist);
-                        previousEdges.put(edge_nodes, edge);
-                        non_vistednodes.addLast(edge_nodes);
+                return final_path;
+            }
+
+            else {
+                nodes_vist.add(current);
+                ArrayList<edges> nodes_edges= get_node_edge(test_graph, current);
+
+                for (edges edge : nodes_edges) {
+                    node node2 = edge.getTarget_node();
+                    int new_dist = dist.get(current) + edge.get_weight();
+
+                    if (!nodes_vist.contains(node2) && (new_dist < dist.get(node2))) {
+                        previous_node.put(node2, current);
+                        dist.put(node2, new_dist);
+                        non_vistednodes.remove(node2);
+                        non_vistednodes.offer(node2);
                     }
                 }
-                else {
-                    dist.put(edge_nodes, new_dist);
-                    previousEdges.put(edge_nodes, edge);
-                    non_vistednodes.addLast(edge_nodes);
-                }
             }
         }
 
-        edges old_edge = previousEdges.get(dest_node);
-        while (old_edge != null) {
-            path.add(old_edge);
-            old_edge = previousEdges.get(old_edge.getSource_node());
-        }
-        for (int val = path.size() - 1; val >= 0; val--) {
-            newpath.add(path.get(val));
-        }
-        int val2 = newpath.size() - 1;
+        return no_path;
 
-        for (int i = 0; i < newpath.size(); i++) {
-            if (i == val2) {
-                finalpath.add(newpath.get(i).getSource_node());
-                finalpath.add(newpath.get(i).getTarget_node());
-                break;
-            }
-            else {
-                finalpath.add(newpath.get(i).getSource_node());
-            }
-        }
-
-
-        return finalpath;
     }
 
 }

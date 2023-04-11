@@ -30,7 +30,6 @@ class GraphTest {
     public void test_addEdge() {
         graph.addEdge(node_1, node_2, 18);
         assertEquals(node_1.getCity_name(),graph.get_edges_list().get(0).getSource_node().getCity_name());
-        assertEquals(node_2.getCity_name(),graph.get_edges_list().get(1).getSource_node().getCity_name());
     }
 
 

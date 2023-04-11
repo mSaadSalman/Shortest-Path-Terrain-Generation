@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.ObjectInputFilter.Config;
 
 import ca.mcmaster.cas.se2aa4.a3.island.graph.Cities;
+import ca.mcmaster.cas.se2aa4.a3.island.graph.StarNetwork;
+import ca.mcmaster.cas.se2aa4.a4.pathfinder.graphadt.Graph;
 import org.apache.commons.cli.AmbiguousOptionException;
 
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
@@ -34,6 +36,7 @@ public class islandGenerator {
 
     public Structs.Mesh generate() throws IOException {
         // biomeCond = (config.biomes() == null) ? false : true;
+        Graph graph_rep = new Graph();
         biomeArg = (config.biomes());
         Structs.Mesh mesh = registerShape();
         if (config.mode() != null && config.mode().equals("lagoon"))
@@ -46,9 +49,13 @@ public class islandGenerator {
         mesh = new Plains().addElevation(mesh); 
         mesh = new Temp(mesh).enrichTemp(); //index 4
         mesh = new Biomes(mesh).enrichBiomes();
-        mesh = new Cities(mesh).enrichNodes();
-        
-        
+        mesh = new Cities(mesh,graph_rep).enrichNodes(graph_rep);
+        mesh = new StarNetwork(mesh,graph_rep).enrichGraph(graph_rep);
+
+        System.out.println("------------------------------------");
+        System.out.println(graph_rep.get_nodes_list().size());
+        System.out.println(graph_rep.get_edges_list().size());
+        System.out.println("------------------------------------");
 
         // Seed generation
         SeedGen seedGen = new SeedGen();

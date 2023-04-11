@@ -10,9 +10,12 @@ import java.awt.Stroke;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.Set;
 
 public class GraphicRenderer implements Renderer {
 
@@ -22,7 +25,9 @@ public class GraphicRenderer implements Renderer {
         Stroke stroke = new BasicStroke(0.2f);
         canvas.setStroke(stroke);
         drawPolygons(aMesh,canvas);
+        drawNeighbourhood(aMesh,canvas);
         drawCentroids(aMesh,canvas);
+
     }
 
     private void drawPolygons(Mesh aMesh, Graphics2D canvas) {
@@ -32,7 +37,7 @@ public class GraphicRenderer implements Renderer {
     }
 
     private void drawCentroids(Structs.Mesh aMesh, Graphics2D canvas) {
-        canvas.setColor(Color.RED);
+        canvas.setColor(Color.DARK_GRAY);
 
         for (int i = 0; i < aMesh.getVerticesCount(); i++) {
             Structs.Vertex.Builder p = Structs.Vertex.newBuilder(aMesh.getVertices(i));
@@ -59,6 +64,37 @@ public class GraphicRenderer implements Renderer {
             }
         }
     }
+
+    private void drawNeighbourhood(Structs.Mesh aMesh, Graphics2D canvas) {
+        canvas.setColor(Color.LIGHT_GRAY);
+        Stroke stroke = new BasicStroke(5);
+        canvas.setStroke(stroke);
+
+        Set<Set<Structs.Polygon>> drawn = new HashSet<>();
+        for(Structs.Polygon p: aMesh.getPolygonsList()){
+            Structs.Polygon.Builder poll = Structs.Polygon.newBuilder(p);
+            Structs.Vertex centroid = aMesh.getVertices(p.getCentroidIdx());
+            if(poll.getProperties(5).getValue().equals("1")) {
+            for(Integer neigbourIdx: p.getNeighborIdxsList()) {
+                Structs.Polygon neighbour = aMesh.getPolygons(neigbourIdx);
+                Structs.Vertex neighbourCentroid = aMesh.getVertices(neighbour.getCentroidIdx());
+                if (!drawn.contains(Set.of(p, neighbour))&&neighbour.getProperties(0).getValue()!="0,0,55") {
+                    drawLink(centroid, neighbourCentroid, canvas);
+                    drawn.add(Set.of(p, neighbour));
+                    break;
+                }
+            }
+            }
+        }
+    }
+
+    private void drawLink(Structs.Vertex centroid, Structs.Vertex neighbourCentroid, Graphics2D canvas) {
+        Line2D line = new Line2D.Float((float) centroid.getX(), (float) centroid.getY(),
+                (float) neighbourCentroid.getX(),(float) neighbourCentroid.getY());
+        canvas.draw(line);
+    }
+
+
 
     private void drawAPolygon(Structs.Polygon p, Mesh aMesh, Graphics2D canvas) {
         Hull hull = new Hull();

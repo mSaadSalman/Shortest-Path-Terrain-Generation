@@ -36,12 +36,26 @@ public class Properties {
     public static String village_population="500";
     public static String city_population="1000";
     public static String capital_population ="10000";
+    public static String node_withroad ="1";
+    public static String node_withoutroad ="0";
 
 
     public static Structs.Property getLandHighProps() {
         return Structs.Property.newBuilder()
                 .setKey("rgb_color")
                 .setValue(landHighColors)
+                .build();
+    }
+    public static Structs.Property get_nodewithroad() {
+        return Structs.Property.newBuilder()
+                .setKey("road")
+                .setValue(node_withroad)
+                .build();
+    }
+    public static Structs.Property get_nodewithoutroad() {
+        return Structs.Property.newBuilder()
+                .setKey("road")
+                .setValue(node_withoutroad)
                 .build();
     }
 
