@@ -9,7 +9,6 @@ public class node {
     private double elev;
     private int node_num;
 
-    private ArrayList<edges> edge;
 
 
     public node (String city_name, double elev, int node_num){
