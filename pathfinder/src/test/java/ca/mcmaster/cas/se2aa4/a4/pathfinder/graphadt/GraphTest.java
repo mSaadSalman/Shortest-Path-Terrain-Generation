@@ -15,9 +15,17 @@ class GraphTest {
     node node_3 = new node("oakville", 22,3);
     node node_4 = new node("hamilton", 22,4);
     node node_5 = new node("milton",33,5);
+    node node_6 = new node("ajax",22,6);
+    node node_7 = new node("whiby",22,6);
 
 
 
+    @Test
+    public void test_node_attributes(){
+        node test_node = new node("toronto", 22,197);
+        assertEquals(197,test_node.getNode_num());
+        assertEquals("toronto",test_node.getCity_name());
+    }
 
     @Test
     public void test_addNode() {
@@ -31,11 +39,5 @@ class GraphTest {
         graph.addEdge(node_1, node_2, 18);
         assertEquals(node_1.getCity_name(),graph.get_edges_list().get(0).getSource_node().getCity_name());
     }
-
-
-
-
-
-
 
 }

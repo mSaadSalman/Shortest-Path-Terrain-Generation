@@ -49,7 +49,7 @@ public class islandGenerator {
         mesh = new Plains().addElevation(mesh); 
         mesh = new Temp(mesh).enrichTemp(); //index 4
         mesh = new Biomes(mesh).enrichBiomes();
-        mesh = new Cities(mesh,graph_rep).enrichNodes(graph_rep);
+        mesh = new Cities(mesh,graph_rep).enrichNodes(graph_rep,Integer.parseInt(config.city()));
         mesh = new StarNetwork(mesh,graph_rep).enrichGraph(graph_rep);
 
         System.out.println("------------------------------------");

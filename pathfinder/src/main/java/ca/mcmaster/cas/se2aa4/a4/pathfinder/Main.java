@@ -49,7 +49,7 @@ public class Main {
 
 
         shortPath new_path = new shortPath();
-        ArrayList<node> path_list = new_path.find_shortest_path(new_graph, node_1, node_3);
+        ArrayList<node> path_list = new_path.find_shortest_path(new_graph, node_1, node_4);
 
         for(int i =0;i<path_list.size();i++){
             System.out.println(path_list.get(i).getCity_name());

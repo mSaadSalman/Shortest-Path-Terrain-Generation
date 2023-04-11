@@ -56,7 +56,6 @@ public class shortPath implements pathfinder {
             }
 
             else {
-                nodes_vist.add(current);
                 ArrayList<edges> nodes_edges= get_node_edge(test_graph, current);
 
                 for (edges edge : nodes_edges) {
@@ -67,9 +66,10 @@ public class shortPath implements pathfinder {
                         previous_node.put(node2, current);
                         dist.put(node2, new_dist);
                         non_vistednodes.remove(node2);
-                        non_vistednodes.offer(node2);
+                        non_vistednodes.add(node2);
                     }
                 }
+                nodes_vist.add(current);
             }
         }
 

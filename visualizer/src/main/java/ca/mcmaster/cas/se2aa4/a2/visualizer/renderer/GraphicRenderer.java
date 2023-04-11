@@ -74,11 +74,20 @@ public class GraphicRenderer implements Renderer {
         for(Structs.Polygon p: aMesh.getPolygonsList()){
             Structs.Polygon.Builder poll = Structs.Polygon.newBuilder(p);
             Structs.Vertex centroid = aMesh.getVertices(p.getCentroidIdx());
+
             if(poll.getProperties(5).getValue().equals("1")) {
             for(Integer neigbourIdx: p.getNeighborIdxsList()) {
                 Structs.Polygon neighbour = aMesh.getPolygons(neigbourIdx);
                 Structs.Vertex neighbourCentroid = aMesh.getVertices(neighbour.getCentroidIdx());
-                if (!drawn.contains(Set.of(p, neighbour))&&neighbour.getProperties(0).getValue()!="0,0,55") {
+
+
+                if(centroid.getProperties(0).getValue().equals("10000")){
+                    if(neighbour.getProperties(5).getValue().equals("1")){
+                        drawLink(centroid, neighbourCentroid, canvas);
+                    }
+                }
+
+                else if (!drawn.contains(Set.of(p, neighbour))&&neighbour.getProperties(0).getValue()!="0,0,55") {
                     drawLink(centroid, neighbourCentroid, canvas);
                     drawn.add(Set.of(p, neighbour));
                     break;

@@ -22,27 +22,21 @@ public class Cities {
     }
 
 
-    public Structs.Mesh enrichNodes(Graph new_graph) {
+    public Structs.Mesh enrichNodes(Graph new_graph,int num_cities) {
         Structs.Mesh.Builder iMesh = Structs.Mesh.newBuilder();
         iMesh.addAllVertices(aMesh.getVerticesList());
         iMesh.addAllSegments(aMesh.getSegmentsList());
+        for (Structs.Polygon poly : aMesh.getPolygonsList()) {
+            Structs.Polygon.Builder x = Structs.Polygon.newBuilder(poly);
+            iMesh.addPolygons(x);
+        }
+
         Structs.Property population_zero = Properties.get_no_Population();
         Structs.Property population_hamlet = Properties.get_hamlet_Population();
         Structs.Property population_village = Properties.get_village_Population();
         Structs.Property population_city = Properties.get_city_Population();
         Structs.Property population_capital = Properties.get_capital_Population();
-
-        for (Structs.Polygon poly : aMesh.getPolygonsList()) {
-            Structs.Polygon.Builder x = Structs.Polygon.newBuilder(poly);
-            iMesh.addPolygons(x);
-        }
-        for (int i = 0; i < iMesh.getVerticesCount(); i++) {
-            Structs.Vertex.Builder p = Structs.Vertex.newBuilder(iMesh.getVertices(i));
-            p.addProperties(population_zero);
-            iMesh.setVertices(i, p.build());
-        }
-
-        int num_totalnodes= 4;
+        int num_totalnodes= num_cities;
         int num_nodes = num_totalnodes-1;
         Random rand = new Random();
         int poly_size = aMesh.getPolygonsCount();
@@ -58,6 +52,11 @@ public class Cities {
         int capital_counter=0;
         Set<Integer> usedIndices = new HashSet<>();
 
+        for (int i = 0; i < iMesh.getVerticesCount(); i++) {
+            Structs.Vertex.Builder p = Structs.Vertex.newBuilder(iMesh.getVertices(i));
+            p.addProperties(population_zero);
+            iMesh.setVertices(i, p.build());
+        }
 
         for (int i=0; i<aMesh.getPolygonsCount(); i++) {
             int y;
@@ -76,13 +75,11 @@ public class Cities {
                     temp.getProperties(0).getValue() == Properties.volcanoTier2Colors);
 
 
-
             if (num_hamlet_counter <num_hamlet &&(isValid)) {
                 p.setProperties(0, population_hamlet);
                 node new_node =new node("hamlet",2,vert);
                 new_graph.addNode(new_node);
                 num_hamlet_counter++;
-
             }
 
             else if (num_village_counter <num_village &&(isValid)){

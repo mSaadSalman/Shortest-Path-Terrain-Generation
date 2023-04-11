@@ -29,14 +29,16 @@ public class StarNetwork {
         }
         return source;
     }
-    public node get_nodename(Graph new_graph, String cit){
+    public ArrayList<node> get_nodename(Graph new_graph, String cit){
+        ArrayList<node> list_of_node = new ArrayList<>();
         node source =null;
         for(int i=0;i<new_graph.get_nodes_list().size();i++) {
             if(new_graph.get_nodes_list().get(i).getCity_name().equals(cit)){
                 source = new_graph.get_nodes_list().get(i);
+                list_of_node.add(source);
             }
         }
-        return source;
+        return list_of_node;
     }
 
     public Structs.Mesh enrichGraph(Graph new_graph) {
@@ -74,23 +76,38 @@ public class StarNetwork {
             }
         }
 
-        node dest = get_nodename(new_graph,"city");
-        node dest2 = get_nodename(new_graph,"hamlet");
+        node dest = get_nodename(new_graph,"capital").get(0);
+        ArrayList<node> hamlets= get_nodename(new_graph,"hamlet");
+        ArrayList<node> villages= get_nodename(new_graph,"village");
+        ArrayList<node> cities= get_nodename(new_graph,"city");
 
         shortPath new_path = new shortPath();
-        ArrayList<node> path_list = new_path.find_shortest_path(new_graph, dest, dest2);
-        System.out.println("-------------------");
-        System.out.println(path_list.size());
+        ArrayList<node> list_of_nodes = new ArrayList<>();
+
+
+        for(node ham_node:hamlets){
+            ArrayList<node> path_list = new_path.find_shortest_path(new_graph, dest, ham_node);
+            list_of_nodes.addAll(path_list);
+        }
+        for(node village_node:villages){
+            ArrayList<node> path_list = new_path.find_shortest_path(new_graph, dest, village_node);
+            list_of_nodes.addAll(path_list);
+        }
+        for(node city_node:cities){
+            ArrayList<node> path_list = new_path.find_shortest_path(new_graph, dest, city_node);
+            list_of_nodes.addAll(path_list);
+        }
 
         ArrayList<Integer> centroidid = new ArrayList<>();
 
-        for(int k =0;k<path_list.size();k++){
-            System.out.println(path_list.get(k).getCity_name());
-            centroidid.add(path_list.get(k).getNode_num());
+        for(int k =0;k<list_of_nodes.size();k++){
+            //System.out.println(list_of_nodes.get(k).getCity_name());
+            centroidid.add(list_of_nodes.get(k).getNode_num());
         }
+
+
         Structs.Property road = Properties.get_nodewithroad();
         Structs.Property no_road = Properties.get_nodewithoutroad();
-
         for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
             Structs.Polygon.Builder p = Structs.Polygon.newBuilder(iMesh.getPolygons(i));
 
