@@ -3,20 +3,6 @@ package ca.mcmaster.cas.se2aa4.a4.pathfinder.graphadt;
 import java.util.*;
 
 public class shortPath implements pathfinder {
-    public ArrayList<edges> get_node_edge(Graph test_graph, node node_temp) {
-        ArrayList<edges> source_edges = new ArrayList<>();
-        for (edges curr_edge : test_graph.get_edges_list()) {
-            if ((curr_edge.getSource_node().getCity_name()).equals(node_temp.getCity_name())) {
-                source_edges.add(curr_edge);
-            }
-            if ((curr_edge.getTarget_node().getCity_name()).equals(node_temp.getCity_name())) {
-                source_edges.add(curr_edge);
-            }
-        }
-        return source_edges;
-    }
-
-
 
     public ArrayList<node> find_shortest_path(Graph test_graph, node source_node, node dest_node) {
         Map<node, Integer> dist = new HashMap<>();
@@ -75,6 +61,19 @@ public class shortPath implements pathfinder {
 
         return no_path;
 
+    }
+
+    public ArrayList<edges> get_node_edge(Graph test_graph, node node_temp) {
+        ArrayList<edges> source_edges = new ArrayList<>();
+        for (edges curr_edge : test_graph.get_edges_list()) {
+            if ((curr_edge.getSource_node().getCity_name()).equals(node_temp.getCity_name())) {
+                source_edges.add(curr_edge);
+            }
+            if ((curr_edge.getTarget_node().getCity_name()).equals(node_temp.getCity_name())) {
+                source_edges.add(curr_edge);
+            }
+        }
+        return source_edges;
     }
 
 }
