@@ -69,9 +69,9 @@ public class shortPath implements pathfinder {
             if ((curr_edge.getSource_node().getCity_name()).equals(node_temp.getCity_name())) {
                 source_edges.add(curr_edge);
             }
-            if ((curr_edge.getTarget_node().getCity_name()).equals(node_temp.getCity_name())) {
-                source_edges.add(curr_edge);
-            }
+//            if ((curr_edge.getTarget_node().getCity_name()).equals(node_temp.getCity_name())) {
+//                source_edges.add(curr_edge);
+//            }
         }
         return source_edges;
     }
