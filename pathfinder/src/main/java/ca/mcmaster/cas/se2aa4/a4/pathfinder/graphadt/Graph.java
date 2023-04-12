@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Graph {
-
     private ArrayList <node> node_list;
     private ArrayList <edges> stored_edges;
-
 
     public Graph(){
         this.node_list = new ArrayList<>();
