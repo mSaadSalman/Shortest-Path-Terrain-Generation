@@ -51,7 +51,7 @@ Inputs:
 8. --cities argument is number of cities you want to create (has 1 capital, and rest villages,hamlets,cities)
 
 ```
-java -jar island/island.jar -i img/irregular.mesh -o img/output.mesh --mode lagoon --shape circle --lakes 10 --rivers 10 --aquifers 20 --biomes grassland --elevation volcano --cities 10
+ java -jar island/island.jar -i img/irregular.mesh -o img/output.mesh --mode lagoon --shape circle --lakes 10 --rivers 10 --aquifers 20 --biomes grassland --elevation volcano --city_type 20
 ```
 
 ## Visualizing the Island

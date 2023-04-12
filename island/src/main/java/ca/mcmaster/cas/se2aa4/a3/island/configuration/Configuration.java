@@ -14,7 +14,7 @@ public class Configuration {
     public static final String SEED = "seed";
     public static final String RIVERS = "rivers";
     public static final String ELEVATION = "elevation";
-    public static final String CITY = "cities";
+    public static final String CITY = "city_type";
 
     private CommandLine cli;
 
@@ -131,7 +131,7 @@ public class Configuration {
         options.addOption(Option.builder()
                 .longOpt(CITY)
                 .hasArg()
-                .argName("cities")
+                .argName("city_type")
                 .desc("cities options")
                 .build());
         return options;
