@@ -11,6 +11,7 @@ public class shortPath implements pathfinder {
         ArrayList<node> nodes_vist = new ArrayList<>();
 
 
+
         for(int i=0; i<test_graph.get_nodes_list().size();i++){
             node new_node = test_graph.get_nodes_list().get(i);
 
@@ -26,7 +27,7 @@ public class shortPath implements pathfinder {
         ArrayList<node> final_path = new ArrayList<>();
 
         while (non_vistednodes.size()!=0) {
-            node current_node = non_vistednodes.poll();
+            node current_node = non_vistednodes.remove();
 
             if (current_node == dest_node) {
                 node temp_node = dest_node;
@@ -51,6 +52,7 @@ public class shortPath implements pathfinder {
                     if (!nodes_vist.contains(node2) && (new_dist < dist.get(node2))) {
                         previous_node.put(node2, current_node);
                         dist.put(node2, new_dist);
+
                         non_vistednodes.remove(node2);
                         non_vistednodes.add(node2);
                     }
@@ -62,6 +64,7 @@ public class shortPath implements pathfinder {
         return no_path;
 
     }
+
 
     public ArrayList<edges> get_node_edge(Graph test_graph, node node_temp) {
         ArrayList<edges> source_edges = new ArrayList<>();

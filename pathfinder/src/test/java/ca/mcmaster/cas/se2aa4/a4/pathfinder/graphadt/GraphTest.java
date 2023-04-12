@@ -20,13 +20,12 @@ class GraphTest {
         node node_ham = new node("hamilton", 22,4);
         node node_mil = new node("milton",33,5);
         node node_ajax = new node("ajax",22,6);
-        node node_whit = new node("whitby",22,6);
 
-        test_graph.addNode(node_tor);
-        test_graph.addNode(node_miss);
-        test_graph.addNode(node_oak);
-        test_graph.addNode(node_ham);
-        test_graph.addNode(node_mil);
+        test_graph.addNode(node_tor);//0
+        test_graph.addNode(node_miss);//1
+        test_graph.addNode(node_oak);//2
+        test_graph.addNode(node_ham);//3
+        test_graph.addNode(node_mil);//4
         test_graph.addNode(node_ajax);
 
         test_graph.addEdge(node_tor, node_miss, 15);
@@ -102,7 +101,24 @@ class GraphTest {
         assertEquals(expected_path,path);
     }
 
+    @Test
+    public void test_shortPath2(){
+        shortPath test_path = new shortPath();
+        Graph test_graph = create_Graph();
+        ArrayList<node> path =test_path.find_shortest_path(test_graph,test_graph.get_nodes_list().get(4),test_graph.get_nodes_list().get(0));
 
+        assertEquals("mississauga",path.get(2).getCity_name());
+    }
+
+    @Test
+    public void test_shortPath_straight_order(){
+        shortPath test_path = new shortPath();
+        Graph test_graph = create_Graph();
+        ArrayList<node> path =test_path.find_shortest_path(test_graph,test_graph.get_nodes_list().get(0),test_graph.get_nodes_list().get(3));
+        int size= path.size();
+
+        assertEquals(3,size);
+    }
 
 
 
