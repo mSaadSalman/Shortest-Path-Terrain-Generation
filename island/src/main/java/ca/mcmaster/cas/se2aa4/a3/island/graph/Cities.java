@@ -31,6 +31,7 @@ public class Cities {
             iMesh.addPolygons(x);
         }
 
+        //following is defining cities population and or counters of number of cities
         Structs.Property population_zero = Properties.get_no_Population();
         Structs.Property population_hamlet = Properties.get_hamlet_Population();
         Structs.Property population_village = Properties.get_village_Population();
@@ -52,18 +53,21 @@ public class Cities {
         int capital_counter=0;
         Set<Integer> usedIndices = new HashSet<>();
 
+        //loops through all vertices and adds propety of a population of zero
         for (int i = 0; i < iMesh.getVerticesCount(); i++) {
             Structs.Vertex.Builder p = Structs.Vertex.newBuilder(iMesh.getVertices(i));
             p.addProperties(population_zero);
             iMesh.setVertices(i, p.build());
         }
 
+        //loops through polygons to randomly selects to be either capitals, city, village or hamlet. Keeps a count.
         for (int i=0; i<aMesh.getPolygonsCount(); i++) {
             int y;
             do {
                 y = rand.nextInt(poly_size);
             } while (usedIndices.contains(y));
             usedIndices.add(y);
+
             Structs.Polygon temp = aMesh.getPolygons(y);
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(temp);
             int vert = x.getCentroidIdx();
@@ -72,13 +76,13 @@ public class Cities {
                     temp.getProperties(0).getValue() == Properties.lagoonColors ||
                     temp.getProperties(0).getValue() == Properties.lakeColors ||
                     temp.getProperties(0).getValue() == Properties.volcanoTier1Colors ||
-                    temp.getProperties(0).getValue() == Properties.volcanoTier2Colors);
+                    temp.getProperties(0).getValue() == Properties.volcanoTier2Colors); //makesure current polygon is on land
 
 
             if (num_hamlet_counter <num_hamlet &&(isValid)) {
                 p.setProperties(0, population_hamlet);
                 node new_node =new node("hamlet",2,vert);
-                new_graph.addNode(new_node);
+                new_graph.addNode(new_node); //creates current vertex a node with centroid id
                 num_hamlet_counter++;
             }
 
@@ -104,7 +108,7 @@ public class Cities {
             }
 
             else{
-                p.setProperties(0, population_zero);
+                p.setProperties(0, population_zero);//when number type cities capacity met, defaults to "un_name" node type
                 node new_node =new node("un_name",0,vert);
                 new_graph.addNode(new_node);
             }
