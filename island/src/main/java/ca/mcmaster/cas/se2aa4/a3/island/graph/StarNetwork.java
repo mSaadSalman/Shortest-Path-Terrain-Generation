@@ -19,7 +19,6 @@ public class StarNetwork {
         this.aMesh = iMesh;
         this.graph =new_graph;
     }
-
     public node get_nodeid(Graph new_graph, int idx){
         node source =null;
         for(int i=0;i<new_graph.get_nodes_list().size();i++) {
@@ -53,7 +52,7 @@ public class StarNetwork {
         int count=0;
         ArrayList<Structs.Polygon> landpolygons_list = new ArrayList<>();
 
-
+        //creates list of land polygons only
         for (Structs.Polygon poly : aMesh.getPolygonsList()) {
             Structs.Polygon.Builder x = Structs.Polygon.newBuilder(poly);
             int vertex = x.getCentroidIdx();
@@ -65,17 +64,19 @@ public class StarNetwork {
             }
         }
 
+        //Loops through each polygon and its neigbor to add edges between them
         for (Structs.Polygon curr_poly:landpolygons_list){
-            node source = get_nodeid(new_graph,curr_poly.getCentroidIdx());
+            node source = get_nodeid(new_graph,curr_poly.getCentroidIdx());//gets current polygon's node by matching centroid
 
             for (int idx: curr_poly.getNeighborIdxsList()){
                 Structs.Polygon curr_neigbhor = iMesh.getPolygons(idx);
-                node target = get_nodeid(new_graph,curr_neigbhor.getCentroidIdx());
+                node target = get_nodeid(new_graph,curr_neigbhor.getCentroidIdx());//gets neighbor polygon's node by matching centroid
 
                 new_graph.addEdge(source,target,1);
             }
         }
 
+        //creates list of hamlet, villages and cities node
         node dest = get_nodename(new_graph,"capital").get(0);
         ArrayList<node> hamlets= get_nodename(new_graph,"hamlet");
         ArrayList<node> villages= get_nodename(new_graph,"village");
@@ -84,10 +85,10 @@ public class StarNetwork {
         shortPath new_path = new shortPath();
         ArrayList<node> list_of_nodes = new ArrayList<>();
 
-
+        //given list of city type, finds shortest path between the capital and that city type (for starnetwork)
         for(node ham_node:hamlets){
             ArrayList<node> path_list = new_path.find_shortest_path(new_graph, dest, ham_node);
-            list_of_nodes.addAll(path_list);
+            list_of_nodes.addAll(path_list);//keeps adding the nodes in shortest path into a single list
         }
         for(node village_node:villages){
             ArrayList<node> path_list = new_path.find_shortest_path(new_graph, dest, village_node);
@@ -98,14 +99,13 @@ public class StarNetwork {
             list_of_nodes.addAll(path_list);
         }
 
+        //given list of all nodes which are part of shortest path, find their centroid id (helps to visualize)
         ArrayList<Integer> centroidid = new ArrayList<>();
-
         for(int k =0;k<list_of_nodes.size();k++){
-            //System.out.println(list_of_nodes.get(k).getCity_name());
-            centroidid.add(list_of_nodes.get(k).getNode_num());
+            centroidid.add(list_of_nodes.get(k).getNode_num()); //adds all shortest path node's centroid id's to list
         }
 
-
+        //loop through all polygons and adds propety of road to be 1 if that polygon centroid is part of shortest path
         Structs.Property road = Properties.get_nodewithroad();
         Structs.Property no_road = Properties.get_nodewithoutroad();
         for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
