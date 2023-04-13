@@ -10,8 +10,6 @@ public class shortPath implements pathfinder {
         PriorityQueue<node> non_vistednodes = new PriorityQueue<>(Comparator.comparingInt(dist::get));
         ArrayList<node> nodes_vist = new ArrayList<>();
 
-
-
         for(int i=0; i<test_graph.get_nodes_list().size();i++){
             node new_node = test_graph.get_nodes_list().get(i);
 
