@@ -15,6 +15,7 @@ It creates two jars:
 `visualizer/visualizer.jar` to visualize such meshes as SVG files
 
 ## Examples of Execution
+NOTE IF RANDOM ERRORS WHEN OPEN FILES, JUST DO INVALIDATE CACHE
 
 ### Generating a mesh, grid or irregular
 
